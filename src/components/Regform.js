@@ -3,6 +3,9 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { Link, useHistory } from "react-router-dom";
+import { firebase } from "@firebase/app"
+import "@firebase/auth";
+import "@firebase/firestore";
 
 export default function Regform() {
   const [value1, setValue1] = useState(0);
@@ -30,7 +33,10 @@ export default function Regform() {
   function generateScore() {
     const groupOne = value1 + value2 + value3 + value4 + value5 + value6 + value7+ value8 + value9 + value10;
     // save to database here
-    alert(groupOne);
+    const uid = firebase.auth().currentUser?.uid
+    const db = firebase.firestore()
+    db.collection("/users").doc(uid).set({ score1: groupOne, score2: groupOne })
+    alert(JSON.stringify(uid))
   }
 
   return (
