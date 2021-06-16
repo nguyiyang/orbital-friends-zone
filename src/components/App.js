@@ -1,4 +1,5 @@
 import React from "react";
+import Admin from "./Admin"
 import Home from "./Home"
 import Login from "./Login"
 import Signup from "./Signup";
@@ -22,6 +23,7 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/regform" component={Regform} />
+              <Route path="/admin" component={Admin} />
             </Switch>
           </Router>
         </div>

@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
 
     function signup(email, password) {
         return auth.createUserWithEmailAndPassword(email, password).then(cred => {
-            db.collection("users").doc(cred.user.uid).set({score1: 0, score2: 0})
+            db.collection("users").doc(cred.user.uid).set({score1: 0, score2: 0, admin: false})
         })
     }
 
