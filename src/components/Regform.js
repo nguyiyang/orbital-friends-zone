@@ -8,6 +8,7 @@ import "@firebase/auth";
 import "@firebase/firestore";
 
 export default function Regform() {
+  const usernameRef = useRef()
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
   const [value3, setValue3] = useState(0);
@@ -76,7 +77,7 @@ export default function Regform() {
     // save to database here
     const uid = firebase.auth().currentUser?.uid;
     const db = firebase.firestore();
-    db.collection("/users").doc(uid).set({ score1: score1, score2: score2 });
+    db.collection("/users").doc(uid).set({ username: usernameRef.current.value, admin: false, groupAssigned: false, score1: score1, score2:score2 });
     history.push("/");
   }
 
@@ -86,6 +87,10 @@ export default function Regform() {
         <Card.Body>
           <h2 className="text-center mb-4"> Questionnaire </h2>
           <Form onSubmit={generateScore}>
+          <Form.Group id="username">
+              <Form.Label> Username</Form.Label>
+              <Form.Control type="username" ref={usernameRef} required />
+            </Form.Group>
             <Form.Group id="q1">
               <Form.Label> You regularly make new friends.</Form.Label>
               <br></br>

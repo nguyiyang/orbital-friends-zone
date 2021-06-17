@@ -30,12 +30,10 @@ export default function Login() {
           if (doc.data().admin) {
             history.push("/admin");
           } else {
-            if (doc.data().score1 === 0) {
-              history.push("/regform");
-            } else {
-              history.push("/");
-            }
+            history.push("/");
           }
+        } else {
+          history.push("/regform");
         }
       });
     } catch {
