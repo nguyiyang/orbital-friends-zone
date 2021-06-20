@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
@@ -8,7 +8,7 @@ import "@firebase/auth";
 import "@firebase/firestore";
 
 export default function Regform() {
-  const usernameRef = useRef()
+  const usernameRef = useRef();
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
   const [value3, setValue3] = useState(0);
@@ -51,6 +51,21 @@ export default function Regform() {
   const handleChange20 = (val) => setValue20(val);
   const history = useHistory();
 
+  const uid = firebase.auth().currentUser?.uid;
+  const db = firebase.firestore();
+
+  const [users, setUsers] = useState(0);
+  const countUsers = () =>
+    db
+      .collection("users")
+      .get()
+      .then((snap) => {
+        setUsers(snap.size); // will return the collection size
+      });
+  useEffect(() => {
+    countUsers();
+  }, []);
+
   function generateScore() {
     const score1 =
       value1 +
@@ -77,7 +92,17 @@ export default function Regform() {
     // save to database here
     const uid = firebase.auth().currentUser?.uid;
     const db = firebase.firestore();
-    db.collection("/users").doc(uid).set({ username: usernameRef.current.value, admin: false, groupAssigned: false, score1: score1, score2:score2 });
+    db.collection("/users").doc(uid).set(
+      {
+        id: users,
+        username: usernameRef.current.value,
+        admin: false,
+        groupAssigned: false,
+        score1: score1,
+        score2: score2
+      },
+      { merge: true }
+    );
     history.push("/");
   }
 
@@ -87,7 +112,7 @@ export default function Regform() {
         <Card.Body>
           <h2 className="text-center mb-4"> Questionnaire </h2>
           <Form onSubmit={generateScore}>
-          <Form.Group id="username">
+            <Form.Group id="username">
               <Form.Label> Username</Form.Label>
               <Form.Control type="username" ref={usernameRef} required />
             </Form.Group>
