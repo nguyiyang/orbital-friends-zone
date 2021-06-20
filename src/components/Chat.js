@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import "./Chat.css";
 
 export default function Home() {
   const { currentUser, logout } = useAuth();
