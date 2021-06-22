@@ -16,9 +16,7 @@ export function AuthProvider({ children }) {
     const db = firebase.firestore()
 
     function signup(email, password) {
-        return auth.createUserWithEmailAndPassword(email, password).then(cred => {
-            db.collection("users").doc(cred.user.uid).add({score1: 0, score2: 0,})
-        })
+        return auth.createUserWithEmailAndPassword(email, password)
     }
 
     function login(email, password) {
