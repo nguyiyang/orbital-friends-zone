@@ -20,12 +20,6 @@ export default function Home() {
     } catch {}
   }
 
-  async function Forum() {
-    try {
-      history.push("/Forum");
-    } catch {}
-  }
-
   return (
     <div>
       <Button variant="link" onClick={handleLogout}>
@@ -34,10 +28,6 @@ export default function Home() {
       <Button variant="link" onClick={Chat}>
         Chat Group
       </Button>
-      <Button variant="link" onClick={Forum}>
-        Forum
-      </Button>
     </div>
   );
 }
-

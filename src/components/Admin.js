@@ -45,6 +45,9 @@ export default function Admin() {
     assigned();
   });
 
+  const [currentGroup, setCurrentGroup] = useState(
+    Math.ceil(totalAssigned / 4)
+  );
 
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
@@ -259,6 +262,9 @@ export default function Admin() {
       <h1>Total users: {totalUsers}</h1>
       <h1>Total Assigned users: {totalAssigned}</h1>
       <h1>Total unassigned users: {userCount}</h1>
+      <button className="w-100" type="submit" onClick={kmeans2}>
+        Create groups *NEW*
+      </button>
       <button className="w-100" type="submit" onClick={kmeans2}>
         Create groups *NEW*
       </button>
