@@ -83,7 +83,7 @@ function ChatMessage(props) {
 
   return (
     <>
-      <div>
+      <div className="chat">
         <p>{text}</p>
       </div>
     </>

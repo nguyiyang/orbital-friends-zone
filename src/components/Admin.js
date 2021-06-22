@@ -101,9 +101,12 @@ export default function Admin() {
 
 
   function kmeans2() {
+    const numberOfUsers = userCount - (userCount % 4)
+    data.splice(numberOfUsers)
     console.log(data)
     // desired number of clusters to be set for kmeans
-    let group = Math.ceil(userCount / 4);
+    let group = Math.floor(userCount / 4);
+    console.log(group)
 
     let centroids = [];
     // generate centroids randomly
@@ -248,11 +251,11 @@ export default function Admin() {
 
   function reset() {
     db.collection("users")
-      .where("groupAssigned", "==", true)
+      .where("groupId", "!=", 0)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          db.collection("users").doc(doc.id).update({ groupAssigned: false });
+          db.collection("users").doc(doc.id).update({ groupId: 0 });
         });
       });
   }
@@ -262,9 +265,7 @@ export default function Admin() {
       <h1>Total users: {totalUsers}</h1>
       <h1>Total Assigned users: {totalAssigned}</h1>
       <h1>Total unassigned users: {userCount}</h1>
-      <button className="w-100" type="submit" onClick={kmeans2}>
-        Create groups *NEW*
-      </button>
+      
       <button className="w-100" type="submit" onClick={kmeans2}>
         Create groups *NEW*
       </button>

@@ -2,13 +2,13 @@ body {
   background-color: #282c34;
 }
 
-.App {
+.chat {
   text-align: center;
   max-width: 728px;
   margin: 0 auto;
 }
 
-.App header {
+.chat header {
   background-color: #181717;
   height: 10vh;
   min-height: 50px;
@@ -25,7 +25,7 @@ body {
   box-sizing: border-box;
 }
 
-.App section {
+.chat section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +33,7 @@ body {
   background-color: rgb(40, 37, 53);
 }
 
-main {
+.chat main {
   padding: 10px;
   height: 80vh;
   margin: 10vh 0 10vh;
@@ -42,19 +42,19 @@ main {
   flex-direction: column;
 }
 
-main::-webkit-scrollbar {
+.chat main::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-main::-webkit-scrollbar-track {
+.chat main::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-main::-webkit-scrollbar-thumb {
+.chat main::-webkit-scrollbar-thumb {
   background: #6649b8;
 }
 
-form {
+.chat form {
   height: 10vh;
   position: fixed;
   bottom: 0;
@@ -65,12 +65,12 @@ form {
   font-size: 1.5rem;
 }
 
-form button {
+.chat form button {
   width: 20%;
   background-color: rgb(56, 56, 143);
 }
 
-input {
+.chat input {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
@@ -81,7 +81,7 @@ input {
   padding: 0 10px;
 }
 
-button {
+.chat button {
   background-color: #282c34; /* Green */
   border: none;
   color: white;
@@ -93,25 +93,25 @@ button {
   font-size: 1.25rem;
 }
 
-button:disabled {
+.chat button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sign-in {
+.chat .sign-in {
   color: #282c34;
   background: white;
   max-width: 400px;
   margin: 0 auto;
 }
 
-ul,
+.chat ul,
 li {
   text-align: left;
   list-style: none;
 }
 
-p {
+.chat p {
   max-width: 500px;
   margin-bottom: 12px;
   line-height: 24px;
@@ -122,21 +122,21 @@ p {
   text-align: center;
 }
 
-.message {
+.chat .message {
   display: flex;
   align-items: center;
 }
 
-.sent {
+.chat .sent {
   flex-direction: row-reverse;
 }
 
-.sent p {
+.chat .sent p {
   color: white;
   background: #0b93f6;
   align-self: flex-end;
 }
-.received p {
+.chat .received p {
   background: #e5e5ea;
   color: black;
 }

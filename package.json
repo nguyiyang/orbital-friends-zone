@@ -12,11 +12,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
     "react-firebase-hooks": "^3.0.4",
-=======
-    "react-firebase-hooks": "3.0.4",
->>>>>>> f4f33937cd58b36fd7503ada117f4482a3d0c2ab
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
