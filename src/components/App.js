@@ -8,6 +8,7 @@ import Chat from "./Chat";
 import NoChat from "./NoChat";
 import Forum from "./Forum";
 import addPost from "./addPost";
+import addComment from "./addComment";
 import PrivateRoute from "./PrivateRoute";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
@@ -32,6 +33,7 @@ function App() {
               <Route path="/NoChat" component={NoChat} />
               <Route path="/Forum" component={Forum} />
               <Route path="/addPost" component={addPost} />
+              <Route path="/addComment" component={addComment} />
             </Switch>
           </Router>
         </div>

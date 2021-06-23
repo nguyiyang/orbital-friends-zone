@@ -51,11 +51,30 @@ function Forum() {
 
   const [posts] = useCollectionData(query, { idField: "id" });
 
+  const history = useHistory();
+
+  async function writeComment() {
+    try {
+      history.push("./addComment");
+    } catch {}
+  }
+
   return (
     <>
       <main>
         {posts &&
-          posts.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          posts.map((text) => (
+            <div>
+              <ChatMessage key={text.id} post={text} />
+              <Button variant="link" onClick={writeComment}>
+                Comment
+              </Button>
+              <Button variant="link" onClick={text.update(like + 1)}>
+                Like
+              </Button>
+              {text.likes} Likes
+            </div>
+          ))}
 
         <span ref={dummy}></span>
       </main>
@@ -64,7 +83,7 @@ function Forum() {
 }
 
 function ChatMessage(props) {
-  const { text, uid } = props.message;
+  const { text, uid } = props.post;
 
   return (
     <div>
