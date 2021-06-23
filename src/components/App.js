@@ -12,12 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <AuthProvider>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div classNAme="w-100" style={{ maxWidth: "400px" }}>
+    <AuthProvider> 
           <Router>
             <Switch>
               <PrivateRoute exact path="/" component={Home} />
@@ -28,8 +23,6 @@ function App() {
               <Route path="/chat" component={Chat} />
             </Switch>
           </Router>
-        </div>
-      </Container>
     </AuthProvider>
   );
 }

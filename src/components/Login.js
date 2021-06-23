@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
+import background from "./../sample.jfif";
 
 export default function Login() {
   const emailRef = useRef();
@@ -44,29 +45,63 @@ export default function Login() {
   }
 
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4"> Log in</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label> Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label> Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Log in
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/Signup">Sign up</Link>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
+      <div>
+        <div style={{ height: 50 }}></div>
+        <h2
+          className="text-center mb-4"
+          style={{ fontSize: 50, fontFamily: "Bradley Hand, cursive" }}
+        >
+          {" "}
+          FriendsZone
+        </h2>
+        <Card style={{ background: 0.1 }}>
+          <Card.Body>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group id="email">
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  ref={emailRef}
+                  required
+                />
+              </Form.Group>
+              <div style={{ height: 25 }}></div>
+              <Form.Group id="password">
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  ref={passwordRef}
+                  required
+                />
+              </Form.Group>
+              <div style={{ height: 25 }}></div>
+              <Button
+                disabled={loading}
+                className="w-100"
+                type="submit"
+                style={{ backgroundColor: "purple", borderRadius: 20 }}
+              >
+                Log in
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+        <div className="w-100 text-center mt-2">
+          Need an account? <Link to="/Signup">Sign up</Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
