@@ -23,21 +23,27 @@ export default function About() {
               >
                 Welcome to FriendsZone!
               </h1>
-              <div style={{ height: "75vh", textAlign: "center", backgroundColor: "lightgrey" }}>
-                Creator's note
-              </div>
-              <div style={{marginLeft: "auto", marginRight: 0}}>
-              <Button
-                type="submit"
+              <div
                 style={{
-                  backgroundColor: "purple",
-                  borderRadius: 20,
-                  height: "10vh",
-                  width: "10vw",
+                  height: "75vh",
+                  textAlign: "center",
+                  backgroundColor: "lightgrey",
                 }}
               >
-                Proceed
-              </Button>
+                Creator's note
+              </div>
+              <div style={{ marginLeft: "auto", marginRight: 0 }}>
+                <Button
+                  type="submit"
+                  style={{
+                    backgroundColor: "purple",
+                    borderRadius: 20,
+                    height: "10vh",
+                    width: "10vw",
+                  }}
+                >
+                  Proceed
+                </Button>
               </div>
             </div>
           </Form>

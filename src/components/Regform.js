@@ -112,6 +112,7 @@ export default function Regform() {
         <Card.Body>
           <h1 style={{ fontFamily: "Bradley Hand, cursive" }}> FriendsZone </h1>
           <Form onSubmit={generateScore}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <div
               style={{
                 backgroundColor: "lightgrey",
@@ -540,9 +541,13 @@ export default function Regform() {
               </Form.Group>
 
               <br></br>
-              <Button className="w-100" type="submit">
-                Submit
+            </div>
+            <div style={{marginLeft: "auto", marginRight: 0}}>
+              <Button type="submit" style={{backgroundColor: "purple",
+                  borderRadius: 20, width: "10vw", height: "10vh"}}>
+                Complete
               </Button>
+            </div>
             </div>
           </Form>
         </Card.Body>
