@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import background from "./../sample.jfif";
+import background from "./sample.jpg";
 
 export default function Signup() {
   const emailRef = useRef();

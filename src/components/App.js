@@ -1,5 +1,6 @@
 import React from "react";
 import Admin from "./Admin";
+import About from "./About";
 import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -20,6 +21,7 @@ function App() {
               <Route path="/signup" component={Signup} />
               <Route path="/regform" component={Regform} />
               <Route path="/admin" component={Admin} />
+              <Route path= "/about" component={About} />
               <Route path="/chat" component={Chat} />
             </Switch>
           </Router>

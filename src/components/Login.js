@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import background from "./../sample.jfif";
+import background from "./sample.jpg";
 
 export default function Login() {
   const emailRef = useRef();
@@ -34,7 +34,7 @@ export default function Login() {
             history.push("/");
           }
         } else {
-          history.push("/regform");
+          history.push("/about");
         }
       });
     } catch {
