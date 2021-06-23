@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { firebase } from "@firebase/app";
 
 export default function Home() {
   const { currentUser, logout } = useAuth();
@@ -14,9 +15,16 @@ export default function Home() {
     } catch {}
   }
 
+  const [groupId, setGroupId] = useState(0);
+  getGroupId().then((x) => setGroupId(x));
+
   async function Chat() {
     try {
-      history.push("/Chat");
+      if (groupId === 0) {
+        history.push("./NoChat");
+      } else {
+        history.push("./Chat");
+      }
     } catch {}
   }
 
@@ -30,4 +38,10 @@ export default function Home() {
       </Button>
     </div>
   );
+}
+
+async function getGroupId() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  return printed.data().groupId;
 }

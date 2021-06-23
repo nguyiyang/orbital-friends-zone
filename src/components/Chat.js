@@ -2,12 +2,11 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
-import firebase from "firebase/app";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import "./Chat.css";
+import { firebase } from "@firebase/app";
 
-export default function Home() {
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+export default function Chat() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
 
@@ -18,11 +17,16 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Button variant="link" onClick={Home}>
-        Back
-      </Button>
-      <ChatRoom />
+    <div className="Chat">
+      <header>
+        <Button variant="link" onClick={Home}>
+          Back
+        </Button>
+      </header>
+
+      <section>
+        <ChatRoom />
+      </section>
     </div>
   );
 }
@@ -33,7 +37,9 @@ const firestore = firebase.firestore();
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("Chat");
-  const query = messagesRef.orderBy("createdAt").limit(25);
+  const [groupId, setGroupId] = useState(0);
+  getGroupId().then((x) => setGroupId(x));
+  const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
 
@@ -41,13 +47,12 @@ function ChatRoom() {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
     const { uid } = auth.currentUser;
-
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid
+      uid,
+      chatGroupId: groupId
     });
 
     setFormValue("");
@@ -67,11 +72,11 @@ function ChatRoom() {
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          placeholder="say something nice"
+          placeholder="Type a message"
         />
 
         <button type="submit" disabled={!formValue}>
-          🕊️
+          ->
         </button>
       </form>
     </>
@@ -79,13 +84,21 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
-  const { text, uid, photoURL } = props.message;
+  const { text, uid } = props.message;
+
+  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
   return (
     <>
-      <div className="chat">
+      <div className={`message ${messageClass}`}>
         <p>{text}</p>
       </div>
     </>
   );
+}
+
+async function getGroupId() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  return printed.data().groupId;
 }
