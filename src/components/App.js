@@ -6,6 +6,8 @@ import Signup from "./Signup";
 import Regform from "./Regform";
 import Chat from "./Chat";
 import NoChat from "./NoChat";
+import Forum from "./Forum";
+import addPost from "./addPost";
 import PrivateRoute from "./PrivateRoute";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
@@ -28,6 +30,8 @@ function App() {
               <Route path="/admin" component={Admin} />
               <Route path="/chat" component={Chat} />
               <Route path="/NoChat" component={NoChat} />
+              <Route path="/Forum" component={Forum} />
+              <Route path="/addPost" component={addPost} />
             </Switch>
           </Router>
         </div>
