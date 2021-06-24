@@ -37,11 +37,13 @@ const firestore = firebase.firestore();
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("Chat");
+  // groupId of current user
   const [groupId, setGroupId] = useState(0);
   getGroupId().then((x) => setGroupId(x));
   const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
+  console.log(messages)
 
   const [formValue, setFormValue] = useState("");
 
@@ -63,7 +65,7 @@ function ChatRoom() {
     <>
       <main>
         {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          messages.filter((msg) => msg.chatGroupId === groupId).map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
         <span ref={dummy}></span>
       </main>
@@ -76,7 +78,7 @@ function ChatRoom() {
         />
 
         <button type="submit" disabled={!formValue}>
-          ->
+          =
         </button>
       </form>
     </>

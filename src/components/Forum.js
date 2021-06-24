@@ -6,7 +6,7 @@ import { firebase } from "@firebase/app";
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-export default function forum() {
+export default function Forum() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
 
@@ -34,7 +34,7 @@ export default function forum() {
       </header>
 
       <section>
-        <Forum />
+        <ShowForum />
       </section>
     </div>
   );
@@ -43,7 +43,7 @@ export default function forum() {
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-function Forum() {
+function ShowForum() {
   const dummy = useRef();
   const postRef = firestore.collection("Forum");
 
@@ -71,7 +71,7 @@ function Forum() {
               <Button variant="link" onClick={writeComment}>
                 Comment
               </Button>
-              <Button variant="link" onClick={giveLike}>
+              <Button variant="link">
                 Like
               </Button>
               {text.likes} Likes

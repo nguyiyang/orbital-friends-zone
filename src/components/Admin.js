@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
@@ -88,7 +88,7 @@ export default function Admin() {
             score1: score1,
             score2: score2,
             username: username,
-            id: id
+            id: id,
           };
           id++;
           setData((data) => [...data, newData]);
@@ -99,14 +99,13 @@ export default function Admin() {
     getData();
   }, []);
 
-
   function kmeans2() {
-    const numberOfUsers = userCount - (userCount % 4)
-    data.splice(numberOfUsers)
-    console.log(data)
+    const numberOfUsers = userCount - (userCount % 4);
+    data.splice(numberOfUsers);
+    console.log(data);
     // desired number of clusters to be set for kmeans
     let group = Math.floor(userCount / 4);
-    console.log(group)
+    console.log(group);
 
     let centroids = [];
     // generate centroids randomly
@@ -127,7 +126,11 @@ export default function Admin() {
             (centroids[i].score2 - data[j].score2) *
               (centroids[i].score2 - data[j].score2)
         );
-        distances.push({ itemId: data[j].id, clusterId: i, distance: distance });
+        distances.push({
+          itemId: data[j].id,
+          clusterId: i,
+          distance: distance,
+        });
       }
     }
     // sort distances in ascending order
@@ -147,12 +150,11 @@ export default function Admin() {
         centroids[distances[i].clusterId].size++;
       }
     }
-    console.log(distances)
-    console.log(centroids[0])
-
+    console.log(distances);
+    console.log(centroids[0]);
 
     // do recalculating of groups
-    let count = 0
+    let count = 0;
     while (true) {
       if (count < 1000) {
         if (recalculate() === true) {
@@ -178,7 +180,7 @@ export default function Admin() {
           score1: accum1 / centroids[i].items.length,
           score2: accum2 / centroids[i].items.length,
           size: 0,
-          items: []
+          items: [],
         });
         accum1 = 0;
         accum2 = 0;
@@ -195,7 +197,11 @@ export default function Admin() {
               (newCentroids[i].score2 - data[j].score2) *
                 (newCentroids[i].score2 - data[j].score2)
           );
-          newDistances.push({ itemId: data[j].id, clusterId: i, distance: distance });
+          newDistances.push({
+            itemId: data[j].id,
+            clusterId: i,
+            distance: distance,
+          });
         }
       }
       // sort distances in ascending order
@@ -240,13 +246,14 @@ export default function Admin() {
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              console.log(totalAssigned)
-              db.collection("users").doc(doc.id).update({ groupId: i + Math.ceil(totalAssigned/4) + 1 });
+              console.log(totalAssigned);
+              db.collection("users")
+                .doc(doc.id)
+                .update({ groupId: i + Math.ceil(totalAssigned / 4) + 1 });
             });
           });
       }
     }
-
   }
 
   function reset() {
@@ -261,22 +268,36 @@ export default function Admin() {
   }
 
   return (
-    <>
-      <h1>Total users: {totalUsers}</h1>
-      <h1>Total Assigned users: {totalAssigned}</h1>
-      <h1>Total unassigned users: {userCount}</h1>
-      
-      <button className="w-100" type="submit" onClick={kmeans2}>
-        Create groups *NEW*
-      </button>
-      <button className="w-100" type="submit" onClick={reset}>
-        Reset group assigned
-      </button>
+    <div>
       <div>
-        <Button variant="link" onClick={handleLogout}>
-          Log out
-        </Button>
+        <div style={{ height: 50 }}></div>
+        <h2 style={{ fontSize: 50, fontFamily: "Bradley Hand, cursive" }}>
+          {" "}
+          FriendsZone
+        </h2>
+        <Card style={{ background: 0.1 }}>
+          <h1>Total Assigned users: {totalAssigned}</h1>
+          <h1>Total unassigned users: {userCount}</h1>
+
+          <button type="submit" onClick={kmeans2}>
+            Create groups *NEW*
+          </button>
+          <button type="submit" onClick={reset}>
+            Reset group assigned
+          </button>
+          <Card.Body>
+            <Form onSubmit={handleLogout}>
+              <h1>Total users: {totalUsers}</h1>
+              <Button
+                type="submit"
+                style={{ backgroundColor: "purple", borderRadius: 20 }}
+              >
+                Log out
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
       </div>
-    </>
+    </div>
   );
 }
