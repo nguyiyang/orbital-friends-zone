@@ -6,7 +6,6 @@ import { firebase } from "@firebase/app";
 
 export default function addPost() {
   const { currentUser, logout } = useAuth();
-  const history = useHistory();
 
   async function back() {
     try {
@@ -31,34 +30,37 @@ export default function addPost() {
 
 function AddPost() {
   const [formValue, setFormValue] = useState("");
-
-  async function back() {
-    try {
-      history.push("./Forum");
-    } catch {}
-  }
+  const [formValue2, setFormValue2] = useState("");
+  const history = useHistory();
 
   const createPost = async (e) => {
     e.preventDefault();
     const { uid } = firebase.auth().currentUser;
     await firebase.firestore().collection("Forum").add({
-      text: formValue,
+      title: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       likes: 0,
-      comments: {}
+      comments: {},
+      content: formValue2
     });
 
     setFormValue("");
+    history.push("./Forum");
   };
 
   return (
     <>
-      <form onSubmit={createPost && back}>
+      <form onSubmit={createPost}>
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          placeholder="Type a message"
+          placeholder="Title"
+        />
+        <input
+          value={formValue2}
+          onChange={(e) => setFormValue2(e.target.value)}
+          placeholder="Content"
         />
 
         <button type="submit" disabled={!formValue}>

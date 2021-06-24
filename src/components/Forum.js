@@ -65,11 +65,13 @@ function Forum() {
         {posts &&
           posts.map((text) => (
             <div>
-              <ChatMessage key={text.id} post={text} />
+              <Post key={text.key} post={text} />
+              {text.title}
+              <div>{text.content}</div>
               <Button variant="link" onClick={writeComment}>
                 Comment
               </Button>
-              <Button variant="link" onClick={text.update(like + 1)}>
+              <Button variant="link" onClick={giveLike}>
                 Like
               </Button>
               {text.likes} Likes
@@ -82,7 +84,7 @@ function Forum() {
   );
 }
 
-function ChatMessage(props) {
+function Post(props) {
   const { text, uid } = props.post;
 
   return (
