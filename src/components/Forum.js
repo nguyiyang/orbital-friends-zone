@@ -59,6 +59,22 @@ function ShowForum() {
     } catch {}
   }
 
+  async function giveLike(identity, numOfLikes, likedArray) {
+    const currUid = await auth.currentUser.uid;
+    console.log(likedArray);
+    if (likedArray.includes(currUid)) {
+      postRef.doc(identity).update({
+        likes: numOfLikes - 1,
+        alreadyLiked: firebase.firestore.FieldValue.arrayRemove(currUid)
+      });
+    } else {
+      postRef.doc(identity).update({
+        likes: numOfLikes + 1,
+        alreadyLiked: firebase.firestore.FieldValue.arrayUnion(currUid)
+      });
+    }
+  }
+
   return (
     <>
       <main>
@@ -71,7 +87,10 @@ function ShowForum() {
               <Button variant="link" onClick={writeComment}>
                 Comment
               </Button>
-              <Button variant="link">
+              <Button
+                variant="link"
+                onClick={() => giveLike(text.id, text.likes, text.alreadyLiked)}
+              >
                 Like
               </Button>
               {text.likes} Likes

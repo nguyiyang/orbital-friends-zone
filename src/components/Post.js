@@ -43,6 +43,7 @@ function AddPost() {
       uid,
       likes: 0,
       comments: {},
+      alreadyLiked: {},
       content: formValue2
     });
 
