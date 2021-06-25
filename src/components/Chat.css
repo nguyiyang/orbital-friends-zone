@@ -1,5 +1,4 @@
 .Chat body {
-  background-image: url(/ChatBackground.jpg);
   background-color: red;
 }
 
@@ -7,7 +6,6 @@
   text-align: left;
   max-width: 1920px;
   margin: 0 auto;
-  background-image: "./ChatBackground.jpg";
 }
 
 .Chat section {
@@ -71,7 +69,7 @@
 
 .Chat button {
   border: none;
-  color: white;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -123,7 +121,7 @@ li {
 
 .Chat .backButton {
   border: none;
-  color: white;
+  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
