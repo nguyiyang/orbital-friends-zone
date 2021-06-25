@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button, Card } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
@@ -15,7 +15,6 @@ export default function Admin() {
       history.push("/login");
     } catch {}
   }
-  const uid = firebase.auth().currentUser?.uid;
   const db = firebase.firestore();
 
   // count total number of users
@@ -25,7 +24,7 @@ export default function Admin() {
       .collection("users")
       .get()
       .then((querySnapshot) => {
-        setTotalUsers(querySnapshot.size);
+        setTotalUsers(querySnapshot.size - 1);
       });
   useEffect(() => {
     display();
@@ -36,7 +35,7 @@ export default function Admin() {
   const assigned = () =>
     db
       .collection("users")
-      .where("groupId", "!=", 0)
+      .where("groupId", ">", 0)
       .get()
       .then((querySnapshot) => {
         setTotalAssigned(querySnapshot.size);
@@ -45,9 +44,6 @@ export default function Admin() {
     assigned();
   });
 
-  const [currentGroup, setCurrentGroup] = useState(
-    Math.ceil(totalAssigned / 4)
-  );
 
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
@@ -258,7 +254,7 @@ export default function Admin() {
 
   function reset() {
     db.collection("users")
-      .where("groupId", "!=", 0)
+      .where("groupId", ">", 0)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
