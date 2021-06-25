@@ -4,8 +4,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
-import chatBackground from "./Images/ChatBackground.jpg";
-
 import styles from "./Chat.css";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -25,7 +23,6 @@ export default function Chat() {
       style={{
         display: "flex",
         justifyContent: "center",
-        backgroundImage: `url(${chatBackground})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         width: "100vw",

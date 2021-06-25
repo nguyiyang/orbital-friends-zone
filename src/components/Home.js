@@ -7,7 +7,6 @@ import { firebase } from "@firebase/app";
 import styles from "./Home.css";
 import logOutIcon from "./Images/Logout_icon.jpg";
 import forumPic from "./Images/forumPic.jpg";
-import chatPic from "./Images/ChatBackground.jpg";
 import HomeImage from "./Images/HomeImage.jpg";
 
 export default function Home() {
