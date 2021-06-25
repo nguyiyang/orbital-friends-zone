@@ -4,6 +4,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
+import chatBackground from "./Images/ChatBackground.jpg";
+
+import styles from "./Chat.css";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function Chat() {
@@ -17,9 +20,20 @@ export default function Chat() {
   }
 
   return (
-    <div className="Chat">
+    <div
+      className="Chat"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        backgroundImage: `url(${chatBackground})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        width: "100vw",
+        height: "100vh"
+      }}
+    >
       <header>
-        <Button variant="link" onClick={Home}>
+        <Button variant="link" onClick={Home} className="backButton">
           Back
         </Button>
       </header>
@@ -43,7 +57,7 @@ function ChatRoom() {
   const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
-  console.log(messages)
+  console.log(messages);
 
   const [formValue, setFormValue] = useState("");
 
@@ -65,7 +79,9 @@ function ChatRoom() {
     <>
       <main>
         {messages &&
-          messages.filter((msg) => msg.chatGroupId === groupId).map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          messages
+            .filter((msg) => msg.chatGroupId === groupId)
+            .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
         <span ref={dummy}></span>
       </main>
@@ -78,7 +94,7 @@ function ChatRoom() {
         />
 
         <button type="submit" disabled={!formValue}>
-          =
+          Send
         </button>
       </form>
     </>

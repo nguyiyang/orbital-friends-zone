@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import background from "./sample.jpg";
+import background from "./Images/sample.jpg";
 
 export default function Login() {
   const emailRef = useRef();
@@ -53,7 +53,7 @@ export default function Login() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         width: "100vw",
-        height: "100vh",
+        height: "100vh"
       }}
     >
       <div>

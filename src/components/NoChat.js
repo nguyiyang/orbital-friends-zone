@@ -20,7 +20,10 @@ export default function NoChat() {
           Back
         </Button>
       </div>
-      <div>Hello, please wait for another week thanks.</div>
+      <div>
+        You have not been assigned a group. 😞 Group Creation will be done from
+        0000-0600 every Monday. Check again later!
+      </div>
     </div>
   );
 }

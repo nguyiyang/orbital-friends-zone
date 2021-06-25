@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import background from "./sample.jpg";
+import background from "./Images/sample.jpg";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -41,28 +41,38 @@ export default function Signup() {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100vw",
-          height: "100vh",
+          height: "100vh"
         }}
       >
         <div>
-        <div style={{ height: 50 }}></div>
-        <h2
-          className="text-center mb-4"
-          style={{ fontSize: 50, fontFamily: "Bradley Hand, cursive" }}
-        >
-          {" "}
-          FriendsZone
-        </h2>
+          <div style={{ height: 50 }}></div>
+          <h2
+            className="text-center mb-4"
+            style={{ fontSize: 50, fontFamily: "Bradley Hand, cursive" }}
+          >
+            {" "}
+            FriendsZone
+          </h2>
           <Card style={{ background: 0.1 }}>
             <Card.Body>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
-                  <Form.Control type="email" placeholder="Email" ref={emailRef} required />
+                  <Form.Control
+                    type="email"
+                    placeholder="Email"
+                    ref={emailRef}
+                    required
+                  />
                 </Form.Group>
                 <div style={{ height: 25 }}></div>
                 <Form.Group id="password">
-                  <Form.Control type="password" placeholder="Password" ref={passwordRef} required />
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    ref={passwordRef}
+                    required
+                  />
                 </Form.Group>
                 <div style={{ height: 25 }}></div>
                 <Form.Group id="password-confirm">
@@ -74,7 +84,12 @@ export default function Signup() {
                   />
                 </Form.Group>
                 <div style={{ height: 25 }}></div>
-                <Button disabled={loading} className="w-100" type="submit" style={{ backgroundColor: "purple", borderRadius: 20 }}>
+                <Button
+                  disabled={loading}
+                  className="w-100"
+                  type="submit"
+                  style={{ backgroundColor: "purple", borderRadius: 20 }}
+                >
                   Sign up
                 </Button>
               </Form>

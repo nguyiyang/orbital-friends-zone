@@ -4,6 +4,12 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
+import styles from "./Home.css";
+import logOutIcon from "./Images/Logout_icon.jpg";
+import forumPic from "./Images/forumPic.jpg";
+import chatPic from "./Images/ChatBackground.jpg";
+import HomeImage from "./Images/HomeImage.jpg";
+
 export default function Home() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
@@ -35,17 +41,19 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Button variant="link" onClick={handleLogout}>
-        Log out
+    <section className="hello">
+      <Button variant="link" onClick={handleLogout} className="logOutButton">
+        <img src={logOutIcon} alt="Picnic" width="50px" height="50px" />
       </Button>
-      <Button variant="link" onClick={Chat}>
-        Chat Group
-      </Button>
-      <Button variant="link" onClick={Forum}>
-        Forum
-      </Button>
-    </div>
+      <div className="asdf">
+        <Button variant="link" onClick={Chat} className="chatButton">
+          <img src={HomeImage} />
+        </Button>
+        <Button variant="link" onClick={Forum} className="forumButton">
+          <img src={forumPic} />
+        </Button>
+      </div>
+    </section>
   );
 }
 
