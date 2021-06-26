@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import logOutIcon from "./Images/Logout_icon.jpg";
 import { Form, Button, Card } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
@@ -43,7 +44,6 @@ export default function Admin() {
   useEffect(() => {
     assigned();
   });
-
 
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
@@ -264,36 +264,82 @@ export default function Admin() {
   }
 
   return (
-    <div>
-      <div>
-        <div style={{ height: 50 }}></div>
-        <h2 style={{ fontSize: 50, fontFamily: "Bradley Hand, cursive" }}>
-          {" "}
-          FriendsZone
-        </h2>
-        <Card style={{ background: 0.1 }}>
-          <h1>Total Assigned users: {totalAssigned}</h1>
-          <h1>Total unassigned users: {userCount}</h1>
+    <>
+      <Card style={{ backgroundColor: "lightblue" }}>
+        <Card.Body>
+          <Form onSubmit={kmeans2}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{height: "5vh"}}>
+              <h1 style={{ fontFamily: "Bradley Hand, cursive"}}>
+                FriendsZone
+                <Button
+                  variant="link"
+                  onClick={handleLogout}
+                  style={{ float: "right" }}
+                >
+                  <img
+                    src={logOutIcon}
+                    alt="Picnic"
+                    width="50px"
+                    height="50px"
+                  />
+                </Button>
+              </h1>
+              </div>
 
-          <button type="submit" onClick={kmeans2}>
-            Create groups *NEW*
-          </button>
-          <button type="submit" onClick={reset}>
-            Reset group assigned
-          </button>
-          <Card.Body>
-            <Form onSubmit={handleLogout}>
-              <h1>Total users: {totalUsers}</h1>
-              <Button
-                type="submit"
-                style={{ backgroundColor: "purple", borderRadius: 20 }}
+              <div
+                style={{
+                  display: "flex",
+                  height: "95vh",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
               >
-                Log out
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
-      </div>
-    </div>
+                <div
+                  style={{
+                    margin: "auto",
+                    backgroundColor: "lightgrey",
+                    width: "70vw",
+                    height: "75vh",
+                    padding: 100,
+                    borderRadius: 30,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 25,
+                  }}
+                >
+                  <p>Current unassigned users: {userCount}</p>
+                  <p>Groups to be generated: {Math.floor(userCount / 4)}</p>
+                  <Button
+                    type="submit"
+                    style={{
+                      backgroundColor: "blue",
+                      borderRadius: 20,
+                      width: "10vw",
+                      height: "5vh",
+                    }}
+                  >
+                    Create Group
+                  </Button>
+                  <Button
+                    type="submit"
+                    style={{
+                      backgroundColor: "red",
+                      borderRadius: 20,
+                      width: "10vw",
+                      height: "5vh",
+                    }}
+                  >
+                    Reset groups
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Form>
+        </Card.Body>
+      </Card>
+    </>
   );
 }
