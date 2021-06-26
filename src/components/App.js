@@ -11,6 +11,7 @@ import Forum from "./Forum";
 import Post from "./Post";
 import Comment from "./Comment";
 import PrivateRoute from "./PrivateRoute";
+import RegformSuccess from "./RegisterSuccess";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/regform" component={Regform} />
+              <Route path="/regform_success" component={RegformSuccess} />
               <Route path="/admin" component={Admin} />
               <Route path= "/about" component={About} />
               <Route path="/chat" component={Chat} />
