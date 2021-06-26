@@ -33,7 +33,8 @@ export default function About() {
                   borderRadius: 30,
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center"
+                  justifyContent: "center",
+                  fontSize: 25
                 }}
               >
                 <p>Alright, everything is done!</p>

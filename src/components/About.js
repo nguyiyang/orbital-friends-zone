@@ -26,11 +26,31 @@ export default function About() {
               <div
                 style={{
                   height: "75vh",
-                  textAlign: "center",
+                  width: "70vw",
+                  margin: "auto",
                   backgroundColor: "lightgrey",
+                  padding: 100,
+                  borderRadius: 30,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  fontSize: 25
                 }}
               >
-                Creator's note
+                <p>Creator's note:</p>
+                <p>
+                  Welcome! This is FriendsZone, a project to bring together
+                  like-minded students in NUS to help forge lasting friendships.
+                  Our project helps place you with three other like-minded users
+                  into groups of four. From there on, you can mingle with your
+                  groupmates or visit the forum to get to know even more people!
+                </p>
+                <p>
+                  But firstly, we would need to get to know you a little better
+                  :). Whenever you are ready, please click on "Continue" to
+                  proceed to the questionnaire where we can assess your
+                  compatibality with other users.
+                </p>
               </div>
               <div style={{ marginLeft: "auto", marginRight: 0 }}>
                 <Button
@@ -42,7 +62,7 @@ export default function About() {
                     width: "10vw",
                   }}
                 >
-                  Proceed
+                  Continue
                 </Button>
               </div>
             </div>
