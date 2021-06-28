@@ -152,7 +152,7 @@ export default function Admin() {
     // do recalculating of groups
     let count = 0;
     while (true) {
-      if (count < 1000) {
+      if (count < 1000000) {
         if (recalculate() === true) {
           break;
         }
