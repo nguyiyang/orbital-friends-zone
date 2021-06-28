@@ -313,7 +313,7 @@ export default function Admin() {
                   <p>Current unassigned users: {userCount}</p>
                   <p>Groups to be generated: {Math.floor(userCount / 4)}</p>
                   <Button
-                    onClick={kmeans}
+                    onClick={kmeans2}
                     style={{
                       backgroundColor: "blue",
                       borderRadius: 20,
