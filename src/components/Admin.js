@@ -267,7 +267,7 @@ export default function Admin() {
     <>
       <Card style={{ backgroundColor: "lightblue" }}>
         <Card.Body>
-          <Form onSubmit={kmeans2}>
+          <Form>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{height: "5vh"}}>
               <h1 style={{ fontFamily: "Bradley Hand, cursive"}}>
@@ -313,7 +313,7 @@ export default function Admin() {
                   <p>Current unassigned users: {userCount}</p>
                   <p>Groups to be generated: {Math.floor(userCount / 4)}</p>
                   <Button
-                    type="submit"
+                    onClick={kmeans}
                     style={{
                       backgroundColor: "blue",
                       borderRadius: 20,
@@ -324,7 +324,7 @@ export default function Admin() {
                     Create Group
                   </Button>
                   <Button
-                    type="submit"
+                    onClick={reset}
                     style={{
                       backgroundColor: "red",
                       borderRadius: 20,
