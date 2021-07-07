@@ -58,14 +58,19 @@ function ChatRoom() {
 
   const [formValue, setFormValue] = useState("");
 
+  const [userName, setUserName] = useState("Nil");
+  getUserName().then((x) => setUserName(x));
+
   const sendMessage = async (e) => {
     e.preventDefault();
     const { uid } = auth.currentUser;
+
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      chatGroupId: groupId
+      chatGroupId: groupId,
+      userID: userName
     });
 
     setFormValue("");
@@ -99,21 +104,38 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
-  const { text, uid } = props.message;
+  const { text, userID, uid } = props.message;
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
 
-  return (
-    <>
-      <div className={`message ${messageClass}`}>
-        <p>{text}</p>
-      </div>
-    </>
-  );
+  if (messageClass === "sent") {
+    return (
+      <>
+        <div className={`message ${messageClass}`}>
+          <p>{text}</p>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div id="displayedName">{userID}</div>
+        <div className={`message ${messageClass}`}>
+          <p>{text}</p>
+        </div>
+      </>
+    );
+  }
 }
 
 async function getGroupId() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();
   return printed.data().groupId;
+}
+
+async function getUserName() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  return printed.data().username;
 }
