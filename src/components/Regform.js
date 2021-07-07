@@ -8,7 +8,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     height: "20vh",
     width: "50vw",
     padding: theme.spacing(3),
-    textAlign: "center"
+    textAlign: "center",
   },
   description: {
     height: "20vh",
@@ -30,10 +30,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   radio: {
-    justify: "center"
+    justify: "center",
   },
   control: {
     padding: theme.spacing(2),
+  },
+  button: {
+    height: "20vh",
+    width: "10vw",
+    marginLeft: "25vw"
   },
 }));
 
@@ -163,7 +168,7 @@ export default function Regform() {
       parseInt(value18) +
       parseInt(value19) +
       parseInt(value20);
-      console.log(usernameRef.current.value)
+    console.log(usernameRef.current.value);
     // save to database here
     const uid = firebase.auth().currentUser?.uid;
     const db = firebase.firestore();
@@ -209,598 +214,1078 @@ export default function Regform() {
   return (
     <>
       <div style={{ backgroundColor: "#cfe8fc" }}>
-      <Form onSubmit={generateScore}>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid
-              container
-              justify="center"
-              spacing={2}
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-            <br></br>
-            <Grid item>
-                <Paper className={classes.description}>
-                <h3>Welcome </h3>
-                <p style={{ width: "40vw" }}>
-                {" "}
-                Please answer the following questions as truthfully as possible
-                to ensure that our matching is accurate. 1 will indicate that
-                you cannot relate to the statement at all while 5 means that the
-                sentence describes you perfectly.{" "}
-              </p>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                <p>Username *</p>
-                <TextField id="standard-basic"  placeholder="Enter your username" inputRef={usernameRef}/>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You regularly make new friends.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q1"
-                    name="q1"
-                    value={value1}
-                    onChange={handleChange1}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    At social event, you will try to introduce yourself to new people.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q2"
-                    name="q2"
-                    value={value2}
-                    onChange={handleChange2}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You feel comfortable just walking up to someone you find interesting and striking up a conversation.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q3"
-                    name="q3"
-                    value={value3}
-                    onChange={handleChange3}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    In a group, you are usually the one initiating meetups.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q4"
-                    name="q4"
-                    value={value4}
-                    onChange={handleChange4}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    In your free time, you are more likely to hangout with your friends than to hangout alone.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q5"
-                    name="q5"
-                    value={value5}
-                    onChange={handleChange5}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You cannot stand eating alone.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q6"
-                    name="q6"
-                    value={value6}
-                    onChange={handleChange6}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    Given a choice between partying and spending some alone time, you would prefer the former most of the time.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q7"
-                    name="q7"
-                    value={value7}
-                    onChange={handleChange7}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You cannot be left out in a group discussion.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q8"
-                    name="q8"
-                    value={value8}
-                    onChange={handleChange8}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You are happy to start the conversation in a group setting.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q9"
-                    name="q9"
-                    value={value9}
-                    onChange={handleChange9}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You often take the lead in decision making within a group.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q10"
-                    name="q10"
-                    value={value10}
-                    onChange={handleChange10}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You describe yourself as a rational human being.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q11"
-                    name="q11"
-                    value={value11}
-                    onChange={handleChange11}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    Most of the time, emotions are more important than facts in your opinion.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q12"
-                    name="q12"
-                    value={value12}
-                    onChange={handleChange12}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You usually prefer just doing what you feel like at any given moment instead of planning a particular daily routine.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q13"
-                    name="q13"
-                    value={value13}
-                    onChange={handleChange13}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You will help anyone in need at your own expense.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q14"
-                    name="q14"
-                    value={value14}
-                    onChange={handleChange14}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    In an argument with your friend, you think that the fact is less important than the feelings of your friend.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q15"
-                    name="q15"
-                    value={value15}
-                    onChange={handleChange15}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You will let your emotions of a situation disrupt your workflow.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q16"
-                    name="q16"
-                    value={value16}
-                    onChange={handleChange16}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    When knowing that you have the optimal solution, you will still consult everyone involved to ensure that everyone is agreeable.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q17"
-                    name="q17"
-                    value={value17}
-                    onChange={handleChange17}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You try to avoid conflict at all costs, even when you are in the right.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q18"
-                    name="q18"
-                    value={value18}
-                    onChange={handleChange18}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    You value Harmony the most.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q19"
-                    name="q19"
-                    value={value19}
-                    onChange={handleChange19}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-
-              <Grid item>
-                <Paper className={classes.description}>
-                
-                <FormControl component="fieldset">
-
-                  <FormLabel component="legend">
-                    {" "}
-                    When making an important life decision, you consider your personal feelings first.
-                  </FormLabel>
-                  <br></br>
-
-                  <RadioGroup
-                    row
-                    aria-label="q20"
-                    name="q20"
-                    value={value20}
-                    onChange={handleChange20}
-                  >
-                    <FormControlLabel value="1" control={<Radio />} label="1" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="2" control={<Radio />} label="2" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="3" control={<Radio />} label="3" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="4" control={<Radio />} label="4" style={{marginLeft:"4vw"}}/>
-                    <FormControlLabel value="5" control={<Radio />} label="5" style={{marginLeft:"4vw"}}/>
-                  </RadioGroup>
-                  </FormControl>
-                </Paper>
-              </Grid>
-              
-            </Grid>
-          </Grid>
-        </Grid>
-        <div style={{ marginLeft: "auto", marginRight: 0 }}>
-              <Button
-                type="submit"
-                style={{
-                  backgroundColor: "purple",
-                  borderRadius: 20,
-                  width: "10vw",
-                  height: "10vh",
-                }}
+        <Form onSubmit={generateScore}>
+          <Grid container className={classes.root} spacing={2}>
+            <Grid item xs={12}>
+              <Grid
+                container
+                justify="center"
+                spacing={2}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
               >
-                Complete
-              </Button>
-            </div>
+                <br></br>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <h3>Welcome </h3>
+                    <p style={{ width: "40vw" }}>
+                      {" "}
+                      Please answer the following questions as truthfully as
+                      possible to ensure that our matching is accurate. 1 will
+                      indicate that you cannot relate to the statement at all
+                      while 5 means that the sentence describes you perfectly.{" "}
+                    </p>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <p>Username *</p>
+                    <TextField
+                      id="standard-basic"
+                      placeholder="Enter your username"
+                      inputRef={usernameRef}
+                    />
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You regularly make new friends.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q1"
+                        name="q1"
+                        value={value1}
+                        onChange={handleChange1}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        At social event, you will try to introduce yourself to
+                        new people.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q2"
+                        name="q2"
+                        value={value2}
+                        onChange={handleChange2}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You feel comfortable just walking up to someone you find
+                        interesting and striking up a conversation.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q3"
+                        name="q3"
+                        value={value3}
+                        onChange={handleChange3}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        In a group, you are usually the one initiating meetups.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q4"
+                        name="q4"
+                        value={value4}
+                        onChange={handleChange4}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        In your free time, you are more likely to hangout with
+                        your friends than to hangout alone.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q5"
+                        name="q5"
+                        value={value5}
+                        onChange={handleChange5}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You cannot stand eating alone.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q6"
+                        name="q6"
+                        value={value6}
+                        onChange={handleChange6}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        Given a choice between partying and spending some alone
+                        time, you would prefer the former most of the time.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q7"
+                        name="q7"
+                        value={value7}
+                        onChange={handleChange7}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You cannot be left out in a group discussion.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q8"
+                        name="q8"
+                        value={value8}
+                        onChange={handleChange8}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You are happy to start the conversation in a group
+                        setting.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q9"
+                        name="q9"
+                        value={value9}
+                        onChange={handleChange9}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You often take the lead in decision making within a
+                        group.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q10"
+                        name="q10"
+                        value={value10}
+                        onChange={handleChange10}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You describe yourself as a rational human being.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q11"
+                        name="q11"
+                        value={value11}
+                        onChange={handleChange11}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        Most of the time, emotions are more important than facts
+                        in your opinion.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q12"
+                        name="q12"
+                        value={value12}
+                        onChange={handleChange12}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You usually prefer just doing what you feel like at any
+                        given moment instead of planning a particular daily
+                        routine.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q13"
+                        name="q13"
+                        value={value13}
+                        onChange={handleChange13}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You will help anyone in need at your own expense.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q14"
+                        name="q14"
+                        value={value14}
+                        onChange={handleChange14}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        In an argument with your friend, you think that the fact
+                        is less important than the feelings of your friend.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q15"
+                        name="q15"
+                        value={value15}
+                        onChange={handleChange15}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You will let your emotions of a situation disrupt your
+                        workflow.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q16"
+                        name="q16"
+                        value={value16}
+                        onChange={handleChange16}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        When knowing that you have the optimal solution, you
+                        will still consult everyone involved to ensure that
+                        everyone is agreeable.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q17"
+                        name="q17"
+                        value={value17}
+                        onChange={handleChange17}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You try to avoid conflict at all costs, even when you
+                        are in the right.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q18"
+                        name="q18"
+                        value={value18}
+                        onChange={handleChange18}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        You value Harmony the most.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q19"
+                        name="q19"
+                        value={value19}
+                        onChange={handleChange19}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+
+                <Grid item>
+                  <Paper className={classes.description}>
+                    <FormControl component="fieldset">
+                      <FormLabel component="legend">
+                        {" "}
+                        When making an important life decision, you consider
+                        your personal feelings first.
+                      </FormLabel>
+                      <br></br>
+
+                      <RadioGroup
+                        row
+                        aria-label="q20"
+                        name="q20"
+                        value={value20}
+                        onChange={handleChange20}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          control={<Radio />}
+                          label="1"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          control={<Radio />}
+                          label="2"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="3"
+                          control={<Radio />}
+                          label="3"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="4"
+                          control={<Radio />}
+                          label="4"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                        <FormControlLabel
+                          value="5"
+                          control={<Radio />}
+                          label="5"
+                          style={{ marginLeft: "4vw" }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Paper>
+                </Grid>
+              </Grid>
+              <br></br>
+              <Grid container className={classes.button}>
+              <Grid item>
+                <Button
+                  type="submit"
+                  style={{
+                    backgroundColor: "#406dc2",
+                    borderRadius: 5,
+                    width: "8vw"
+                  }}
+                >
+                  Submit
+                </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            
+          </Grid>
         </Form>
       </div>
-      
     </>
   );
 }
