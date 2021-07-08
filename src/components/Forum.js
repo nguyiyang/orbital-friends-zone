@@ -53,9 +53,9 @@ function ShowForum() {
 
   const history = useHistory();
 
-  async function writeComment() {
+  async function writeComment(x) {
     try {
-      history.push("./addComment");
+      history.push("./addComment", { postId: x });
     } catch {}
   }
 
@@ -84,7 +84,7 @@ function ShowForum() {
               <Post key={text.key} post={text} />
               {text.title}
               <div>{text.content}</div>
-              <Button variant="link" onClick={writeComment}>
+              <Button variant="link" onClick={() => writeComment(text.id)}>
                 Comment
               </Button>
               <Button
