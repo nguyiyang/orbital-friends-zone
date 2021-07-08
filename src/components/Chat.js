@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
 import styles from "./Chat.css";
+
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function Chat() {
@@ -54,11 +55,10 @@ function ChatRoom() {
   const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
-  console.log(messages);
 
   const [formValue, setFormValue] = useState("");
 
-  const [userName, setUserName] = useState("Nil");
+  const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
 
   const sendMessage = async (e) => {

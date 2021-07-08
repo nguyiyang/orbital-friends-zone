@@ -34,6 +34,9 @@ function AddPost() {
   const [formValue2, setFormValue2] = useState("");
   const history = useHistory();
 
+  const [userName, setUserName] = useState("");
+  getUserName().then((x) => setUserName(x));
+
   const createPost = async (e) => {
     e.preventDefault();
     const { uid } = firebase.auth().currentUser;
@@ -42,9 +45,9 @@ function AddPost() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       likes: 0,
-      comments: [],
       alreadyLiked: [],
-      content: formValue2
+      content: formValue2,
+      userID: userName
     });
 
     setFormValue("");
@@ -71,4 +74,10 @@ function AddPost() {
       </form>
     </>
   );
+}
+
+async function getUserName() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  return printed.data().username;
 }
