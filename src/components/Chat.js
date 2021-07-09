@@ -78,8 +78,25 @@ function ChatRoom() {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  function displayName(x) {
+    if (x === -1) {
+      return "Academic Advice";
+    } else if (x === -2) {
+      return "CCA and Interests";
+    } else if (x === -3) {
+      return "Personal Life and Relationship";
+    } else if (x === -4) {
+      return "Memes only!";
+    } else if (typeof x === "number") {
+      return "Assigned Group";
+    } else {
+      return x;
+    }
+  }
+
   return (
     <>
+      {displayName(groupNumber)}
       <main>
         {messages &&
           messages
