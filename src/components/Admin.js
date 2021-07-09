@@ -269,6 +269,12 @@ export default function Admin() {
     } catch {}
   }
 
+  async function ReadFeedback() {
+    try {
+      history.push("./Feedback");
+    } catch {}
+  }
+
   return (
     <>
       <Card style={{ backgroundColor: "lightblue" }}>
@@ -350,6 +356,17 @@ export default function Admin() {
                     }}
                   >
                     Make Announcement
+                  </Button>
+                  <Button
+                    onClick={ReadFeedback}
+                    style={{
+                      backgroundColor: "blue",
+                      borderRadius: 20,
+                      width: "10vw",
+                      height: "5vh"
+                    }}
+                  >
+                    Feedbacks
                   </Button>
                 </div>
               </div>
