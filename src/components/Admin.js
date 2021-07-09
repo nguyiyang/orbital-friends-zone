@@ -84,7 +84,7 @@ export default function Admin() {
             score1: score1,
             score2: score2,
             username: username,
-            id: id,
+            id: id
           };
           id++;
           setData((data) => [...data, newData]);
@@ -125,7 +125,7 @@ export default function Admin() {
         distances.push({
           itemId: data[j].id,
           clusterId: i,
-          distance: distance,
+          distance: distance
         });
       }
     }
@@ -176,7 +176,7 @@ export default function Admin() {
           score1: accum1 / centroids[i].items.length,
           score2: accum2 / centroids[i].items.length,
           size: 0,
-          items: [],
+          items: []
         });
         accum1 = 0;
         accum2 = 0;
@@ -196,7 +196,7 @@ export default function Admin() {
           newDistances.push({
             itemId: data[j].id,
             clusterId: i,
-            distance: distance,
+            distance: distance
           });
         }
       }
@@ -263,28 +263,34 @@ export default function Admin() {
       });
   }
 
+  async function MakeAnnouncement() {
+    try {
+      history.push("./MakeAnnouncement");
+    } catch {}
+  }
+
   return (
     <>
       <Card style={{ backgroundColor: "lightblue" }}>
         <Card.Body>
           <Form>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{height: "5vh"}}>
-              <h1 style={{ fontFamily: "Bradley Hand, cursive"}}>
-                FriendsZone
-                <Button
-                  variant="link"
-                  onClick={handleLogout}
-                  style={{ float: "right" }}
-                >
-                  <img
-                    src={logOutIcon}
-                    alt="Picnic"
-                    width="50px"
-                    height="50px"
-                  />
-                </Button>
-              </h1>
+              <div style={{ height: "5vh" }}>
+                <h1 style={{ fontFamily: "Bradley Hand, cursive" }}>
+                  FriendsZone
+                  <Button
+                    variant="link"
+                    onClick={handleLogout}
+                    style={{ float: "right" }}
+                  >
+                    <img
+                      src={logOutIcon}
+                      alt="Picnic"
+                      width="50px"
+                      height="50px"
+                    />
+                  </Button>
+                </h1>
               </div>
 
               <div
@@ -292,7 +298,7 @@ export default function Admin() {
                   display: "flex",
                   height: "95vh",
                   flexDirection: "column",
-                  justifyContent: "center",
+                  justifyContent: "center"
                 }}
               >
                 <div
@@ -307,7 +313,7 @@ export default function Admin() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: 25,
+                    fontSize: 25
                   }}
                 >
                   <p>Current unassigned users: {userCount}</p>
@@ -318,7 +324,7 @@ export default function Admin() {
                       backgroundColor: "blue",
                       borderRadius: 20,
                       width: "10vw",
-                      height: "5vh",
+                      height: "5vh"
                     }}
                   >
                     Create Group
@@ -329,10 +335,21 @@ export default function Admin() {
                       backgroundColor: "red",
                       borderRadius: 20,
                       width: "10vw",
-                      height: "5vh",
+                      height: "5vh"
                     }}
                   >
                     Reset groups
+                  </Button>
+                  <Button
+                    onClick={MakeAnnouncement}
+                    style={{
+                      backgroundColor: "blue",
+                      borderRadius: 20,
+                      width: "10vw",
+                      height: "5vh"
+                    }}
+                  >
+                    Make Announcement
                   </Button>
                 </div>
               </div>
