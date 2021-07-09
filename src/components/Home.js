@@ -39,6 +39,12 @@ export default function Home() {
     } catch {}
   }
 
+  async function Announcement() {
+    try {
+      history.push("./Announcement");
+    } catch {}
+  }
+
   return (
     <section className="hello">
       <Button variant="link" onClick={handleLogout} className="logOutButton">
@@ -50,6 +56,9 @@ export default function Home() {
         </Button>
         <Button variant="link" onClick={Forum} className="forumButton">
           <img src={forumPic} />
+        </Button>
+        <Button variant="link" onClick={Announcement} className="forumButton">
+          Announcement
         </Button>
       </div>
     </section>

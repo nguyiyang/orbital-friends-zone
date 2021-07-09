@@ -10,6 +10,8 @@ import NoChat from "./NoChat";
 import Forum from "./Forum";
 import Post from "./Post";
 import Comment from "./Comment";
+import Announcement from "./Announcement";
+import MakeAnnouncement from "./MakeAnnouncement";
 import PrivateRoute from "./PrivateRoute";
 import RegformSuccess from "./RegisterSuccess";
 import { Container } from "react-bootstrap";
@@ -33,6 +35,8 @@ function App() {
           <Route path="/Forum" component={Forum} />
           <Route path="/addPost" component={Post} />
           <Route path="/addComment" component={Comment} />
+          <Route path="/MakeAnnouncement" component={MakeAnnouncement} />
+          <Route path="/Announcement" component={Announcement} />
         </Switch>
       </Router>
     </AuthProvider>
