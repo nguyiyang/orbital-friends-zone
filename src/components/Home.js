@@ -20,16 +20,9 @@ export default function Home() {
     } catch {}
   }
 
-  const [groupId, setGroupId] = useState(0);
-  getGroupId().then((x) => setGroupId(x));
-
   async function Chat() {
     try {
-      if (groupId === 0) {
-        history.push("./NoChat");
-      } else {
-        history.push("./Chat");
-      }
+      history.push("./ChatGroups");
     } catch {}
   }
 
@@ -72,10 +65,4 @@ export default function Home() {
       </div>
     </section>
   );
-}
-
-async function getGroupId() {
-  const uid = firebase.auth().currentUser?.uid;
-  const printed = await firebase.firestore().collection("testusers").doc(uid).get();
-  return printed.data().groupId;
 }

@@ -9,7 +9,7 @@ export default function NoChat() {
 
   async function Home() {
     try {
-      history.push("./");
+      history.push("./ChatGroups");
     } catch {}
   }
 

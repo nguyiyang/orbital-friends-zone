@@ -15,6 +15,7 @@ import MakeAnnouncement from "./MakeAnnouncement";
 import MakeFeedback from "./CreateFeedback";
 import Feedback from "./Feedback";
 import Thankyou from "./Thankyou";
+import ChatGroups from "./ChatGroups";
 import PrivateRoute from "./PrivateRoute";
 import RegformSuccess from "./RegisterSuccess";
 import { Container } from "react-bootstrap";
@@ -43,6 +44,7 @@ function App() {
           <Route path="/Feedback" component={Feedback} />
           <Route path="/CreateFeedback" component={MakeFeedback} />
           <Route path="/Thankyou" component={Thankyou} />
+          <Route path="/ChatGroups" component={ChatGroups} />
         </Switch>
       </Router>
     </AuthProvider>

@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
+import { useLocation } from "react-router-dom";
 
 import styles from "./Chat.css";
 
@@ -14,7 +15,7 @@ export default function Chat() {
 
   async function Home() {
     try {
-      history.push("./");
+      history.push("./ChatGroups");
     } catch {}
   }
 
@@ -49,12 +50,12 @@ const firestore = firebase.firestore();
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("Chat");
-  // groupId of current user
-  const [groupId, setGroupId] = useState(0);
-  getGroupId().then((x) => setGroupId(x));
+
   const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
+
+  const groupNumber = useLocation().state.gNumber;
 
   const [formValue, setFormValue] = useState("");
 
@@ -69,7 +70,7 @@ function ChatRoom() {
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      chatGroupId: groupId,
+      chatGroupId: groupNumber,
       userID: userName
     });
 
@@ -82,7 +83,7 @@ function ChatRoom() {
       <main>
         {messages &&
           messages
-            .filter((msg) => msg.chatGroupId === groupId)
+            .filter((msg) => msg.chatGroupId === groupNumber)
             .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
         <span ref={dummy}></span>
