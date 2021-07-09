@@ -24,7 +24,7 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value);
       const uid = firebase.auth().currentUser?.uid;
       const db = firebase.firestore();
-      const docRef = db.collection("users").doc(uid);
+      const docRef = db.collection("testusers").doc(uid);
 
       docRef.get().then((doc) => {
         if (doc.exists) {
