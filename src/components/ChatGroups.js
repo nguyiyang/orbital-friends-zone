@@ -32,6 +32,12 @@ export default function ChatGroups() {
     } catch {}
   }
 
+  async function Game() {
+    try {
+      history.push("./Game");
+    } catch {}
+  }
+
   return (
     <section>
       <Button variant="link" onClick={Home}>
@@ -56,6 +62,9 @@ export default function ChatGroups() {
           className="forumButton"
         >
           Matched Groups
+        </Button>
+        <Button variant="link" onClick={Game} className="forumButton">
+          Game
         </Button>
       </div>
     </section>
