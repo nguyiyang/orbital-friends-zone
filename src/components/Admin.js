@@ -18,24 +18,11 @@ export default function Admin() {
   }
   const db = firebase.firestore();
 
-  // count total number of users
-  const [totalUsers, setTotalUsers] = useState(0);
-  const display = () =>
-    db
-      .collection("users")
-      .get()
-      .then((querySnapshot) => {
-        setTotalUsers(querySnapshot.size - 1);
-      });
-  useEffect(() => {
-    display();
-  });
-
   // count total number of assigned users
   const [totalAssigned, setTotalAssigned] = useState(0);
   const assigned = () =>
     db
-      .collection("users")
+      .collection("testusers")
       .where("groupId", ">", 0)
       .get()
       .then((querySnapshot) => {
@@ -49,7 +36,7 @@ export default function Admin() {
   const [userCount, setUserCount] = useState(0);
 
   const countUnassigned = () => {
-    db.collection("users")
+    db.collection("testusers")
       .where("groupId", "==", 0)
       .get()
       .then((querySnapshot) => {
@@ -70,7 +57,7 @@ export default function Admin() {
     let username = "";
     let id;
     let newData;
-    db.collection("users")
+    db.collection("testusers")
       .where("groupId", "==", 0)
       .get()
       .then((querySnapshot) => {
@@ -98,10 +85,8 @@ export default function Admin() {
   function kmeans2() {
     const numberOfUsers = userCount - (userCount % 4);
     data.splice(numberOfUsers);
-    console.log(data);
     // desired number of clusters to be set for kmeans
     let group = Math.floor(userCount / 4);
-    console.log(group);
 
     let centroids = [];
     // generate centroids randomly
@@ -146,8 +131,6 @@ export default function Admin() {
         centroids[distances[i].clusterId].size++;
       }
     }
-    console.log(distances);
-    console.log(centroids[0]);
 
     // do recalculating of groups
     let count = 0;
@@ -235,30 +218,62 @@ export default function Admin() {
       return different;
     }
 
+    for (let i = 1; i < Math.floor(userCount / 4) + 1; i++) {
+      db.collection("groups").doc(JSON.stringify(i)).set({ members: [] });
+    }
     for (let i = 0; i < centroids.length; i++) {
       for (let j = 0; j < centroids[i].items.length; j++) {
-        db.collection("users")
+        db.collection("testusers")
           .where("id", "==", centroids[i].items[j])
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              console.log(totalAssigned);
-              db.collection("users")
+              db.collection("groups")
+                .doc(JSON.stringify(i + Math.floor(totalAssigned / 4) + 1))
+                .update({
+                  members: firebase.firestore.FieldValue.arrayUnion(doc.id),
+                });
+
+              db.collection("testusers")
                 .doc(doc.id)
                 .update({ groupId: i + Math.ceil(totalAssigned / 4) + 1 });
             });
           });
       }
     }
+
+    db.collection("groups")
+      .get()
+      .then((querySnapshot) => {
+        let x = querySnapshot.size;
+        db.collection("testusers")
+          .where("groupId","==",0)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              // generate random number from groups
+              Math.floor((Math.random() * x) + 1)
+              db.collection("groups")
+                .doc(JSON.stringify(x))
+                .update({
+                  members: firebase.firestore.FieldValue.arrayUnion(doc.id),
+                });
+
+              db.collection("testusers")
+                .doc(doc.id)
+                .update({ groupId: x });
+            })
+          })
+      });
   }
 
   function reset() {
-    db.collection("users")
+    db.collection("testusers")
       .where("groupId", ">", 0)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          db.collection("users").doc(doc.id).update({ groupId: 0 });
+          db.collection("testusers").doc(doc.id).update({ groupId: 0 });
         });
       });
   }
@@ -269,22 +284,22 @@ export default function Admin() {
         <Card.Body>
           <Form>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{height: "5vh"}}>
-              <h1 style={{ fontFamily: "Bradley Hand, cursive"}}>
-                FriendsZone
-                <Button
-                  variant="link"
-                  onClick={handleLogout}
-                  style={{ float: "right" }}
-                >
-                  <img
-                    src={logOutIcon}
-                    alt="Picnic"
-                    width="50px"
-                    height="50px"
-                  />
-                </Button>
-              </h1>
+              <div style={{ height: "5vh" }}>
+                <h1 style={{ fontFamily: "Bradley Hand, cursive" }}>
+                  FriendsZone
+                  <Button
+                    variant="link"
+                    onClick={handleLogout}
+                    style={{ float: "right" }}
+                  >
+                    <img
+                      src={logOutIcon}
+                      alt="Picnic"
+                      width="50px"
+                      height="50px"
+                    />
+                  </Button>
+                </h1>
               </div>
 
               <div

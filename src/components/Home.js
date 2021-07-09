@@ -58,6 +58,6 @@ export default function Home() {
 
 async function getGroupId() {
   const uid = firebase.auth().currentUser?.uid;
-  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  const printed = await firebase.firestore().collection("testusers").doc(uid).get();
   return printed.data().groupId;
 }
