@@ -45,6 +45,12 @@ export default function Home() {
     } catch {}
   }
 
+  async function Feedback() {
+    try {
+      history.push("./CreateFeedback");
+    } catch {}
+  }
+
   return (
     <section className="hello">
       <Button variant="link" onClick={handleLogout} className="logOutButton">
@@ -59,6 +65,9 @@ export default function Home() {
         </Button>
         <Button variant="link" onClick={Announcement} className="forumButton">
           Announcement
+        </Button>
+        <Button variant="link" onClick={Feedback} className="forumButton">
+          Feedback
         </Button>
       </div>
     </section>
