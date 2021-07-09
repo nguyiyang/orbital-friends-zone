@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     height: "20vh",
     width: "10vw",
-    marginLeft: "25vw"
+    marginLeft: "25vw",
   },
 }));
 
@@ -231,8 +231,8 @@ export default function Regform() {
                     <h3>Welcome </h3>
                     <p style={{ width: "40vw" }}>
                       {" "}
-                      Please answer the following questions as truthfully as
-                      possible to ensure that our matching is accurate. 1 will
+                      We would like to get to know you better! Please answer the
+                      following questions as truthfully as possible. 1 will
                       indicate that you cannot relate to the statement at all
                       while 5 means that the sentence describes you perfectly.{" "}
                     </p>
@@ -1268,21 +1268,20 @@ export default function Regform() {
               </Grid>
               <br></br>
               <Grid container className={classes.button}>
-              <Grid item>
-                <Button
-                  type="submit"
-                  style={{
-                    backgroundColor: "#406dc2",
-                    borderRadius: 5,
-                    width: "8vw"
-                  }}
-                >
-                  Submit
-                </Button>
+                <Grid item>
+                  <Button
+                    type="submit"
+                    style={{
+                      backgroundColor: "#406dc2",
+                      borderRadius: 5,
+                      width: "8vw",
+                    }}
+                  >
+                    Submit
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>
-            
           </Grid>
         </Form>
       </div>
