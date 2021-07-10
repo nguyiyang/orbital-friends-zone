@@ -17,6 +17,7 @@ import Feedback from "./Feedback";
 import Thankyou from "./Thankyou";
 import ChatGroups from "./ChatGroups";
 import Game from "./Game";
+import ExitGroupCompleted from "./ExitGroupCompleted";
 import PrivateRoute from "./PrivateRoute";
 import RegformSuccess from "./RegisterSuccess";
 import { Container } from "react-bootstrap";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/Thankyou" component={Thankyou} />
           <Route path="/ChatGroups" component={ChatGroups} />
           <Route path="/Game" component={Game} />
+          <Route path="/ExitGroupCompleted" component={ExitGroupCompleted} />
         </Switch>
       </Router>
     </AuthProvider>

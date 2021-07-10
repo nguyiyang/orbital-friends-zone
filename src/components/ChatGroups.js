@@ -32,10 +32,25 @@ export default function ChatGroups() {
     } catch {}
   }
 
+  async function FixedChat(x) {
+    try {
+      history.push("./Chat", { gNumber: x });
+    } catch {}
+  }
+
   async function Game() {
     try {
       history.push("./Game");
     } catch {}
+  }
+
+  const firestore = firebase.firestore();
+
+  async function ExitGroup() {
+    firestore.collection("users").doc(firebase.auth().currentUser?.uid).update({
+      groupId: 0
+    });
+    history.push("./ExitGroupCompleted");
   }
 
   return (
@@ -44,16 +59,16 @@ export default function ChatGroups() {
         Back
       </Button>
       <div>
-        <Button variant="link" onClick={() => Chat(-1)} className="chatButton">
+        <Button variant="link" onClick={() => FixedChat(-1)}>
           Academic Advice
         </Button>
-        <Button variant="link" onClick={() => Chat(-2)} className="forumButton">
+        <Button variant="link" onClick={() => FixedChat(-2)}>
           CCA and Interests
         </Button>
-        <Button variant="link" onClick={() => Chat(-3)} className="forumButton">
+        <Button variant="link" onClick={() => FixedChat(-3)}>
           Personal Life and Relationship
         </Button>
-        <Button variant="link" onClick={() => Chat(-4)} className="forumButton">
+        <Button variant="link" onClick={() => FixedChat(-4)}>
           Memes only!
         </Button>
         <Button
@@ -65,6 +80,9 @@ export default function ChatGroups() {
         </Button>
         <Button variant="link" onClick={Game} className="forumButton">
           Game
+        </Button>
+        <Button variant="link" onClick={ExitGroup} className="forumButton">
+          Exit Group
         </Button>
       </div>
     </section>
