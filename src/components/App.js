@@ -20,6 +20,7 @@ import Game from "./Game";
 import ExitGroupCompleted from "./ExitGroupCompleted";
 import PrivateRoute from "./PrivateRoute";
 import RegformSuccess from "./RegisterSuccess";
+import test2 from "./test2";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -49,6 +50,7 @@ function App() {
           <Route path="/ChatGroups" component={ChatGroups} />
           <Route path="/Game" component={Game} />
           <Route path="/ExitGroupCompleted" component={ExitGroupCompleted} />
+          <Route path="/test2" component={test2} />
         </Switch>
       </Router>
     </AuthProvider>
