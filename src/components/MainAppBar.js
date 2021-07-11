@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
 import { useHistory } from "react-router-dom";
-import AppBar from "./test1";
-import Toolbar, { styles as toolbarStyles } from "./test3";
+import AppBar from "./AppBar";
+import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
 import { useAuth } from "../contexts/AuthContext";
 
 const styles = (theme) => ({

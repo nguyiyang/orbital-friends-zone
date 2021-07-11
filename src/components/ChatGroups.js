@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "./Typography";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import AppAppBar from "./test2.js";
+import AppBar from "./MainAppBar";
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
@@ -191,7 +191,7 @@ function ChatGroups(props) {
 
   return (
     <Container className={classes.root} component="section">
-      <AppAppBar />
+      <AppBar />
       <Button
         onClick={() => {
           Back();
