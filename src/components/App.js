@@ -1,27 +1,27 @@
 import React from "react";
 import Admin from "./Admin";
-import About from "./About";
-import Home from "./Home";
-import Login from "./Login";
-import Signup from "./Signup";
-import Regform from "./Regform";
-import Chat from "./Chat";
+import About from "./pages/LoginRegister/About";
+import Home from "./pages/dashboard/Home";
+import Login from "./pages/LoginRegister/Login";
+import Signup from "./pages/LoginRegister/Signup";
+import Regform from "./pages/LoginRegister/Regform";
+import Chat from "./pages/dashboard/Chat";
 import NoChat from "./NoChat";
-import Forum from "./Forum";
+import Forum from "./pages/dashboard/Forum";
 import Post from "./Post";
 import Comment from "./Comment";
-import Announcement from "./Announcement";
+import Announcement from "./pages/dashboard/Announcement";
 import MakeAnnouncement from "./MakeAnnouncement";
-import MakeFeedback from "./CreateFeedback";
+import MakeFeedback from "./pages/dashboard/CreateFeedback";
 import Feedback from "./Feedback";
 import Thankyou from "./Thankyou";
-import ChatGroups from "./ChatGroups";
-import Game from "./Game";
+import ChatGroups from "./pages/dashboard/ChatGroups";
+import Game from "./pages/dashboard/Game";
 import ExitGroupCompleted from "./ExitGroupCompleted";
 import PrivateRoute from "./PrivateRoute";
-import RegformSuccess from "./RegisterSuccess";
+import RegformSuccess from "./pages/LoginRegister/RegisterSuccess";
 import MainAppBar from "./MainAppBar";
-import { Container } from "react-bootstrap";
+import Test from "./Test";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -51,6 +51,7 @@ function App() {
           <Route path="/Game" component={Game} />
           <Route path="/ExitGroupCompleted" component={ExitGroupCompleted} />
           <Route path="/MainAppBar" component={MainAppBar} />
+          <Route path="/Test" component={Test} />
         </Switch>
       </Router>
     </AuthProvider>

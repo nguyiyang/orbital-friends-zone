@@ -118,12 +118,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import background from "./Images/sample.jpg";
 
 const useStyles = makeStyles((theme) => ({
   root: {

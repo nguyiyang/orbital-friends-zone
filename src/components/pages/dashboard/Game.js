@@ -1,16 +1,16 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
-export default function MakeFeedback() {
+export default function Game() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
 
   async function back() {
     try {
-      history.push("./");
+      history.push("./ChatGroups");
     } catch {}
   }
 
@@ -21,34 +21,23 @@ export default function MakeFeedback() {
           Back
         </Button>
       </header>
-
+      What would you like for dinner tonight?
       <section>
-        <AddFeedback />
+        <GameQ />
       </section>
     </div>
   );
 }
 
-function AddFeedback() {
+function GameQ() {
   const [formValue, setFormValue] = useState("");
-  const [formValue2, setFormValue2] = useState("");
-  const history = useHistory();
 
-  const [userName, setUserName] = useState("");
-  getUserName().then((x) => setUserName(x));
+  const history = useHistory();
 
   const createFeedback = async (e) => {
     e.preventDefault();
-    const { uid } = firebase.auth().currentUser;
-    await firebase.firestore().collection("Feedback").add({
-      content: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      userID: userName
-    });
-
+    history.push("./Chat", { gNumber: formValue });
     setFormValue("");
-    history.push("./Thankyou");
   };
 
   return (
@@ -57,7 +46,7 @@ function AddFeedback() {
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          placeholder="How can we improve the app?"
+          placeholder="Answer"
         />
         <button type="submit" disabled={!formValue}>
           -
@@ -65,10 +54,4 @@ function AddFeedback() {
       </form>
     </>
   );
-}
-
-async function getUserName() {
-  const uid = firebase.auth().currentUser?.uid;
-  const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().username;
 }
