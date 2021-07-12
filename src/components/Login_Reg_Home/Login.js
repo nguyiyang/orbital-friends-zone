@@ -107,7 +107,7 @@ export default function Login() {
 }
 */
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
@@ -122,7 +122,7 @@ import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import FaceIcon from '@material-ui/icons/Face';
+import FaceIcon from "@material-ui/icons/Face";
 
 const useStyles = makeStyles((theme) => ({
   root: {

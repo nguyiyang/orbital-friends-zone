@@ -106,7 +106,7 @@ export default function Signup() {
 }
 */
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";

@@ -1,15 +1,29 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
-import MainFeaturedPost from './MainFeaturedPost';
+import MainFeaturedPost from "./MainFeaturedPost";
+import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
+
+const useStyles = makeStyles((theme) => ({
+  backButton: {
+    margin: theme.spacing(3)
+  },
+  postButton: {
+    margin: theme.spacing(3)
+  }
+}));
 
 export default function Forum() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const classes = useStyles();
 
   async function Home() {
     try {
@@ -24,20 +38,36 @@ export default function Forum() {
   }
 
   return (
-    <div>
-      <header>
-        <Button variant="link" onClick={Home}>
-          Back
-        </Button>
-        <Button variant="link" onClick={addPost}>
-          Create Post
-        </Button>
-      </header>
+    <>
+      <AppBar />
+      Forum
+      <div>
+        <header>
+          <Button
+            variant="outlined"
+            color="inherit"
+            className={classes.backButton}
+            onClick={Home}
+          >
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            onClick={addPost}
+            right="0"
+            className={classes.postButton}
+          >
+            Create Post
+          </Button>
+        </header>
 
-      <section>
-        <ShowForum />
-      </section>
-    </div>
+        <section>
+          <ShowForum />
+        </section>
+      </div>
+    </>
   );
 }
 
@@ -45,36 +75,9 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function ShowForum() {
-  const dummy = useRef();
   const postRef = firestore.collection("Forum");
-
   const query = postRef.orderBy("createdAt", "desc");
-
   const [posts] = useCollectionData(query, { idField: "id" });
-
-  const history = useHistory();
-
-  async function writeComment(x) {
-    try {
-      history.push("./addComment", { postId: x });
-    } catch {}
-  }
-
-  async function giveLike(identity, numOfLikes, likedArray) {
-    const currUid = await auth.currentUser.uid;
-    console.log(likedArray);
-    if (likedArray.includes(currUid)) {
-      postRef.doc(identity).update({
-        likes: numOfLikes - 1,
-        alreadyLiked: firebase.firestore.FieldValue.arrayRemove(currUid)
-      });
-    } else {
-      postRef.doc(identity).update({
-        likes: numOfLikes + 1,
-        alreadyLiked: firebase.firestore.FieldValue.arrayUnion(currUid)
-      });
-    }
-  }
 
   return (
     <>
@@ -85,29 +88,7 @@ function ShowForum() {
               <MainFeaturedPost post={text} />
             </div>
           ))}
-
-        <span ref={dummy}></span>
       </main>
     </>
   );
 }
-
-
-
-
-/*
-<Post key={text.key} post={text} />
-              <div>{text.userID}</div>
-              <div>{text.title}</div>
-              <div>{text.content}</div>
-              <Button variant="link" onClick={() => writeComment(text.id)}>
-                Comment
-              </Button>
-              <Button
-                variant="link"
-                onClick={() => giveLike(text.id, text.likes, text.alreadyLiked)}
-              >
-                Like
-              </Button>
-              {text.likes} Likes
-              */

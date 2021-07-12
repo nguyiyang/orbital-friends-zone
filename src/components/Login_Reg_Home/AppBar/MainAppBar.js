@@ -7,7 +7,9 @@ import { useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
 import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
 import { useAuth } from "../../../contexts/AuthContext";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Box, Container, Typography, Button } from "@material-ui/core";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const styles = (theme) => ({
   title: {
@@ -18,7 +20,12 @@ const styles = (theme) => ({
     justifyContent: "space-between"
   },
   left: {
-    flex: 1
+    flex: 1,
+    float: "left"
+  },
+  center: {
+    flex: 1,
+    float: "left"
   },
   leftLinkActive: {
     color: theme.palette.common.white
@@ -57,7 +64,7 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
+          <div className={classes.center} />
           <Link
             variant="h6"
             underline="none"
@@ -77,7 +84,8 @@ function AppAppBar(props) {
                 handleLogout();
               }}
             >
-              {<ExitToAppIcon fontSize="large" />}{"  Sign Out"}
+              {<ExitToAppIcon fontSize="large" />}
+              {"  Sign Out"}
             </Link>
           </div>
         </Toolbar>

@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import logOutIcon from "../Images/Logout_icon.jpg";
 import AppBar from "./MainAppBar";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Card } from "react-bootstrap";
+import { Button } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    marginRight: theme.spacing(2)
+  }
+}));
 
 export default function Admin() {
+  const classes = useStyles();
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   async function handleLogout() {
@@ -232,7 +241,7 @@ export default function Admin() {
               db.collection("groups")
                 .doc(JSON.stringify(i + Math.floor(totalAssigned / 4) + 1))
                 .update({
-                  members: firebase.firestore.FieldValue.arrayUnion(doc.id),
+                  members: firebase.firestore.FieldValue.arrayUnion(doc.id)
                 });
 
               db.collection("users")
@@ -248,23 +257,21 @@ export default function Admin() {
       .then((querySnapshot) => {
         let x = querySnapshot.size;
         db.collection("users")
-          .where("groupId","==",0)
+          .where("groupId", "==", 0)
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               // generate random number from groups
-              let rand = Math.floor((Math.random() * x) + 1)
+              let rand = Math.floor(Math.random() * x + 1);
               db.collection("groups")
                 .doc(JSON.stringify(rand))
                 .update({
-                  members: firebase.firestore.FieldValue.arrayUnion(doc.id),
+                  members: firebase.firestore.FieldValue.arrayUnion(doc.id)
                 });
 
-              db.collection("users")
-                .doc(doc.id)
-                .update({ groupId: x });
-            })
-          })
+              db.collection("users").doc(doc.id).update({ groupId: x });
+            });
+          });
       });
   }
 
@@ -293,29 +300,11 @@ export default function Admin() {
 
   return (
     <>
-    <AppBar />
-      <Card style={{ backgroundColor: "lightblue" }}>
+      <AppBar />
+      <Card>
         <Card.Body>
           <Form>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ height: "5vh" }}>
-                <h1 style={{ fontFamily: "Bradley Hand, cursive" }}>
-                  FriendsZone
-                  <Button
-                    variant="link"
-                    onClick={handleLogout}
-                    style={{ float: "right" }}
-                  >
-                    <img
-                      src={logOutIcon}
-                      alt="Picnic"
-                      width="50px"
-                      height="50px"
-                    />
-                  </Button>
-                </h1>
-              </div>
-
               <div
                 style={{
                   display: "flex",
@@ -343,45 +332,33 @@ export default function Admin() {
                   <p>Groups to be generated: {Math.floor(userCount / 4)}</p>
                   <Button
                     onClick={kmeans2}
-                    style={{
-                      backgroundColor: "blue",
-                      borderRadius: 20,
-                      width: "10vw",
-                      height: "5vh"
-                    }}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
                   >
                     Create Group
                   </Button>
                   <Button
                     onClick={reset}
-                    style={{
-                      backgroundColor: "red",
-                      borderRadius: 20,
-                      width: "10vw",
-                      height: "5vh"
-                    }}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
                   >
                     Reset groups
                   </Button>
                   <Button
                     onClick={MakeAnnouncement}
-                    style={{
-                      backgroundColor: "blue",
-                      borderRadius: 20,
-                      width: "10vw",
-                      height: "5vh"
-                    }}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
                   >
                     Make Announcement
                   </Button>
                   <Button
                     onClick={ReadFeedback}
-                    style={{
-                      backgroundColor: "blue",
-                      borderRadius: 20,
-                      width: "10vw",
-                      height: "5vh"
-                    }}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
                   >
                     Feedbacks
                   </Button>
