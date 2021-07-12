@@ -48,7 +48,7 @@ function AddFeedback() {
     });
 
     setFormValue("");
-    //history.push("./Thankyou");
+    history.push("./Thankyou");
   };
 
   return (

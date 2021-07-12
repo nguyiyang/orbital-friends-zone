@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logOutIcon from "../Images/Logout_icon.jpg";
+import AppBar from "./MainAppBar";
 import { Form, Button, Card } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
@@ -292,6 +293,7 @@ export default function Admin() {
 
   return (
     <>
+    <AppBar />
       <Card style={{ backgroundColor: "lightblue" }}>
         <Card.Body>
           <Form>

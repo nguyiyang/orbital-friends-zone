@@ -1,15 +1,46 @@
 import React, { useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import { Helmet } from "react-helmet";
-import { Box, Container, Typography } from "@material-ui/core";
+import { Box, Container, Typography, Button } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import GroupNotFound from "./../Images/GroupNotFound.jpg";
 
-export default function NoChat() {
+const styles = (theme) => ({
+  root: {
+    width: "50%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: theme.spacing(5),
+
+    height: "100%",
+    align: "center",
+  },
+  button: {
+    border: "4px solid currentColor",
+    borderRadius: 0,
+    height: "auto",
+    padding: theme.spacing(2, 5),
+  },
+  link: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+  },
+  buoy: {
+    width: "50%",
+  },
+});
+
+function NoChat(props) {
   const history = useHistory();
+  const { classes } = props;
 
-  async function Home() {
+  async function ChatGroups() {
     try {
       history.push("./ChatGroups");
     } catch {}
@@ -30,51 +61,33 @@ export default function NoChat() {
     </div>
     */
     <>
-      <Helmet>
-        <title>404 | Material Kit</title>
-      </Helmet>
-      <Box
-        sx={{
-          backgroundColor: "background.default",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          justifyContent: "center",
-          align: "center"
-        }}
-      >
-        <Container
-          maxWidth="md"
-          sx={{
-            backgroundColor: "background.default",
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-            justifyContent: "center",
-            align: "center"
-          }}
+      <AppBar />
+      <Container className={classes.root} component="section">
+        <Typography align="center" color="textPrimary" variant="h2">
+          Oops! You have not been assigned a group.
+        </Typography>
+        <br></br>
+        <Typography align="center" color="textPrimary" variant="subtitle2">
+          Group Creation will be done from 0000-0600 every Monday. Check again
+          later!
+        </Typography>
+        <br></br>
+        <img src={GroupNotFound} className={classes.buoy} alt="buoy" />
+        <Button
+          size="large"
+          variant="contained"
+          color="primary"
+          onClick={() => ChatGroups()}
         >
-          <Typography align="center" color="textPrimary" variant="h2">
-            Oops! You have not been assigned a group.
-          </Typography>
-          <Typography align="center" color="textPrimary" variant="subtitle2">
-            Group Creation will be done from 0000-0600 every Monday. Check again
-            later!
-          </Typography>
-          <Box sx={{ textAlign: "center" }}>
-            <img
-              alt="Under development"
-              src="/static/images/undraw_page_not_found_su7k.svg"
-              style={{
-                marginTop: 50,
-                display: "inline-block",
-                maxWidth: "100%",
-                width: 560
-              }}
-            />
-          </Box>
-        </Container>
-      </Box>
+          Go back
+        </Button>
+      </Container>
     </>
   );
 }
+
+NoChat.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(NoChat);
