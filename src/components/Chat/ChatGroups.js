@@ -4,7 +4,7 @@ import { ButtonBase } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "../Typography";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -197,7 +197,7 @@ function ChatGroups(props) {
           Back();
         }}
       >
-        <ExitToAppIcon />
+        <ArrowBackIcon fontSize="large" />
       </Button>
       <Button
         size="large"

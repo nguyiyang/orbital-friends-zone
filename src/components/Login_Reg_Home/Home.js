@@ -84,7 +84,7 @@ import FeedbackButton from "./FeedbackButton";
 
 const styles = (theme) => ({
   root: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     marginBottom: theme.spacing(4)
   },
   images: {
@@ -97,7 +97,7 @@ const styles = (theme) => ({
     display: "block",
     padding: 0,
     borderRadius: 0,
-    height: "40vh",
+    height: "55vh",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
       height: 100
@@ -168,19 +168,20 @@ function Home(props) {
   const images = [
     {
       url:
-        "https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1622495893617-38b112b30790?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1099&q=80"
+        ,
       title: "Chat",
       width: "33%"
     },
     {
       url:
-        "https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80",
+        "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80",
       title: "Forum",
       width: "33%"
     },
     {
       url:
-        "https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1610450363377-356b69e6558b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1041&q=80",
       title: "Announcements",
       width: "33%"
     }

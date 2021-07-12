@@ -114,7 +114,6 @@ import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import { Alert } from "react-bootstrap";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useRef, useState } from "react";
@@ -123,6 +122,7 @@ import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
+import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -210,7 +210,7 @@ export default function Login() {
             FriendsZone
           </Typography>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <FaceIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in

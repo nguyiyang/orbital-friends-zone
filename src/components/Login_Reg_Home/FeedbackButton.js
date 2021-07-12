@@ -41,17 +41,12 @@ function FeedbackButton(props) {
     <Container className={classes.root} component="section">
       <Button className={classes.button} onClick={handleFeedback}>
         <Typography variant="h4" component="span">
-          Any improvements to our application? Any feedback would b
+          Feedback
         </Typography>
       </Button>
       <Typography variant="subtitle1" className={classes.link}>
-        We are here to help. Get in touch!
+        We appreciate all feedback to improve our application!
       </Typography>
-      <img
-        src="/static/themes/onepirate/producBuoy.svg"
-        className={classes.buoy}
-        alt="buoy"
-      />
     </Container>
   );
 }

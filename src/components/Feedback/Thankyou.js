@@ -58,6 +58,7 @@ function ThankYou(props) {
         </Typography>
         <br></br>
         <img src={ThankYouImage} className={classes.buoy} alt="buoy" />
+        <br></br>
         <Button
           size="large"
           variant="contained"

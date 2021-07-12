@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
 import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
 import { useAuth } from "../../contexts/AuthContext";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 const styles = (theme) => ({
   title: {
     fontSize: 24
@@ -74,7 +76,7 @@ function AppAppBar(props) {
                 handleLogout();
               }}
             >
-              {"Logout"}
+              {"Sign Out"}
             </Link>
           </div>
         </Toolbar>
