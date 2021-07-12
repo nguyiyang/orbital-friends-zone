@@ -77,7 +77,7 @@ function AppAppBar(props) {
                 handleLogout();
               }}
             >
-              {<ExitToAppIcon fontSize="large" />}
+              {<ExitToAppIcon fontSize="large" />}{"  Sign Out"}
             </Link>
           </div>
         </Toolbar>

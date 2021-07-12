@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
+import MainFeaturedPost from './MainFeaturedPost';
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -81,7 +82,21 @@ function ShowForum() {
         {posts &&
           posts.map((text) => (
             <div>
-              <Post key={text.key} post={text} />
+              <MainFeaturedPost post={text} />
+            </div>
+          ))}
+
+        <span ref={dummy}></span>
+      </main>
+    </>
+  );
+}
+
+
+
+
+/*
+<Post key={text.key} post={text} />
               <div>{text.userID}</div>
               <div>{text.title}</div>
               <div>{text.content}</div>
@@ -95,21 +110,4 @@ function ShowForum() {
                 Like
               </Button>
               {text.likes} Likes
-            </div>
-          ))}
-
-        <span ref={dummy}></span>
-      </main>
-    </>
-  );
-}
-
-function Post(props) {
-  const { text, uid } = props.post;
-
-  return (
-    <div>
-      <p>{text}</p>
-    </div>
-  );
-}
+              */
