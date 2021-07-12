@@ -6,8 +6,7 @@ import Link from "@material-ui/core/Link";
 import { useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
 import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
-import { useAuth } from "../contexts/AuthContext";
-
+import { useAuth } from "../../../contexts/AuthContext";
 const styles = (theme) => ({
   title: {
     fontSize: 24

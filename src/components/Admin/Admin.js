@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import logOutIcon from "./Images/Logout_icon.jpg";
+import logOutIcon from "../Images/Logout_icon.jpg";
 import { Form, Button, Card } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";

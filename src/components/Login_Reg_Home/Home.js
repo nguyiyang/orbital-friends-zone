@@ -71,16 +71,16 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { ButtonBase } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import Typography from "./../../Typography";
+import Typography from "../Typography";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import AppBar from "./../../MainAppBar";
+import AppBar from "./AppBar/MainAppBar";
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import FeedbackButton from "./../../FeedbackButton";
+import FeedbackButton from "./FeedbackButton";
 
 const styles = (theme) => ({
   root: {
