@@ -22,7 +22,7 @@ export default function Admin() {
   const [totalAssigned, setTotalAssigned] = useState(0);
   const assigned = () =>
     db
-      .collection("testusers")
+      .collection("users")
       .where("groupId", ">", 0)
       .get()
       .then((querySnapshot) => {
@@ -36,7 +36,7 @@ export default function Admin() {
   const [userCount, setUserCount] = useState(0);
 
   const countUnassigned = () => {
-    db.collection("testusers")
+    db.collection("users")
       .where("groupId", "==", 0)
       .get()
       .then((querySnapshot) => {
@@ -57,7 +57,7 @@ export default function Admin() {
     let username = "";
     let id;
     let newData;
-    db.collection("testusers")
+    db.collection("users")
       .where("groupId", "==", 0)
       .get()
       .then((querySnapshot) => {
@@ -223,7 +223,7 @@ export default function Admin() {
     }
     for (let i = 0; i < centroids.length; i++) {
       for (let j = 0; j < centroids[i].items.length; j++) {
-        db.collection("testusers")
+        db.collection("users")
           .where("id", "==", centroids[i].items[j])
           .get()
           .then((querySnapshot) => {
@@ -234,7 +234,7 @@ export default function Admin() {
                   members: firebase.firestore.FieldValue.arrayUnion(doc.id),
                 });
 
-              db.collection("testusers")
+              db.collection("users")
                 .doc(doc.id)
                 .update({ groupId: i + Math.ceil(totalAssigned / 4) + 1 });
             });
@@ -246,20 +246,20 @@ export default function Admin() {
       .get()
       .then((querySnapshot) => {
         let x = querySnapshot.size;
-        db.collection("testusers")
+        db.collection("users")
           .where("groupId","==",0)
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               // generate random number from groups
-              Math.floor((Math.random() * x) + 1)
+              let rand = Math.floor((Math.random() * x) + 1)
               db.collection("groups")
-                .doc(JSON.stringify(x))
+                .doc(JSON.stringify(rand))
                 .update({
                   members: firebase.firestore.FieldValue.arrayUnion(doc.id),
                 });
 
-              db.collection("testusers")
+              db.collection("users")
                 .doc(doc.id)
                 .update({ groupId: x });
             })
@@ -268,12 +268,12 @@ export default function Admin() {
   }
 
   function reset() {
-    db.collection("testusers")
+    db.collection("users")
       .where("groupId", ">", 0)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          db.collection("testusers").doc(doc.id).update({ groupId: 0 });
+          db.collection("users").doc(doc.id).update({ groupId: 0 });
         });
       });
   }

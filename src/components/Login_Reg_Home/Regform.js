@@ -135,7 +135,7 @@ export default function Regform() {
   const [users, setUsers] = useState(0);
   const countUsers = () =>
     db
-      .collection("testusers")
+      .collection("users")
       .get()
       .then((snap) => {
         setUsers(snap.size); // will return the collection size
@@ -194,7 +194,7 @@ export default function Regform() {
       value19 &&
       value20
     ) {
-      db.collection("/testusers").doc(uid).set(
+      db.collection("/users").doc(uid).set(
         {
           id: users,
           username: usernameRef.current.value,
