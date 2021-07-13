@@ -11,6 +11,10 @@ import Box from "@material-ui/core/Box";
 import { useLocation } from "react-router-dom";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import TextField from "@material-ui/core/TextField";
+import SendIcon from '@material-ui/icons/Send';
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
@@ -19,6 +23,24 @@ const useStyles = makeStyles((theme) => ({
   postButton: {
     margin: theme.spacing(3),
   },
+  root: {
+    display: 'flex',
+    padding: '2px 4px',
+    position: 'relative',
+    alignItems: 'center',
+    width: "50%",
+    marginLeft:  theme.spacing(60),
+    align: 'center',
+    justifyContent: "center",
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton:{
+    marginRight: 1,
+    padding: 10,
+  }
 }));
 
 export default function Comment() {
@@ -118,7 +140,7 @@ function CommentList() {
 function AddComment() {
   const formValue = useRef();
   const history = useHistory();
-
+  const classes = useStyles();
   const postIdentifier = useLocation().state.postId;
 
   async function back() {
@@ -150,7 +172,31 @@ function AddComment() {
 
   return (
     <>
-      <Container justifyContent="center" align="center" maxWidth="sm">
+      <Paper component="form" className={classes.root}>
+      <InputBase
+        className={classes.input}
+        placeholder="Comment here"
+        inputRef={formValue}
+        onChange={(text) => setBtnDisabled(!text.target.value)}
+        multiline
+      />
+      <IconButton type="submit" className={classes.iconButton} aria-label="search" disabled={btnDisabled} >
+        <SendIcon />
+      </IconButton>
+      </Paper>
+    </>
+  );
+}
+
+async function getUserName() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  return printed.data().username;
+}
+
+
+/*
+<Container justifyContent="center" align="center" maxWidth="sm">
         <form onSubmit={createComment}>
           <TextField
             id="filled-textarea"
@@ -176,12 +222,5 @@ function AddComment() {
           </Button>
         </form>
       </Container>
-    </>
-  );
-}
 
-async function getUserName() {
-  const uid = firebase.auth().currentUser?.uid;
-  const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().username;
-}
+    */

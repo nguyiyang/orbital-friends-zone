@@ -60,7 +60,7 @@ function MakeAnnouncement(props) {
   getUserName().then((x) => setUserName(x));
 
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const [btnDisabled1, setBtnDisabled1] = useState(true)
+  const [btnDisabled1, setBtnDisabled1] = useState(true);
 
   const createAnnouncement = async (e) => {
     e.preventDefault();
