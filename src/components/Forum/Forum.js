@@ -8,6 +8,7 @@ import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Box from '@material-ui/core/Box';
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -40,7 +41,23 @@ export default function Forum() {
   return (
     <>
       <AppBar />
-      Forum
+      <Typography
+      component="div"
+      variant="body1"
+      style={{ width: '100%', position: 'relative' }}
+    >
+      <Box
+        bgcolor="grey.700"
+        color="white"
+        p={2}
+        position="absolute"
+        top={0}
+        left="48%"
+        zIndex="tooltip"
+      >
+        Forum
+      </Box>
+      </Typography>
       <div>
         <header>
           <Button

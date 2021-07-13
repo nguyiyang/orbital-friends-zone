@@ -13,11 +13,12 @@ import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import green from "@material-ui/core/colors/green";
+import { purple, yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
-    backgroundColor: blue[100],
+    backgroundColor: blue[50],
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",
@@ -42,10 +43,14 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0
     }
   },
-  button: {
+  likebutton: {
     backgroundColor: green[500],
     marginRight: theme.spacing(2)
-  }
+  },
+  commentbutton: {
+    backgroundColor: purple[500],
+    marginRight: theme.spacing(2)
+  },
 }));
 
 const auth = firebase.auth();
@@ -121,7 +126,7 @@ export default function MainFeaturedPost(props) {
             <Button
               variant="contained"
               color="primary"
-              className={classes.button}
+              className={classes.likebutton}
               startIcon={<ThumbUpAltIcon />}
               onClick={() => giveLike(post.id, post.likes, post.alreadyLiked)}
             >
@@ -131,7 +136,7 @@ export default function MainFeaturedPost(props) {
             <Button
               variant="contained"
               color="primary"
-              className={classes.button}
+              className={classes.commentbutton}
               onClick={() => writeComment(post.id)}
             >
               Comment
