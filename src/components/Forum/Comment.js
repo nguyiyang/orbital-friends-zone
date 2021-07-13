@@ -130,6 +130,8 @@ function AddComment() {
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
 
+  const [btnDisabled, setBtnDisabled] = useState(true);
+
   const createComment = async (e) => {
     e.preventDefault();
 
@@ -158,6 +160,7 @@ function AddComment() {
             variant="filled"
             justifyContent="center"
             size="small"
+            onChange={(text) => setBtnDisabled(!text.target.value)}
           />
 
           <Button
@@ -167,6 +170,7 @@ function AddComment() {
             variant="contained"
             color="primary"
             size="large"
+            disabled={btnDisabled}
           >
             Submit
           </Button>

@@ -59,6 +59,9 @@ function MakeAnnouncement(props) {
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
 
+  const [btnDisabled, setBtnDisabled] = useState(true);
+  const [btnDisabled1, setBtnDisabled1] = useState(true)
+
   const createAnnouncement = async (e) => {
     e.preventDefault();
     const { uid } = firebase.auth().currentUser;
@@ -100,9 +103,9 @@ function MakeAnnouncement(props) {
               <Typography variant="h3" component="h2" gutterBottom>
                 Make Announcement
               </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Title" inputRef={formValue1} />
-              <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} />
-              <BoxButton type="submit" color="primary" variant="contained" className={classes.button}>
+              <TextField noBorder className={classes.textField} placeholder="Title" inputRef={formValue1} onChange={(text) => setBtnDisabled(!text.target.value)}/>
+              <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} onChange={(text) => setBtnDisabled1(!text.target.value)}/>
+              <BoxButton type="submit" color="primary" variant="contained" className={classes.button} disabled={btnDisabled || btnDisabled1}>
                 Submit
               </BoxButton>
             </form>

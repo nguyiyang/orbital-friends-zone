@@ -140,6 +140,8 @@ function MakeFeedback(props) {
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
 
+  const [btnDisabled, setBtnDisabled] = useState(true)
+
   const createFeedback = async (e) => {
     e.preventDefault();
     const { uid } = firebase.auth().currentUser;
@@ -175,8 +177,8 @@ function MakeFeedback(props) {
               <Typography variant="h5">
               How can we improve the app?
               </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Type Here" multiline inputRef={formValue} />
-              <BoxButton type="submit" color="primary" variant="contained" className={classes.button}>
+              <TextField noBorder className={classes.textField} placeholder="Type Here" multiline inputRef={formValue} onChange={(text) => setBtnDisabled(!text.target.value)} />
+              <BoxButton type="submit" color="primary" variant="contained" className={classes.button} disabled={btnDisabled}>
                 Submit
               </BoxButton>
             </form>
