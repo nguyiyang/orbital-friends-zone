@@ -13,7 +13,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const styles = (theme) => ({
   title: {
-    fontSize: 24
+    fontSize: 39
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
