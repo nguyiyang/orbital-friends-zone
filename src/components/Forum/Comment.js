@@ -4,21 +4,21 @@ import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import CommentFormat from "./NoComment_Comment";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { Button } from "@material-ui/core";
+import { Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Box from '@material-ui/core/Box';
+import Box from "@material-ui/core/Box";
 import { useLocation } from "react-router-dom";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
   },
   postButton: {
-    margin: theme.spacing(3)
-  }
+    margin: theme.spacing(3),
+  },
 }));
 
 export default function Comment() {
@@ -32,13 +32,13 @@ export default function Comment() {
     } catch {}
   }
 
-    return (
-      <>
-        <AppBar />
-        <Typography
+  return (
+    <>
+      <AppBar />
+      <Typography
         component="div"
         variant="body1"
-        style={{ width: '100%', position: 'relative' }}
+        style={{ width: "100%", position: "relative" }}
       >
         <Box
           bgcolor="grey.700"
@@ -51,26 +51,26 @@ export default function Comment() {
         >
           Comment
         </Box>
-        </Typography>
-        <div>
-          <header>
-            <Button
-              variant="outlined"
-              color="inherit"
-              className={classes.backButton}
-              onClick={back}
-            >
-              Back
-            </Button>
-          
-          </header>
-          <AddComment />
-          <section>
-            <CommentList />
-          </section>
-        </div>
-      </>
-    );
+      </Typography>
+      <div>
+        <header>
+          <Button
+            variant="outlined"
+            color="inherit"
+            className={classes.backButton}
+            onClick={back}
+          >
+            Back
+          </Button>
+        </header>
+        <AddComment />
+        <br></br>
+        <section>
+          <CommentList />
+        </section>
+      </div>
+    </>
+  );
 }
 
 const auth = firebase.auth();
@@ -89,12 +89,12 @@ function CommentList() {
     if (likedArray.includes(currUid)) {
       commentsRef.doc(identity).update({
         likes: numOfLikes - 1,
-        alreadyLiked: firebase.firestore.FieldValue.arrayRemove(currUid)
+        alreadyLiked: firebase.firestore.FieldValue.arrayRemove(currUid),
       });
     } else {
       commentsRef.doc(identity).update({
         likes: numOfLikes + 1,
-        alreadyLiked: firebase.firestore.FieldValue.arrayUnion(currUid)
+        alreadyLiked: firebase.firestore.FieldValue.arrayUnion(currUid),
       });
     }
   }
@@ -107,11 +107,9 @@ function CommentList() {
             .filter((cm) => cm.postOwner === postIdentifier)
             .map((text) => (
               <div>
-              <CommentFormat comment={text} />
+                <CommentFormat comment={text} />
               </div>
             ))}
-
-        
       </main>
     </>
   );
@@ -144,27 +142,36 @@ function AddComment() {
       likes: 0,
       alreadyLiked: [],
       postOwner: postIdentifier,
-      userID: userName
+      userID: userName,
     });
   };
 
   return (
     <>
-    <form onSubmit={createComment}>
-     <TextField
-          id="filled-textarea"
-          label="Comment here"
-          inputRef={formValue}
-          multiline
-          variant="filled"
-          leftmargin = "50px"
-        />
+      <Container justifyContent="center" align="center" maxWidth="sm">
+        <form onSubmit={createComment}>
+          <TextField
+            id="filled-textarea"
+            label="Comment here"
+            inputRef={formValue}
+            multiline
+            variant="filled"
+            justifyContent="center"
+            size="small"
+          />
 
-        <Button type="submit" disabled={!formValue} position="relative" variant="contained">
-          Submit
-        </Button>
+          <Button
+            type="submit"
+            disabled={!formValue}
+            position="relative"
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            Submit
+          </Button>
         </form>
-      
+      </Container>
     </>
   );
 }
