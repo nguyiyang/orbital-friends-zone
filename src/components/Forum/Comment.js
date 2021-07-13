@@ -77,7 +77,6 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function CommentList() {
-  const dummy = useRef();
   const commentsRef = firestore.collection("Comment");
   const query = commentsRef.orderBy("createdAt", "desc");
   const [comments] = useCollectionData(query, { idField: "id" });
@@ -112,14 +111,14 @@ function CommentList() {
               </div>
             ))}
 
-        <span ref={dummy}></span>
+        
       </main>
     </>
   );
 }
 
 function AddComment() {
-  const [formValue, setFormValue] = useState("");
+  const formValue = useRef();
   const history = useHistory();
 
   const postIdentifier = useLocation().state.postId;
@@ -139,7 +138,7 @@ function AddComment() {
     const { uid } = firebase.auth().currentUser;
 
     await firebase.firestore().collection("Comment").add({
-      content: formValue,
+      content: formValue.current.value,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       likes: 0,
@@ -147,23 +146,24 @@ function AddComment() {
       postOwner: postIdentifier,
       userID: userName
     });
-
-    setFormValue("");
   };
 
   return (
     <>
-      <TextField onSubmit={createComment}>
-        <input
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-          placeholder="Comment here"
+    <form onSubmit={createComment}>
+     <TextField
+          id="filled-textarea"
+          label="Comment here"
+          inputRef={formValue}
+          multiline
+          variant="filled"
+          leftmargin = "50px"
         />
 
-        <button type="submit" disabled={!formValue}>
-          ->
-        </button>
-      </TextField>
+        <Button type="submit" disabled={!formValue} position="relative" variant="contained">
+          Submit
+        </Button>
+        </form>
       
     </>
   );
