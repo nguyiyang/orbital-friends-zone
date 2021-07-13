@@ -1,15 +1,31 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
+import CommentFormat from "./NoComment_Comment";
+import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Box from '@material-ui/core/Box';
 import { useLocation } from "react-router-dom";
-
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import TextField from '@material-ui/core/TextField';
+
+const useStyles = makeStyles((theme) => ({
+  backButton: {
+    margin: theme.spacing(3)
+  },
+  postButton: {
+    margin: theme.spacing(3)
+  }
+}));
 
 export default function Comment() {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const classes = useStyles();
 
   async function back() {
     try {
@@ -17,23 +33,45 @@ export default function Comment() {
     } catch {}
   }
 
-  return (
-    <div>
-      <header>
-        <Button variant="link" onClick={back}>
-          Back
-        </Button>
-      </header>
-
-      <section>
-        <AddComment />
-      </section>
-
-      <div>
-        <CommentList />
-      </div>
-    </div>
-  );
+    return (
+      <>
+        <AppBar />
+        <Typography
+        component="div"
+        variant="body1"
+        style={{ width: '100%', position: 'relative' }}
+      >
+        <Box
+          bgcolor="grey.700"
+          color="white"
+          p={2}
+          position="absolute"
+          top={0}
+          left="47.5%"
+          zIndex="tooltip"
+        >
+          Comment
+        </Box>
+        </Typography>
+        <div>
+          <header>
+            <Button
+              variant="outlined"
+              color="inherit"
+              className={classes.backButton}
+              onClick={back}
+            >
+              Back
+            </Button>
+          
+          </header>
+          <AddComment />
+          <section>
+            <CommentList />
+          </section>
+        </div>
+      </>
+    );
 }
 
 const auth = firebase.auth();
@@ -71,18 +109,7 @@ function CommentList() {
             .filter((cm) => cm.postOwner === postIdentifier)
             .map((text) => (
               <div>
-                <comments key={text.key} Comment={text} />
-                {text.userID}
-                <div>{text.content}</div>
-                <Button
-                  variant="link"
-                  onClick={() =>
-                    giveLike(text.id, text.likes, text.alreadyLiked)
-                  }
-                >
-                  Like
-                </Button>
-                {text.likes} Likes
+              <CommentFormat comment={text} />
               </div>
             ))}
 
