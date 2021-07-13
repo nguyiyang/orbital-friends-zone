@@ -11,7 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const styles = (theme) => ({
   title: {
-    fontSize: 24
+    fontSize: 30
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
