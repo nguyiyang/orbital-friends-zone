@@ -73,6 +73,7 @@ function NoChat(props) {
         </Typography>
         <br></br>
         <img src={GroupNotFound} className={classes.buoy} alt="buoy" />
+        <br></br>
         <Button
           size="large"
           variant="contained"
