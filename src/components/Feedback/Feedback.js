@@ -44,7 +44,7 @@ export default function Feedback() {
         bgcolor="grey.700"
         color="white"
         p={2}
-        position="absolute"
+        position="static"
         top={0}
         left="47.5%"
         zIndex="tooltip"

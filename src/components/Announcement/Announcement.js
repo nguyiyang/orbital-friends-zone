@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
   announButton: {
     margin: theme.spacing(3)
-  }
+  },
+
 }));
 
 export default function Announcement() {
@@ -44,9 +45,8 @@ export default function Announcement() {
         bgcolor="grey.700"
         color="white"
         p={2}
-        position="absolute"
+        position="static"
         top={0}
-        left="46.5%"
         zIndex="tooltip"
       >
         Announcement

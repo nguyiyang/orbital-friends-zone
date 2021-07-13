@@ -50,7 +50,7 @@ export default function Forum() {
         bgcolor="grey.700"
         color="white"
         p={2}
-        position="absolute"
+        position="static"
         top={0}
         left="48%"
         zIndex="tooltip"

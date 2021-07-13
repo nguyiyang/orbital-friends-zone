@@ -10,6 +10,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import { blue } from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
@@ -23,7 +24,7 @@ const styles = (theme) => ({
   card: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: blue[200],
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -53,7 +54,7 @@ function Post(props) {
 
   async function back() {
     try {
-      history.push("./");
+      history.push("./Forum");
     } catch {}
   }
 
@@ -98,13 +99,10 @@ function Post(props) {
           <div className={classes.card}>
             <form onSubmit={createPost} className={classes.cardContent}>
               <Typography variant="h2" component="h2" gutterBottom>
-                Make Post
+                Create Post
               </Typography>
-              <Typography variant="h5">
-              How can we improve the app?
-              </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Title" inputRef={formValue1} />
-              <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} />
+              <TextField noBorder className={classes.textField} placeholder="Post Title" inputRef={formValue1} />
+              <TextField noBorder className={classes.textField} placeholder="Post Content"  multiline inputRef={formValue2} />
               <BoxButton type="submit" color="primary" variant="contained" className={classes.button}>
                 Submit
               </BoxButton>

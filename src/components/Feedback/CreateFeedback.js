@@ -175,7 +175,7 @@ function MakeFeedback(props) {
               <Typography variant="h5">
               How can we improve the app?
               </Typography>
-              <TextField noBorder className={classes.textField} placeholder="How can we improve the app?" inputRef={formValue} />
+              <TextField noBorder className={classes.textField} placeholder="Type Here" multiline inputRef={formValue} />
               <BoxButton type="submit" color="primary" variant="contained" className={classes.button}>
                 Submit
               </BoxButton>

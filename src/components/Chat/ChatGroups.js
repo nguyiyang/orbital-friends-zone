@@ -11,14 +11,15 @@ import { Link, useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
+import { makeStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
   root: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(4)
+    marginTop: theme.spacing(0),
+    marginBottom: theme.spacing(6)
   },
   images: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: "flex",
     flexWrap: "wrap"
   },
@@ -87,6 +88,9 @@ const styles = (theme) => ({
     bottom: -2,
     left: "calc(50% - 9px)",
     transition: theme.transitions.create("opacity")
+  },
+  backButton: {
+    margin: theme.spacing(3)
   }
 });
 
@@ -114,7 +118,7 @@ function ChatGroups(props) {
       width: "40%"
     },
     {
-      url: "https://miro.medium.com/max/1400/0*z1mm6izqSeDiKukb",
+      url: "https://ardalis.com/static/4fb4ac75fbd03f00f42e4ac3586c8265/c3638/NotSureIfGoodProgrammer.jpg",
       title: "Memes Only!",
       width: "38%"
     },
@@ -126,7 +130,7 @@ function ChatGroups(props) {
     },
     {
       url:
-        "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80",
+        "https://miro.medium.com/max/1000/0*mD7F8b6gIjsq3gsi",
       title: "Game",
       width: "24%"
     }
@@ -193,12 +197,13 @@ function ChatGroups(props) {
     <Container className={classes.root} component="section">
       <AppBar />
       <Button
-        onClick={() => {
-          Back();
-        }}
-      >
-        <ArrowBackIcon fontSize="large" />
-      </Button>
+            variant="outlined"
+            color="inherit"
+            className={classes.backButton}
+            onClick={Back}
+          >
+            Back
+          </Button>
       <Button
         size="large"
         variant="contained"

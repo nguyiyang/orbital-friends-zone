@@ -70,6 +70,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import { purple, yellow } from "@material-ui/core/colors";
 
 const styles = (theme) => ({
   root: {
@@ -83,7 +84,7 @@ const styles = (theme) => ({
   card: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: purple[400],
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -100,6 +101,10 @@ const styles = (theme) => ({
   backButton: {
     margin: theme.spacing(3)
   },
+  helpButton: {
+    backgroundColor: yellow[500],
+    color: theme.palette.common.black,
+  }
 });
 
 function Game(props) {
@@ -112,6 +117,12 @@ function Game(props) {
   async function back() {
     try {
       history.push("./ChatGroups");
+    } catch {}
+  }
+
+  async function Help() {
+    try {
+      history.push("./Help")
     } catch {}
   }
 
@@ -134,6 +145,14 @@ function Game(props) {
           >
             Back
           </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.helpButton}
+            onClick={Help}
+          >
+            How does this work?
+          </Button>
     <Container className={classes.root} component="section">
       <Grid container alignItems="center"
   justify="center" m={20}>
@@ -144,9 +163,9 @@ function Game(props) {
                 Game
               </Typography>
               <Typography variant="h5">
-              How can we improve the app?
+              Which country will you visit once leisure travel is allowed?
               </Typography>
-              <TextField noBorder className={classes.textField} placeholder="What would you like for dinner togni" inputRef={formValue} />
+              <TextField noBorder className={classes.textField} placeholder="Answer" inputRef={formValue} />
               <BoxButton type="submit" color="primary" variant="contained" className={classes.button}>
                 Submit
               </BoxButton>

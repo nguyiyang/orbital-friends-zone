@@ -17,6 +17,7 @@ import Feedback from "./Feedback/Feedback";
 import Thankyou from "./Feedback/Thankyou";
 import ChatGroups from "./Chat/ChatGroups";
 import Game from "./Chat/Game";
+import Help from "./Chat/Help";
 import ExitGroupCompleted from "./Chat/ExitGroupCompleted";
 import PrivateRoute from "./PrivateRoute";
 import RegformSuccess from "./Login_Reg_Home/RegisterSuccess";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/Game" component={Game} />
           <Route path="/ExitGroupCompleted" component={ExitGroupCompleted} />
           <Route path="/MainAppBar" component={MainAppBar} />
+          <Route path="/Help" component={Help} />
         </Switch>
       </Router>
     </AuthProvider>

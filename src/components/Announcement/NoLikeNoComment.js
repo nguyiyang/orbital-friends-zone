@@ -18,7 +18,7 @@ import { purple, yellow, red} from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   Announcement: {
     position: "relative",
-    backgroundColor: red[50],
+    backgroundColor: red[100],
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",

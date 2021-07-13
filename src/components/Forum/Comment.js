@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { Form, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
@@ -45,7 +44,7 @@ export default function Comment() {
           bgcolor="grey.700"
           color="white"
           p={2}
-          position="absolute"
+          position="static"
           top={0}
           left="47.5%"
           zIndex="tooltip"
@@ -154,7 +153,7 @@ function AddComment() {
 
   return (
     <>
-      <form onSubmit={createComment}>
+      <TextField onSubmit={createComment}>
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
@@ -164,7 +163,8 @@ function AddComment() {
         <button type="submit" disabled={!formValue}>
           ->
         </button>
-      </form>
+      </TextField>
+      
     </>
   );
 }
