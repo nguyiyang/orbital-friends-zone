@@ -1,46 +1,34 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import { useLocation } from "react-router-dom";
-
+import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Box from '@material-ui/core/Box';
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import styles from "./Chat.css";
 
-import { useCollectionData } from "react-firebase-hooks/firestore";
+const useStyles = makeStyles((theme) => ({
+  backButton: {
+    margin: theme.spacing(1)
+  },
+}));
 
 export default function Chat() {
   const { currentUser, logout } = useAuth();
-  const history = useHistory();
-
-  async function Home() {
-    try {
-      history.push("./ChatGroups");
-    } catch {}
-  }
+  
 
   return (
-    <div
-      className="Chat"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        width: "100vw",
-        height: "100vh"
-      }}
-    >
-      <header>
-        <Button variant="link" onClick={Home} className="backButton">
-          Back
-        </Button>
-      </header>
-
+    <>
+    <AppBar/>
       <section>
         <ChatRoom />
       </section>
-    </div>
+    </>
   );
 }
 
@@ -49,6 +37,8 @@ const firestore = firebase.firestore();
 
 function ChatRoom() {
   const dummy = useRef();
+  const history = useHistory();
+  const classes = useStyles();
   const messagesRef = firestore.collection("Chat");
 
   const query = messagesRef.orderBy("createdAt");
@@ -78,6 +68,12 @@ function ChatRoom() {
     dummy.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  async function Home() {
+    try {
+      history.push("./ChatGroups");
+    } catch {}
+  }
+
   function displayName(x) {
     if (x === -1) {
       return "Academic Advice";
@@ -96,7 +92,47 @@ function ChatRoom() {
 
   return (
     <>
-      {displayName(groupNumber)}
+      
+
+      <Typography
+      component="div"
+      variant="body1"
+      style={{ width: '100%', position: 'relative' }}
+    >
+      <Box
+        bgcolor="grey.700"
+        color="white"
+        p={2}
+        position="static"
+        top={0}
+        zIndex="tooltip"
+      >
+        Chat Group ({displayName(groupNumber)})
+      </Box>
+      </Typography>
+
+      <Button
+            variant="outlined"
+            color="inherit"
+            className={classes.backButton}
+            onClick={Home}
+          >
+            Back
+          </Button>
+
+    
+
+      <div
+      className="Chat"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        width: "100%",
+        height: "100%"
+      }}>
+        <section>
       <main>
         {messages &&
           messages
@@ -117,6 +153,8 @@ function ChatRoom() {
           Send
         </button>
       </form>
+      </section>
+      </div>
     </>
   );
 }
