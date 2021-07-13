@@ -28,7 +28,7 @@ export default function Feedback() {
 
   async function Home() {
     try {
-      history.push("./");
+      history.push("./Admin");
     } catch {}
   }
 

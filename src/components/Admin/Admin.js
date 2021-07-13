@@ -9,15 +9,40 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Typography from '../FormTemplate/Typography';
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginRight: theme.spacing(2)
-  }
-}));
+const styles = (theme) => ({
+  root: {
+    display: 'flex',
+    overflow: 'hidden',
+  },
+  container: {
+    marginTop: theme.spacing(15),
+    marginBottom: theme.spacing(30),
+    display: 'flex',
+    position: 'relative',
+  },
+  item: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(0, 5),
+  },
+  image: {
+    height: 55,
+  },
+  title: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
+  },
+});
 
-export default function Admin() {
-  const classes = useStyles();
+function Admin(props) {
+  const { classes } = props;
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   async function handleLogout() {
@@ -301,36 +326,12 @@ export default function Admin() {
   return (
     <>
       <AppBar />
-      <Card>
-        <Card.Body>
-          <Form>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div
-                style={{
-                  display: "flex",
-                  height: "95vh",
-                  flexDirection: "column",
-                  justifyContent: "center"
-                }}
-              >
-                <div
-                  style={{
-                    margin: "auto",
-                    backgroundColor: "lightgrey",
-                    width: "70vw",
-                    height: "75vh",
-                    padding: 100,
-                    borderRadius: 30,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 25
-                  }}
-                >
-                  <p>Current unassigned users: {userCount}</p>
-                  <p>Groups to be generated: {Math.floor(userCount / 4)}</p>
-                  <Button
+      <section className={classes.root}>
+      <Container className={classes.container}>
+        <Grid container spacing={5}>
+          <Grid item xs={12} md={4}>
+            <div className={classes.item}>
+            <Button
                     onClick={kmeans2}
                     variant="contained"
                     color="primary"
@@ -346,7 +347,19 @@ export default function Admin() {
                   >
                     Reset groups
                   </Button>
-                  <Button
+                
+              <Typography variant="h6" className={classes.title}>
+                The best luxury hotels
+              </Typography>
+              <Typography variant="h5">
+                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
+                {', go for a mini-vacation just a few subway stops away from your home.'}
+              </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <div className={classes.item}>
+            <Button
                     onClick={MakeAnnouncement}
                     variant="contained"
                     color="primary"
@@ -354,7 +367,18 @@ export default function Admin() {
                   >
                     Make Announcement
                   </Button>
-                  <Button
+              <Typography variant="h6" className={classes.title}>
+                New experiences
+              </Typography>
+              <Typography variant="h5">
+                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
+                {'your Sundays will not be alike.'}
+              </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <div className={classes.item}>
+            <Button
                     onClick={ReadFeedback}
                     variant="contained"
                     color="primary"
@@ -362,12 +386,25 @@ export default function Admin() {
                   >
                     Feedbacks
                   </Button>
-                </div>
-              </div>
+              <Typography variant="h6" className={classes.title}>
+                Exclusive rates
+              </Typography>
+              <Typography variant="h5">
+                {'By registering, you will access specially negotiated rates '}
+                {'that you will not find anywhere else.'}
+              </Typography>
             </div>
-          </Form>
-        </Card.Body>
-      </Card>
+          </Grid>
+        </Grid>
+      </Container>
+    </section>
+      
     </>
   );
 }
+
+Admin.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Admin);
