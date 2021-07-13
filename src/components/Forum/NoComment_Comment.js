@@ -109,7 +109,6 @@ export default function Comments(props) {
           <div className={classes.CommentsContent}>
             
             <Typography variant="body1" display="block" color="secondary">
-              {"by "}
               {comment.userID}
             </Typography>
             <Typography variant="h6" color="inherit">
