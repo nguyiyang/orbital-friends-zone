@@ -172,7 +172,7 @@ function AddComment() {
 
   return (
     <>
-      <Paper component="form" className={classes.root}>
+      <Paper component="form" className={classes.root} onSubmit={createComment}>
       <InputBase
         className={classes.input}
         placeholder="Comment here"

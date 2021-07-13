@@ -86,6 +86,7 @@ export default function MainFeaturedPost(props) {
 
   async function writeComment(x) {
     try {
+      console.log(x);
       history.push("./addComment", { postId: x });
     } catch {}
   }
