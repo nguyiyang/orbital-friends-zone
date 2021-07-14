@@ -22,6 +22,7 @@ import ExitGroupCompleted from "./Chat/ExitGroupCompleted";
 import PrivateRoute from "./PrivateRoute";
 import RegformSuccess from "./Login_Reg_Home/RegisterSuccess";
 import MainAppBar from "./Login_Reg_Home/AppBar/MainAppBar";
+import SignupSuccess from "./Login_Reg_Home/SignupSuccess";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/ExitGroupCompleted" component={ExitGroupCompleted} />
           <Route path="/MainAppBar" component={MainAppBar} />
           <Route path="/Help" component={Help} />
+          <Route path="/SignupSuccess" component={SignupSuccess} />
         </Switch>
       </Router>
     </AuthProvider>

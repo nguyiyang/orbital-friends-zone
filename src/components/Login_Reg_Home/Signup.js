@@ -176,7 +176,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("./Login");
+      history.push("./SignUpSuccess");
     } catch {
       setError("Failed to create an account");
     }
