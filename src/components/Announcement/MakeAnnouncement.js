@@ -72,7 +72,7 @@ function MakeAnnouncement(props) {
       content: formValue2.current.value,
       userID: userName
     });
-
+    history.push("./Admin");
   };
 
   return (
@@ -104,7 +104,7 @@ function MakeAnnouncement(props) {
                 Make Announcement
               </Typography>
               <TextField noBorder className={classes.textField} placeholder="Title" inputRef={formValue1} onChange={(text) => setBtnDisabled(!text.target.value)}/>
-              <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} onChange={(text) => setBtnDisabled1(!text.target.value)}/>
+              <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} onChange={(text) => setBtnDisabled1(!text.target.value)} multiline/>
               <BoxButton type="submit" color="primary" variant="contained" className={classes.button} disabled={btnDisabled || btnDisabled1}>
                 Submit
               </BoxButton>
