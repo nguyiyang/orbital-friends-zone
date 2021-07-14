@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
+import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
@@ -25,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   description: {
-    height: "20vh",
     width: "50vw",
     padding: theme.spacing(3),
   },
@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Regform() {
+  const [error, setError] = useState("");
   const usernameRef = useRef();
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
@@ -146,6 +147,7 @@ export default function Regform() {
 
   function generateScore(e) {
     e.preventDefault();
+    setError("");
     const score1 =
       parseInt(value1) +
       parseInt(value2) +
@@ -194,18 +196,27 @@ export default function Regform() {
       value19 &&
       value20
     ) {
-      db.collection("/users").doc(uid).set(
-        {
-          id: users,
-          username: usernameRef.current.value,
-          admin: false,
-          score1: score1,
-          score2: score2,
-          groupId: 0,
-        },
-        { merge: true }
-      );
-      history.push("/regform_success");
+      db.collection("/users")
+        .doc(usernameRef.current.value)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setError("Username exists");
+          } else {
+            db.collection("/users").doc(usernameRef.current.value).set(
+              {
+                id: users,
+                username: usernameRef.current.value,
+                admin: false,
+                score1: score1,
+                score2: score2,
+                groupId: 0,
+              },
+              { merge: true }
+            )
+            history.push("/regform_success");
+          }
+        });
     } else {
       alert("Please complete all questions!");
     }
@@ -240,7 +251,9 @@ export default function Regform() {
                 </Grid>
                 <Grid item>
                   <Paper className={classes.description}>
+                  {error && <Alert variant="danger">{error}</Alert>}
                     <p>Username *</p>
+                    
                     <TextField
                       id="standard-basic"
                       placeholder="Enter your username"
