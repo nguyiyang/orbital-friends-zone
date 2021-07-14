@@ -1,3 +1,93 @@
+import React, { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+import { firebase } from "@firebase/app";
+import { Box, Container, Typography, Button } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import PeepoClap from "./../Images/peepoClap.gif";
+import { yellow } from "@material-ui/core/colors";
+
+const styles = (theme) => ({
+  whole:{
+    display: 'flex',
+    backgroundColor: yellow[200],
+    height: "100%",
+  },
+  root: {
+
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: theme.spacing(30),
+    marginBottom: theme.spacing(41),
+    height: "100%",
+    align: "center",
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    borderRadius: 0,
+    height: "auto",
+    
+  },
+  link: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+  },
+  buoy: {
+    marginTop: theme.spacing(3),
+  },
+});
+
+function ThankYou(props) {
+  const history = useHistory();
+  const { classes } = props;
+
+  async function Home() {
+    try {
+      history.push("./");
+    } catch {}
+  }
+
+  return (
+    <><section className={classes.whole}>
+      <Container className={classes.root} component="section">
+        <Typography align="center" color="textPrimary" variant="h2">
+        Everything is done!
+        </Typography>
+        <br></br>
+        <Typography align="center" color="textPrimary" variant="h6">
+        Now, you have to wait for the group completion to be complete. Do visit the forum and the other chat groups to talk to others while waiting!
+        </Typography>
+        <br></br>
+        <img src={PeepoClap} className={classes.buoy} alt="buoy" />
+        <br></br>
+        <Button
+          size="large"
+          variant="contained"
+          color="primary"
+          onClick={() => Home()}
+          className = {classes.button}
+        >
+          Continue
+        </Button>
+      </Container>
+      </section>
+    </>
+  );
+}
+
+ThankYou.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ThankYou);
+
+
+
+/*
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
@@ -61,3 +151,4 @@ export default function About() {
     </>
   );
 }
+*/

@@ -1,6 +1,6 @@
 import React from "react";
 import Admin from "./Admin/Admin";
-import About from "./Login_Reg_Home/About";
+import About from "./Login_Reg_Home/About/About";
 import Home from "./Login_Reg_Home/Home";
 import Login from "./Login_Reg_Home/Login";
 import Signup from "./Login_Reg_Home/Signup";
