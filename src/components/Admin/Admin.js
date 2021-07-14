@@ -9,27 +9,27 @@ import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
 import { makeStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Typography from '../FormTemplate/Typography';
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Typography from "../FormTemplate/Typography";
 
 const styles = (theme) => ({
   root: {
-    display: 'flex',
-    overflow: 'hidden',
+    display: "flex",
+    overflow: "hidden",
   },
   container: {
     marginTop: theme.spacing(15),
     marginBottom: theme.spacing(30),
-    display: 'flex',
-    position: 'relative',
+    display: "flex",
+    position: "relative",
   },
   item: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     padding: theme.spacing(0, 5),
   },
   image: {
@@ -66,6 +66,21 @@ function Admin(props) {
   useEffect(() => {
     assigned();
   });
+
+  const [totalGroups, setTotalGroups] = useState(0);
+  const countGroups = () => {
+    db.collection("groups")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          setTotalGroups(querySnapshot.size);
+        });
+      });
+  };
+  useEffect(() => {
+    countGroups();
+  }, []);
+
 
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
@@ -106,7 +121,7 @@ function Admin(props) {
             score1: score1,
             score2: score2,
             username: username,
-            id: id
+            id: id,
           };
           id++;
           setData((data) => [...data, newData]);
@@ -117,7 +132,7 @@ function Admin(props) {
     getData();
   }, []);
 
-  function kmeans2() {
+  function kmeans() {
     const numberOfUsers = userCount - (userCount % 4);
     data.splice(numberOfUsers);
     // desired number of clusters to be set for kmeans
@@ -132,26 +147,31 @@ function Admin(props) {
     }
 
     let distances = [];
-    // calculate distance between all centroids and data points
-    let distance;
+    // calculate similarity between all centroids and data points
+    let similarity;
     for (let i = 0; i < group; i++) {
       for (let j = 0; j < data.length; j++) {
-        distance = Math.sqrt(
-          (centroids[i].score1 - data[j].score1) *
-            (centroids[i].score1 - data[j].score1) +
-            (centroids[i].score2 - data[j].score2) *
-              (centroids[i].score2 - data[j].score2)
-        );
+        similarity =
+          (centroids[i].score1 * data[j].score1 +
+            centroids[i].score2 * data[j].score2) /
+          (Math.sqrt(
+            centroids[i].score1 * centroids[i].score1 +
+              centroids[i].score2 * centroids[i].score2
+          ) *
+            Math.sqrt(
+              centroids[i].score1 * centroids[i].score1 +
+                data[j].score2 * data[j].score2
+            ));
         distances.push({
           itemId: data[j].id,
           clusterId: i,
-          distance: distance
+          similarity: similarity,
         });
       }
     }
-    // sort distances in ascending order
-    distances.sort((a, b) => (a.distance > b.distance ? 1 : -1));
-
+    // sort distances in descending order
+    distances.sort((a, b) => (a.similarity > b.similarity ? -1 : 1));
+    
     let seen = [];
     // assign each item to a cluster until it is filled
     for (let i = 0; i < distances.length; i++) {
@@ -194,32 +214,37 @@ function Admin(props) {
           score1: accum1 / centroids[i].items.length,
           score2: accum2 / centroids[i].items.length,
           size: 0,
-          items: []
+          items: [],
         });
         accum1 = 0;
         accum2 = 0;
       }
 
       let newDistances = [];
-      // calculate distance between all centroids and data points
-      let distance;
+      // calculate similarity between all centroids and data points
+      let similarity;
       for (let i = 0; i < group; i++) {
         for (let j = 0; j < data.length; j++) {
-          distance = Math.sqrt(
-            (newCentroids[i].score1 - data[j].score1) *
-              (newCentroids[i].score1 - data[j].score1) +
-              (newCentroids[i].score2 - data[j].score2) *
-                (newCentroids[i].score2 - data[j].score2)
-          );
+          similarity =
+          (newCentroids[i].score1 * data[j].score1 +
+            newCentroids[i].score2 * data[j].score2) /
+          (Math.sqrt(
+            newCentroids[i].score1 * newCentroids[i].score1 +
+            newCentroids[i].score2 * newCentroids[i].score2
+          ) *
+            Math.sqrt(
+              newCentroids[i].score1 * newCentroids[i].score1 +
+                data[j].score2 * data[j].score2
+            ));
           newDistances.push({
             itemId: data[j].id,
             clusterId: i,
-            distance: distance
+            similarity: similarity,
           });
         }
       }
-      // sort distances in ascending order
-      newDistances.sort((a, b) => (a.distance > b.distance ? 1 : -1));
+      // sort distances in descending order
+      newDistances.sort((a, b) => (a.similarity > b.similarity ? -1 : 1));
 
       let seen = [];
       // assign each item to a cluster until it is filled
@@ -253,9 +278,12 @@ function Admin(props) {
       return different;
     }
 
-    for (let i = 1; i < Math.floor(userCount / 4) + 1; i++) {
+    console.log(totalGroups)
+    
+    for (let i = totalGroups + 1; i < totalGroups + Math.floor(userCount / 4) + 1; i++) {
       db.collection("groups").doc(JSON.stringify(i)).set({ members: [] });
     }
+    
     for (let i = 0; i < centroids.length; i++) {
       for (let j = 0; j < centroids[i].items.length; j++) {
         db.collection("users")
@@ -264,14 +292,14 @@ function Admin(props) {
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               db.collection("groups")
-                .doc(JSON.stringify(i + Math.floor(totalAssigned / 4) + 1))
+                .doc(JSON.stringify(i + totalGroups + 1))
                 .update({
-                  members: firebase.firestore.FieldValue.arrayUnion(doc.id)
+                  members: firebase.firestore.FieldValue.arrayUnion(doc.id),
                 });
 
               db.collection("users")
                 .doc(doc.id)
-                .update({ groupId: i + Math.ceil(totalAssigned / 4) + 1 });
+                .update({ groupId: i + totalGroups + 1 });
             });
           });
       }
@@ -291,7 +319,7 @@ function Admin(props) {
               db.collection("groups")
                 .doc(JSON.stringify(rand))
                 .update({
-                  members: firebase.firestore.FieldValue.arrayUnion(doc.id)
+                  members: firebase.firestore.FieldValue.arrayUnion(doc.id),
                 });
 
               db.collection("users").doc(doc.id).update({ groupId: x });
@@ -327,78 +355,85 @@ function Admin(props) {
     <>
       <AppBar />
       <section className={classes.root}>
-      <Container className={classes.container}>
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={4}>
-            <div className={classes.item}>
-            <Button
-                    onClick={kmeans2}
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                  >
-                    Create Group
-                  </Button>
-                  <Button
-                    onClick={reset}
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                  >
-                    Reset groups
-                  </Button>
-                
-              <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
-              </Typography>
-              <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
-              </Typography>
-            </div>
+        <Container className={classes.container}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={4}>
+              <div className={classes.item}>
+                <Button
+                  onClick={kmeans}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Create Group
+                </Button>
+                <Button
+                  onClick={reset}
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                >
+                  Reset groups
+                </Button>
+
+                <Typography variant="h6" className={classes.title}>
+                  The best luxury hotels
+                </Typography>
+                <Typography variant="h5">
+                  {
+                    "From the latest trendy boutique hotel to the iconic palace with XXL pool"
+                  }
+                  {
+                    ", go for a mini-vacation just a few subway stops away from your home."
+                  }
+                </Typography>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <div className={classes.item}>
+                <Button
+                  onClick={MakeAnnouncement}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Make Announcement
+                </Button>
+                <Typography variant="h6" className={classes.title}>
+                  New experiences
+                </Typography>
+                <Typography variant="h5">
+                  {
+                    "Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… "
+                  }
+                  {"your Sundays will not be alike."}
+                </Typography>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <div className={classes.item}>
+                <Button
+                  onClick={ReadFeedback}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Feedbacks
+                </Button>
+                <Typography variant="h6" className={classes.title}>
+                  Exclusive rates
+                </Typography>
+                <Typography variant="h5">
+                  {
+                    "By registering, you will access specially negotiated rates "
+                  }
+                  {"that you will not find anywhere else."}
+                </Typography>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <div className={classes.item}>
-            <Button
-                    onClick={MakeAnnouncement}
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                  >
-                    Make Announcement
-                  </Button>
-              <Typography variant="h6" className={classes.title}>
-                New experiences
-              </Typography>
-              <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <div className={classes.item}>
-            <Button
-                    onClick={ReadFeedback}
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                  >
-                    Feedbacks
-                  </Button>
-              <Typography variant="h6" className={classes.title}>
-                Exclusive rates
-              </Typography>
-              <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
-              </Typography>
-            </div>
-          </Grid>
-        </Grid>
-      </Container>
-    </section>
-      
+        </Container>
+      </section>
     </>
   );
 }
