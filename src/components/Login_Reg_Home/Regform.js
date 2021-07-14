@@ -196,14 +196,15 @@ export default function Regform() {
       value19 &&
       value20
     ) {
+      let count = 0
       db.collection("/users")
-        .doc(usernameRef.current.value)
+        .where("username", "==", usernameRef.current.value)
         .get()
         .then((doc) => {
-          if (doc.exists) {
+          if (doc.size > 0) {
             setError("Username exists");
           } else {
-            db.collection("/users").doc(usernameRef.current.value).set(
+            db.collection("/users").doc(uid).set(
               {
                 id: users,
                 username: usernameRef.current.value,
