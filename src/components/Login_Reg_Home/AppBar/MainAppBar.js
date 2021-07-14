@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
@@ -9,7 +9,7 @@ import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
 import { useAuth } from "../../../contexts/AuthContext";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Box, Container, Typography, Button } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { firebase } from "@firebase/app";
 
 const styles = (theme) => ({
   title: {
@@ -24,7 +24,6 @@ const styles = (theme) => ({
     float: "left"
   },
   center: {
-    flex: 1,
     float: "left"
   },
   leftLinkActive: {
@@ -42,6 +41,9 @@ const styles = (theme) => ({
   },
   linkSecondary: {
     color: theme.palette.secondary.main
+  },
+  welcome: {
+    color: theme.palette.common.black
   }
 });
 
@@ -60,11 +62,23 @@ function AppAppBar(props) {
     } catch {}
   }
 
+  const [userName, setUserName] = useState("");
+  getUserName().then((x) => setUserName(x));
+
   return (
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.center} />
+          <div className={classes.left} >
+          <Typography
+            variant="subtitle"
+            underline="none"
+            className={classes.welcome}
+          >
+            {"Welcome, "}{userName}
+          </Typography>
+          </div>
+          <div className={classes.center} >
           <Link
             variant="h6"
             underline="none"
@@ -74,6 +88,7 @@ function AppAppBar(props) {
           >
             {"FriendsZone"}
           </Link>
+          </div>
           <div className={classes.right}>
             <Link
               component="button"
@@ -93,6 +108,12 @@ function AppAppBar(props) {
       <div className={classes.placeholder} />
     </div>
   );
+}
+
+async function getUserName() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  return printed.data().username;
 }
 
 AppAppBar.propTypes = {
