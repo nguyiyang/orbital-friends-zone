@@ -148,23 +148,25 @@ export default function Regform() {
   function generateScore(e) {
     e.preventDefault();
     setError("");
-    const score1 =
+    const introvertExtrovert =
       parseInt(value1) +
       parseInt(value2) +
       parseInt(value3) +
       parseInt(value4) +
-      parseInt(value5) +
+      parseInt(value5)
+    const sensingIntuitive =
       parseInt(value6) +
       parseInt(value7) +
       parseInt(value8) +
       parseInt(value9) +
       parseInt(value10);
-    const score2 =
+    const thinkingFeeling =
       parseInt(value11) +
       parseInt(value12) +
       parseInt(value13) +
       parseInt(value14) +
-      parseInt(value15) +
+      parseInt(value15)
+    const judgingPerceiving =
       parseInt(value16) +
       parseInt(value17) +
       parseInt(value18) +
@@ -196,7 +198,6 @@ export default function Regform() {
       value19 &&
       value20
     ) {
-      let count = 0
       db.collection("/users")
         .where("username", "==", usernameRef.current.value)
         .get()
@@ -209,8 +210,10 @@ export default function Regform() {
                 id: users,
                 username: usernameRef.current.value,
                 admin: false,
-                score1: score1,
-                score2: score2,
+                introvertExtrovert: introvertExtrovert,
+                sensingIntuitive: sensingIntuitive,
+                thinkingFeeling: thinkingFeeling,
+                judgingPerceiving: judgingPerceiving,
                 groupId: 0,
               },
               { merge: true }
@@ -520,7 +523,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You cannot stand eating alone.
+                        You take enjoyment in building far plans.
                       </FormLabel>
                       <br></br>
 
@@ -570,8 +573,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        Given a choice between partying and spending some alone
-                        time, you would prefer the former most of the time.
+                        Imagine you’re hiking. You see a path nobody came across before. Can you take a risk to take it?
                       </FormLabel>
                       <br></br>
 
@@ -621,7 +623,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You cannot be left out in a group discussion.
+                        You often tend to remember events from your past.
                       </FormLabel>
                       <br></br>
 
@@ -671,8 +673,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You are happy to start the conversation in a group
-                        setting.
+                        You prefer to go with the flow of things.
                       </FormLabel>
                       <br></br>
 
@@ -684,13 +685,13 @@ export default function Regform() {
                         onChange={handleChange9}
                       >
                         <FormControlLabel
-                          value="1"
+                          value="5"
                           control={<Radio />}
                           label="1"
                           style={{ marginLeft: "4vw" }}
                         />
                         <FormControlLabel
-                          value="2"
+                          value="4"
                           control={<Radio />}
                           label="2"
                           style={{ marginLeft: "4vw" }}
@@ -702,13 +703,13 @@ export default function Regform() {
                           style={{ marginLeft: "4vw" }}
                         />
                         <FormControlLabel
-                          value="4"
+                          value="2"
                           control={<Radio />}
                           label="4"
                           style={{ marginLeft: "4vw" }}
                         />
                         <FormControlLabel
-                          value="5"
+                          value="1"
                           control={<Radio />}
                           label="5"
                           style={{ marginLeft: "4vw" }}
@@ -722,8 +723,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You often take the lead in decision making within a
-                        group.
+                        You tend to pay more attention to the big picture than stick to the details.
                       </FormLabel>
                       <br></br>
 
@@ -874,9 +874,9 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You usually prefer just doing what you feel like at any
-                        given moment instead of planning a particular daily
-                        routine.
+                        When knowing that you have the optimal solution, you
+                        will still consult everyone involved to ensure that
+                        everyone is agreeable.
                       </FormLabel>
                       <br></br>
 
@@ -1028,8 +1028,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You will let your emotions of a situation disrupt your
-                        workflow.
+                        You plan ahead and have no problem following through when doing a project.
                       </FormLabel>
                       <br></br>
 
@@ -1079,9 +1078,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        When knowing that you have the optimal solution, you
-                        will still consult everyone involved to ensure that
-                        everyone is agreeable.
+                        You tend to mix both work and play.
                       </FormLabel>
                       <br></br>
 
@@ -1093,13 +1090,13 @@ export default function Regform() {
                         onChange={handleChange17}
                       >
                         <FormControlLabel
-                          value="1"
+                          value="5"
                           control={<Radio />}
                           label="1"
                           style={{ marginLeft: "4vw" }}
                         />
                         <FormControlLabel
-                          value="2"
+                          value="4"
                           control={<Radio />}
                           label="2"
                           style={{ marginLeft: "4vw" }}
@@ -1111,13 +1108,13 @@ export default function Regform() {
                           style={{ marginLeft: "4vw" }}
                         />
                         <FormControlLabel
-                          value="4"
+                          value="2"
                           control={<Radio />}
                           label="4"
                           style={{ marginLeft: "4vw" }}
                         />
                         <FormControlLabel
-                          value="5"
+                          value="1"
                           control={<Radio />}
                           label="5"
                           style={{ marginLeft: "4vw" }}
@@ -1131,8 +1128,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You try to avoid conflict at all costs, even when you
-                        are in the right.
+                        You work on a single task, complete it efficiently, before moving to the next task.
                       </FormLabel>
                       <br></br>
 
@@ -1182,7 +1178,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        You value Harmony the most.
+                        Your desk is usually neat and tidy.
                       </FormLabel>
                       <br></br>
 
@@ -1233,8 +1229,7 @@ export default function Regform() {
                     <FormControl component="fieldset">
                       <FormLabel component="legend">
                         {" "}
-                        When making an important life decision, you consider
-                        your personal feelings first.
+                        You like to take time to weigh all your options before deciding on something.
                       </FormLabel>
                       <br></br>
 

@@ -81,7 +81,6 @@ function Admin(props) {
     countGroups();
   }, []);
 
-
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
 
@@ -104,6 +103,8 @@ function Admin(props) {
   const getData = () => {
     let score1 = 0;
     let score2 = 0;
+    let score3 = 0;
+    let score4 = 0;
     let username = "";
     let id;
     let newData;
@@ -113,13 +114,17 @@ function Admin(props) {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           //console.log(doc.data());
-          score1 = doc.data().score1;
-          score2 = doc.data().score2;
+          score1 = doc.data().introvertExtrovert;
+          score2 = doc.data().sensingIntuitive;
+          score3 = doc.data().thinkingFeeling;
+          score4 = doc.data().judgingPerceiving;
           username = doc.data().username;
           id = doc.data().id;
           newData = {
             score1: score1,
             score2: score2,
+            score3: score3,
+            score4: score4,
             username: username,
             id: id,
           };
@@ -141,9 +146,18 @@ function Admin(props) {
     let centroids = [];
     // generate centroids randomly
     for (let i = 0; i < group; i++) {
-      let score1 = Math.floor(Math.random() * 50 + 1);
-      let score2 = Math.floor(Math.random() * 50 + 1);
-      centroids.push({ score1: score1, score2: score2, size: 0, items: [] });
+      let score1 = Math.floor(Math.random() * 25 + 1);
+      let score2 = Math.floor(Math.random() * 25 + 1);
+      let score3 = Math.floor(Math.random() * 25 + 1);
+      let score4 = Math.floor(Math.random() * 25 + 1);
+      centroids.push({
+        score1: score1,
+        score2: score2,
+        score3: score3,
+        score4: score4,
+        size: 0,
+        items: [],
+      });
     }
 
     let distances = [];
@@ -153,14 +167,20 @@ function Admin(props) {
       for (let j = 0; j < data.length; j++) {
         similarity =
           (centroids[i].score1 * data[j].score1 +
-            centroids[i].score2 * data[j].score2) /
+            centroids[i].score2 * data[j].score2 +
+            centroids[i].score3 * data[j].score3 +
+            centroids[i].score4 * data[j].score4) /
           (Math.sqrt(
             centroids[i].score1 * centroids[i].score1 +
-              centroids[i].score2 * centroids[i].score2
+              centroids[i].score2 * centroids[i].score2 +
+              centroids[i].score3 * centroids[i].score3 +
+              centroids[i].score4 * centroids[i].score4
           ) *
             Math.sqrt(
-              centroids[i].score1 * centroids[i].score1 +
-                data[j].score2 * data[j].score2
+              data[i].score1 * data[i].score1 +
+                data[j].score2 * data[j].score2 +
+                data[i].score3 * data[i].score3 +
+                data[j].score4 * data[j].score4
             ));
         distances.push({
           itemId: data[j].id,
@@ -171,7 +191,7 @@ function Admin(props) {
     }
     // sort distances in descending order
     distances.sort((a, b) => (a.similarity > b.similarity ? -1 : 1));
-    
+
     let seen = [];
     // assign each item to a cluster until it is filled
     for (let i = 0; i < distances.length; i++) {
@@ -206,18 +226,26 @@ function Admin(props) {
       for (let i = 0; i < centroids.length; i++) {
         let accum1 = 0;
         let accum2 = 0;
+        let accum3 = 0;
+        let accum4 = 0;
         for (let j = 0; j < centroids[i].items.length; j++) {
           accum1 += data.find((x) => x.id === centroids[i].items[j]).score1;
           accum2 += data.find((x) => x.id === centroids[i].items[j]).score2;
+          accum3 += data.find((x) => x.id === centroids[i].items[j]).score3;
+          accum4 += data.find((x) => x.id === centroids[i].items[j]).score4;
         }
         newCentroids.push({
           score1: accum1 / centroids[i].items.length,
           score2: accum2 / centroids[i].items.length,
+          score3: accum3 / centroids[i].items.length,
+          score4: accum4 / centroids[i].items.length,
           size: 0,
           items: [],
         });
         accum1 = 0;
         accum2 = 0;
+        accum3 = 0;
+        accum4 = 0;
       }
 
       let newDistances = [];
@@ -227,14 +255,20 @@ function Admin(props) {
         for (let j = 0; j < data.length; j++) {
           similarity =
           (newCentroids[i].score1 * data[j].score1 +
-            newCentroids[i].score2 * data[j].score2) /
+            newCentroids[i].score2 * data[j].score2 +
+            newCentroids[i].score3 * data[j].score3 +
+            newCentroids[i].score4 * data[j].score4) /
           (Math.sqrt(
             newCentroids[i].score1 * newCentroids[i].score1 +
-            newCentroids[i].score2 * newCentroids[i].score2
+            newCentroids[i].score2 * newCentroids[i].score2 +
+            newCentroids[i].score3 * newCentroids[i].score3 +
+            newCentroids[i].score4 * newCentroids[i].score4
           ) *
             Math.sqrt(
-              newCentroids[i].score1 * newCentroids[i].score1 +
-                data[j].score2 * data[j].score2
+              data[i].score1 * data[i].score1 +
+                data[j].score2 * data[j].score2 +
+                data[i].score3 * data[i].score3 +
+                data[j].score4 * data[j].score4
             ));
           newDistances.push({
             itemId: data[j].id,
@@ -278,12 +312,16 @@ function Admin(props) {
       return different;
     }
 
-    console.log(totalGroups)
-    
-    for (let i = totalGroups + 1; i < totalGroups + Math.floor(userCount / 4) + 1; i++) {
+    console.log(totalGroups);
+
+    for (
+      let i = totalGroups + 1;
+      i < totalGroups + Math.floor(userCount / 4) + 1;
+      i++
+    ) {
       db.collection("groups").doc(JSON.stringify(i)).set({ members: [] });
     }
-    
+
     for (let i = 0; i < centroids.length; i++) {
       for (let j = 0; j < centroids[i].items.length; j++) {
         db.collection("users")
