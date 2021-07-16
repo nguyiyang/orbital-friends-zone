@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import logOutIcon from "../Images/Logout_icon.jpg";
 import AppBar from "./MainAppBar";
-import { Form, Card } from "react-bootstrap";
 import { Button } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import { makeStyles } from "@material-ui/core/styles";
+import AnnouncementIcon from "@material-ui/icons/Announcement";
+import NotesIcon from "@material-ui/icons/Notes";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -22,7 +22,7 @@ const styles = (theme) => ({
   },
   container: {
     marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(30),
+    marginBottom: theme.spacing(10),
     display: "flex",
     position: "relative",
   },
@@ -36,8 +36,12 @@ const styles = (theme) => ({
     height: 55,
   },
   title: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(5),
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+  },
+  icons: {
+    fontSize: 150,
   },
 });
 
@@ -81,7 +85,6 @@ function Admin(props) {
     countGroups();
   }, []);
 
-
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
 
@@ -104,6 +107,8 @@ function Admin(props) {
   const getData = () => {
     let score1 = 0;
     let score2 = 0;
+    let score3 = 0;
+    let score4 = 0;
     let username = "";
     let id;
     let newData;
@@ -113,13 +118,17 @@ function Admin(props) {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           //console.log(doc.data());
-          score1 = doc.data().score1;
-          score2 = doc.data().score2;
+          score1 = doc.data().introvertExtrovert;
+          score2 = doc.data().sensingIntuitive;
+          score3 = doc.data().thinkingFeeling;
+          score4 = doc.data().judgingPerceiving;
           username = doc.data().username;
           id = doc.data().id;
           newData = {
             score1: score1,
             score2: score2,
+            score3: score3,
+            score4: score4,
             username: username,
             id: id,
           };
@@ -141,9 +150,18 @@ function Admin(props) {
     let centroids = [];
     // generate centroids randomly
     for (let i = 0; i < group; i++) {
-      let score1 = Math.floor(Math.random() * 50 + 1);
-      let score2 = Math.floor(Math.random() * 50 + 1);
-      centroids.push({ score1: score1, score2: score2, size: 0, items: [] });
+      let score1 = Math.floor(Math.random() * 25 + 1);
+      let score2 = Math.floor(Math.random() * 25 + 1);
+      let score3 = Math.floor(Math.random() * 25 + 1);
+      let score4 = Math.floor(Math.random() * 25 + 1);
+      centroids.push({
+        score1: score1,
+        score2: score2,
+        score3: score3,
+        score4: score4,
+        size: 0,
+        items: [],
+      });
     }
 
     let distances = [];
@@ -153,14 +171,20 @@ function Admin(props) {
       for (let j = 0; j < data.length; j++) {
         similarity =
           (centroids[i].score1 * data[j].score1 +
-            centroids[i].score2 * data[j].score2) /
+            centroids[i].score2 * data[j].score2 +
+            centroids[i].score3 * data[j].score3 +
+            centroids[i].score4 * data[j].score4) /
           (Math.sqrt(
             centroids[i].score1 * centroids[i].score1 +
-              centroids[i].score2 * centroids[i].score2
+              centroids[i].score2 * centroids[i].score2 +
+              centroids[i].score3 * centroids[i].score3 +
+              centroids[i].score4 * centroids[i].score4
           ) *
             Math.sqrt(
-              centroids[i].score1 * centroids[i].score1 +
-                data[j].score2 * data[j].score2
+              data[i].score1 * data[i].score1 +
+                data[j].score2 * data[j].score2 +
+                data[i].score3 * data[i].score3 +
+                data[j].score4 * data[j].score4
             ));
         distances.push({
           itemId: data[j].id,
@@ -171,7 +195,7 @@ function Admin(props) {
     }
     // sort distances in descending order
     distances.sort((a, b) => (a.similarity > b.similarity ? -1 : 1));
-    
+
     let seen = [];
     // assign each item to a cluster until it is filled
     for (let i = 0; i < distances.length; i++) {
@@ -206,18 +230,26 @@ function Admin(props) {
       for (let i = 0; i < centroids.length; i++) {
         let accum1 = 0;
         let accum2 = 0;
+        let accum3 = 0;
+        let accum4 = 0;
         for (let j = 0; j < centroids[i].items.length; j++) {
           accum1 += data.find((x) => x.id === centroids[i].items[j]).score1;
           accum2 += data.find((x) => x.id === centroids[i].items[j]).score2;
+          accum3 += data.find((x) => x.id === centroids[i].items[j]).score3;
+          accum4 += data.find((x) => x.id === centroids[i].items[j]).score4;
         }
         newCentroids.push({
           score1: accum1 / centroids[i].items.length,
           score2: accum2 / centroids[i].items.length,
+          score3: accum3 / centroids[i].items.length,
+          score4: accum4 / centroids[i].items.length,
           size: 0,
           items: [],
         });
         accum1 = 0;
         accum2 = 0;
+        accum3 = 0;
+        accum4 = 0;
       }
 
       let newDistances = [];
@@ -226,16 +258,22 @@ function Admin(props) {
       for (let i = 0; i < group; i++) {
         for (let j = 0; j < data.length; j++) {
           similarity =
-          (newCentroids[i].score1 * data[j].score1 +
-            newCentroids[i].score2 * data[j].score2) /
-          (Math.sqrt(
-            newCentroids[i].score1 * newCentroids[i].score1 +
-            newCentroids[i].score2 * newCentroids[i].score2
-          ) *
-            Math.sqrt(
+            (newCentroids[i].score1 * data[j].score1 +
+              newCentroids[i].score2 * data[j].score2 +
+              newCentroids[i].score3 * data[j].score3 +
+              newCentroids[i].score4 * data[j].score4) /
+            (Math.sqrt(
               newCentroids[i].score1 * newCentroids[i].score1 +
-                data[j].score2 * data[j].score2
-            ));
+                newCentroids[i].score2 * newCentroids[i].score2 +
+                newCentroids[i].score3 * newCentroids[i].score3 +
+                newCentroids[i].score4 * newCentroids[i].score4
+            ) *
+              Math.sqrt(
+                data[i].score1 * data[i].score1 +
+                  data[j].score2 * data[j].score2 +
+                  data[i].score3 * data[i].score3 +
+                  data[j].score4 * data[j].score4
+              ));
           newDistances.push({
             itemId: data[j].id,
             clusterId: i,
@@ -278,12 +316,16 @@ function Admin(props) {
       return different;
     }
 
-    console.log(totalGroups)
-    
-    for (let i = totalGroups + 1; i < totalGroups + Math.floor(userCount / 4) + 1; i++) {
+    console.log(totalGroups);
+
+    for (
+      let i = totalGroups + 1;
+      i < totalGroups + Math.floor(userCount / 4) + 1;
+      i++
+    ) {
       db.collection("groups").doc(JSON.stringify(i)).set({ members: [] });
     }
-    
+
     for (let i = 0; i < centroids.length; i++) {
       for (let j = 0; j < centroids[i].items.length; j++) {
         db.collection("users")
@@ -359,6 +401,7 @@ function Admin(props) {
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+                <GroupAddIcon className={classes.icons} />
                 <Button
                   onClick={kmeans}
                   variant="contained"
@@ -375,22 +418,11 @@ function Admin(props) {
                 >
                   Reset groups
                 </Button>
-
-                <Typography variant="h6" className={classes.title}>
-                  The best luxury hotels
-                </Typography>
-                <Typography variant="h5">
-                  {
-                    "From the latest trendy boutique hotel to the iconic palace with XXL pool"
-                  }
-                  {
-                    ", go for a mini-vacation just a few subway stops away from your home."
-                  }
-                </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+                <AnnouncementIcon className={classes.icons} />
                 <Button
                   onClick={MakeAnnouncement}
                   variant="contained"
@@ -399,19 +431,11 @@ function Admin(props) {
                 >
                   Make Announcement
                 </Button>
-                <Typography variant="h6" className={classes.title}>
-                  New experiences
-                </Typography>
-                <Typography variant="h5">
-                  {
-                    "Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… "
-                  }
-                  {"your Sundays will not be alike."}
-                </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+                <NotesIcon className={classes.icons} />
                 <Button
                   onClick={ReadFeedback}
                   variant="contained"
@@ -420,20 +444,17 @@ function Admin(props) {
                 >
                   Feedbacks
                 </Button>
-                <Typography variant="h6" className={classes.title}>
-                  Exclusive rates
-                </Typography>
-                <Typography variant="h5">
-                  {
-                    "By registering, you will access specially negotiated rates "
-                  }
-                  {"that you will not find anywhere else."}
-                </Typography>
               </div>
             </Grid>
           </Grid>
         </Container>
       </section>
+      <Typography variant="h6" className={classes.title}>
+        Number of available users:
+      </Typography>
+      <Typography variant="h5" className={classes.title}>
+        {userCount}
+      </Typography>
     </>
   );
 }
