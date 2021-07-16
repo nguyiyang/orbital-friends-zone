@@ -54,7 +54,7 @@ function ThankYou(props) {
         </Typography>
         <br></br>
         <Typography align="center" color="textPrimary" variant="body1">
-        Answer the question with your answer. We will match you with people with the same exact answer. Answer is caps-sensitive! Get Creative!
+        Answer the question with your answer. We will match you with people with the same exact answer. Get Creative!
         </Typography>
         <br></br>
         <img src={HaveFunImage} className={classes.buoy} alt="buoy" />

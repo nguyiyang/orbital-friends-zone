@@ -131,7 +131,7 @@ function Game(props) {
 
   const createFeedback = async (e) => {
     e.preventDefault();
-    history.push("./Chat", { gNumber: formValue.current.value });
+    history.push("./Chat", { gNumber: formValue.current.value.toLowerCase() });
   };
 
   return (
