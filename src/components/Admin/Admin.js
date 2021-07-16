@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import logOutIcon from "../Images/Logout_icon.jpg";
 import AppBar from "./MainAppBar";
-import { Form, Card } from "react-bootstrap";
 import { Button } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import { makeStyles } from "@material-ui/core/styles";
+import AnnouncementIcon from "@material-ui/icons/Announcement";
+import NotesIcon from "@material-ui/icons/Notes";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -22,7 +22,7 @@ const styles = (theme) => ({
   },
   container: {
     marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(30),
+    marginBottom: theme.spacing(10),
     display: "flex",
     position: "relative",
   },
@@ -36,8 +36,12 @@ const styles = (theme) => ({
     height: 55,
   },
   title: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(5),
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+  },
+  icons: {
+    fontSize: 150,
   },
 });
 
@@ -254,22 +258,22 @@ function Admin(props) {
       for (let i = 0; i < group; i++) {
         for (let j = 0; j < data.length; j++) {
           similarity =
-          (newCentroids[i].score1 * data[j].score1 +
-            newCentroids[i].score2 * data[j].score2 +
-            newCentroids[i].score3 * data[j].score3 +
-            newCentroids[i].score4 * data[j].score4) /
-          (Math.sqrt(
-            newCentroids[i].score1 * newCentroids[i].score1 +
-            newCentroids[i].score2 * newCentroids[i].score2 +
-            newCentroids[i].score3 * newCentroids[i].score3 +
-            newCentroids[i].score4 * newCentroids[i].score4
-          ) *
-            Math.sqrt(
-              data[i].score1 * data[i].score1 +
-                data[j].score2 * data[j].score2 +
-                data[i].score3 * data[i].score3 +
-                data[j].score4 * data[j].score4
-            ));
+            (newCentroids[i].score1 * data[j].score1 +
+              newCentroids[i].score2 * data[j].score2 +
+              newCentroids[i].score3 * data[j].score3 +
+              newCentroids[i].score4 * data[j].score4) /
+            (Math.sqrt(
+              newCentroids[i].score1 * newCentroids[i].score1 +
+                newCentroids[i].score2 * newCentroids[i].score2 +
+                newCentroids[i].score3 * newCentroids[i].score3 +
+                newCentroids[i].score4 * newCentroids[i].score4
+            ) *
+              Math.sqrt(
+                data[i].score1 * data[i].score1 +
+                  data[j].score2 * data[j].score2 +
+                  data[i].score3 * data[i].score3 +
+                  data[j].score4 * data[j].score4
+              ));
           newDistances.push({
             itemId: data[j].id,
             clusterId: i,
@@ -397,6 +401,7 @@ function Admin(props) {
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+                <GroupAddIcon className={classes.icons} />
                 <Button
                   onClick={kmeans}
                   variant="contained"
@@ -413,22 +418,11 @@ function Admin(props) {
                 >
                   Reset groups
                 </Button>
-
-                <Typography variant="h6" className={classes.title}>
-                  The best luxury hotels
-                </Typography>
-                <Typography variant="h5">
-                  {
-                    "From the latest trendy boutique hotel to the iconic palace with XXL pool"
-                  }
-                  {
-                    ", go for a mini-vacation just a few subway stops away from your home."
-                  }
-                </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+                <AnnouncementIcon className={classes.icons} />
                 <Button
                   onClick={MakeAnnouncement}
                   variant="contained"
@@ -437,19 +431,11 @@ function Admin(props) {
                 >
                   Make Announcement
                 </Button>
-                <Typography variant="h6" className={classes.title}>
-                  New experiences
-                </Typography>
-                <Typography variant="h5">
-                  {
-                    "Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… "
-                  }
-                  {"your Sundays will not be alike."}
-                </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
+                <NotesIcon className={classes.icons} />
                 <Button
                   onClick={ReadFeedback}
                   variant="contained"
@@ -458,20 +444,17 @@ function Admin(props) {
                 >
                   Feedbacks
                 </Button>
-                <Typography variant="h6" className={classes.title}>
-                  Exclusive rates
-                </Typography>
-                <Typography variant="h5">
-                  {
-                    "By registering, you will access specially negotiated rates "
-                  }
-                  {"that you will not find anywhere else."}
-                </Typography>
               </div>
             </Grid>
           </Grid>
         </Container>
       </section>
+      <Typography variant="h6" className={classes.title}>
+        Number of available users:
+      </Typography>
+      <Typography variant="h5" className={classes.title}>
+        {userCount}
+      </Typography>
     </>
   );
 }
