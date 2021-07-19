@@ -100,7 +100,6 @@ function AppAppBar(props) {
               }}
             >
               {<ExitToAppIcon fontSize="large" />}
-              {"  Sign Out"}
             </Link>
           </div>
         </Toolbar>

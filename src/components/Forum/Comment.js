@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     alignItems: 'center',
     width: "50%",
-    marginLeft:  theme.spacing(60),
+    marginLeft:  "25%",
     align: 'center',
     justifyContent: "center",
   },
@@ -208,7 +208,6 @@ async function getUserName() {
             size="small"
             onChange={(text) => setBtnDisabled(!text.target.value)}
           />
-
           <Button
             type="submit"
             disabled={!formValue}
@@ -222,5 +221,4 @@ async function getUserName() {
           </Button>
         </form>
       </Container>
-
     */

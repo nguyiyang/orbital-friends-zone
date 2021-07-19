@@ -1283,7 +1283,7 @@ export default function Regform() {
                     style={{
                       backgroundColor: "#406dc2",
                       borderRadius: 5,
-                      width: "8vw",
+                      
                     }}
                   >
                     Submit
