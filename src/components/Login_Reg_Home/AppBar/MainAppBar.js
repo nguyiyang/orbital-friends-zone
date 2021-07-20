@@ -111,7 +111,11 @@ function AppAppBar(props) {
 async function getUserName() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().username;
+  try {
+    return printed.data().username;
+  } catch {
+    
+  }
 }
 
 AppAppBar.propTypes = {

@@ -1,19 +1,9 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import blue from "@material-ui/core/colors/cyan";
-import Button from "@material-ui/core/Button";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import React, { useRef, useState } from "react";
-import { Form, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import green from "@material-ui/core/colors/green";
-import { purple, yellow} from "@material-ui/core/colors";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   Feedback: {
@@ -45,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
 
 export default function Feedback(props) {
   const classes = useStyles();

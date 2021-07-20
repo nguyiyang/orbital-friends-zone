@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Button from './Button';
+import { Button, Container, Grid } from '@material-ui/core';
 import Typography from './Typo';
-import { yellow } from '@material-ui/core/colors';
-import { Link, useHistory } from "react-router-dom";
 import PepoHappy from "../../Images/PeepoHappy.jpg";
 import PepoG from "../../Images/PepoG.jpg";
 import Pepesnack from "../../Images/Pepesnack.png";
+import { Link, useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {

@@ -1,17 +1,13 @@
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { ButtonBase } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
+import { Button, ButtonBase, Container } from "@material-ui/core";
 import Typography from "../Typography";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import React, { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import { makeStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
   root: {

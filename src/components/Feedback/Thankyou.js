@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
-import { Box, Container, Typography, Button } from "@material-ui/core";
+import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { Button, Container, Typography } from "@material-ui/core";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import ThankYouImage from "./../Images/ThankYouImage.jpg";
+import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
