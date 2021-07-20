@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "./MainAppBar";
-import { Button } from "@material-ui/core";
+import Typography from "../FormTemplate/Typography";
+import { Button, Container, Grid } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { NotesIcon, GroupAddIcon, AnnouncementIcon } from "@material-ui/icons";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
-import AnnouncementIcon from "@material-ui/icons/Announcement";
-import NotesIcon from "@material-ui/icons/Notes";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Typography from "../FormTemplate/Typography";
 
 const styles = (theme) => ({
   root: {

@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
-import { Box, Container, Typography, Button } from "@material-ui/core";
+import React from "react";
+import { Container, Typography, Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import PeepoClap from "./../Images/peepoClap.gif";
-import { yellow } from "@material-ui/core/colors";
+import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
   whole:{
     display: 'flex',
-    backgroundColor: yellow[200],
+    backgroundColor: "#cfe8fc",
     height: "100%",
   },
   root: {
@@ -21,8 +17,8 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: theme.spacing(30),
-    marginBottom: theme.spacing(41),
+    marginTop: theme.spacing(20),
+    marginBottom: theme.spacing(25),
     height: "100%",
     align: "center",
   },

@@ -2,13 +2,12 @@ import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
 import { useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
 import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
-import { useAuth } from "../../../contexts/AuthContext";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { Box, Container, Typography, Button } from "@material-ui/core";
+import { Link, Typography } from "@material-ui/core";
+import { useAuth } from "../../../contexts/AuthContext";
 import { firebase } from "@firebase/app";
 
 const styles = (theme) => ({
@@ -40,10 +39,10 @@ const styles = (theme) => ({
     marginLeft: theme.spacing(3)
   },
   linkSecondary: {
-    color: theme.palette.secondary.main
+    color: theme.palette.common.white
   },
   welcome: {
-    color: theme.palette.common.black
+    color: theme.palette.common.white
   }
 });
 

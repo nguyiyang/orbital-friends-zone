@@ -14,7 +14,7 @@ import Pepesnack from "../../Images/Pepesnack.png";
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: yellow[200],
+    backgroundColor: "#cfe8fc",
     overflow: 'hidden',
   },
   container: {
@@ -32,7 +32,7 @@ const styles = (theme) => ({
     padding: theme.spacing(0, 5),
   },
   title: {
-    marginBottom: theme.spacing(14),
+    marginBottom: theme.spacing(10),
   },
   number: {
     fontSize: 24,
@@ -44,12 +44,6 @@ const styles = (theme) => ({
     height: 200,
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
-  },
-  curvyLines: {
-    pointerEvents: 'none',
-    position: 'absolute',
-    top: -180,
-    opacity: 0.7,
   },
   button: {
     marginTop: theme.spacing(8),
@@ -68,11 +62,8 @@ function ProductHowItWorks(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img
-          src="/static/themes/onepirate/productCurvyLines.png"
-          className={classes.curvyLines}
-        />
-        <Typography variant="h4" marked="center" className={classes.title} component="h2">
+
+        <Typography variant="h4" className={classes.title} component="h2">
           Welcome to FriendsZone!
         </Typography>
         <div>
@@ -116,7 +107,7 @@ function ProductHowItWorks(props) {
           </Grid>
         </div>
         <Button
-          color="secondary"
+          color="primary"
           size="large"
           variant="contained"
           className={classes.button}
