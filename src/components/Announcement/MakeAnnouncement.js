@@ -1,16 +1,15 @@
+import React, { useRef, useState } from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import TextField from '../FormTemplate/TextField';
 import Typography from '../FormTemplate/Typography';
 import BoxButton from '../FormTemplate/Button';
-import { Box, Container, Button } from "@material-ui/core";
-import React, { useRef, useState } from "react";
+import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import { blue } from '@material-ui/core/colors';
+import { Button, Container, Grid } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
-import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { blue } from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {

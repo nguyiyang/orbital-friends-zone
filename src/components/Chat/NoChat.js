@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
-import { Helmet } from "react-helmet";
-import { Box, Container, Typography, Button } from "@material-ui/core";
+import React from "react";
+import { Container, Typography, Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import GroupNotFound from "./../Images/GroupNotFound.jpg";
+import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {

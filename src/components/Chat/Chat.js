@@ -1,15 +1,10 @@
 import React, { useRef, useState } from "react";
-import { Form, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
-import { useLocation } from "react-router-dom";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { Button } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Box from '@material-ui/core/Box';
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useLocation, useHistory } from "react-router-dom";
+import { firebase } from "@firebase/app";
 import styles from "./Chat.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Chat() {
-  const { currentUser, logout } = useAuth();
-  
 
   return (
     <>
@@ -187,11 +180,15 @@ function ChatMessage(props) {
 async function getGroupId() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().groupId;
+  try {
+    return printed.data().groupId;
+  } catch {}
 }
 
 async function getUserName() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().username;
+  try {
+    return printed.data().username;
+  } catch {}
 }

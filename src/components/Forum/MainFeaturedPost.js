@@ -1,19 +1,13 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import blue from "@material-ui/core/colors/cyan";
-import Button from "@material-ui/core/Button";
+import { Button, Grid, Paper, Typography} from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import React, { useRef, useState } from "react";
-import { Form, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../../contexts/AuthContext";
+import { purple, green, blue } from "@material-ui/core/colors";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import green from "@material-ui/core/colors/green";
-import { purple, yellow } from "@material-ui/core/colors";
+
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {

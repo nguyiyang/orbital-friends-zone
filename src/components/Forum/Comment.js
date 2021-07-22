@@ -1,20 +1,13 @@
 import React, { useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Button, IconButton, InputBase, Paper, Typography } from "@material-ui/core";
+import SendIcon from '@material-ui/icons/Send';
 import CommentFormat from "./NoComment_Comment";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { Container, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import { useLocation } from "react-router-dom";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import TextField from "@material-ui/core/TextField";
-import SendIcon from '@material-ui/icons/Send';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
+import { useHistory } from "react-router-dom";
+import { firebase } from "@firebase/app";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
@@ -29,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     alignItems: 'center',
     width: "50%",
-    marginLeft:  theme.spacing(60),
+    marginLeft:  "25%",
     align: 'center',
     justifyContent: "center",
   },
@@ -44,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Comment() {
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
   const classes = useStyles();
 
@@ -191,36 +183,7 @@ function AddComment() {
 async function getUserName() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().username;
+  try {
+    return printed.data().username;
+  } catch {}
 }
-
-
-/*
-<Container justifyContent="center" align="center" maxWidth="sm">
-        <form onSubmit={createComment}>
-          <TextField
-            id="filled-textarea"
-            label="Comment here"
-            inputRef={formValue}
-            multiline
-            variant="filled"
-            justifyContent="center"
-            size="small"
-            onChange={(text) => setBtnDisabled(!text.target.value)}
-          />
-
-          <Button
-            type="submit"
-            disabled={!formValue}
-            position="relative"
-            variant="contained"
-            color="primary"
-            size="large"
-            disabled={btnDisabled}
-          >
-            Submit
-          </Button>
-        </form>
-      </Container>
-
-    */

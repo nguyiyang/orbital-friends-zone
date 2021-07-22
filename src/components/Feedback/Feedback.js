@@ -1,16 +1,12 @@
-import React, { useRef, useState } from "react";
-import { Form, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Button, Typography } from "@material-ui/core";
 import FBFormat from "./NoLikeNoComment_FB";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Box from '@material-ui/core/Box';
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useHistory } from "react-router-dom";
+import { firebase } from "@firebase/app";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
@@ -22,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Feedback() {
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
   const classes = useStyles();
 
