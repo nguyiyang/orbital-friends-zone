@@ -117,7 +117,10 @@ function ChatRoom() {
           justifyContent: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
+          minHeight: "100vh",
+          maxHeight: "auto",
           marginBottom: "6vh",
+          backgroundColor: "#cfe8fc"
         }}
       >
         <section>
@@ -155,7 +158,7 @@ function ChatMessage(props) {
   if (messageClass === "sent") {
     return (
       <>
-        <div className={`message ${messageClass}`}>
+        <div className={`message ${messageClass}`} style={{marginRight: "1vw"}}>
           <p>{text}</p>
         </div>
       </>
@@ -163,8 +166,8 @@ function ChatMessage(props) {
   } else {
     return (
       <>
-        <div id="displayedName">{userID}</div>
-        <div className={`message ${messageClass}`}>
+        <div id="displayedName" style={{marginLeft: "1vw"}}>{userID}</div>
+        <div className={`message ${messageClass}`} style={{marginLeft: "1vw"}}>
           <p>{text}</p>
         </div>
       </>
