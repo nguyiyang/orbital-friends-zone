@@ -12,7 +12,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
-    backgroundColor: blue[50],
+    backgroundColor: blue[200],
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",

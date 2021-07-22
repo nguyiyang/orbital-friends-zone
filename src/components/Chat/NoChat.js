@@ -13,17 +13,14 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-
-    height: "100%",
     align: "center",
-  },
-  button: {
-    border: "4px solid currentColor",
-    borderRadius: 0,
-    height: "auto",
   },
   buoy: {
     width: "50%",
+  },
+  backButton: {
+    margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
 });
 
@@ -38,9 +35,16 @@ function NoChat(props) {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
       <AppBar />
-      <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
+      <Button
+        variant="outlined"
+        color="inherit"
+        className={classes.backButton}
+        onClick={() => ChatGroups()}
+      >
+        Back
+      </Button>
         <Container className={classes.root} component="section">
           <Typography align="center" color="textPrimary" variant="h2">
             Oops! You have not been assigned a group.
@@ -53,17 +57,8 @@ function NoChat(props) {
           <br></br>
           <img src={GroupNotFound} className={classes.buoy} alt="buoy" />
           <br></br>
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            onClick={() => ChatGroups()}
-          >
-            Go back
-          </Button>
         </Container>
-      </div>
-    </>
+    </div>
   );
 }
 

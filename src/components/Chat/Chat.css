@@ -16,6 +16,8 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  min-height: 100vh;
+  max-height: auto;
   background-color: white;
   position: relative;
 }
@@ -93,7 +95,7 @@ li {
 }
 
 .Chat p {
-  max-width: 1920px;
+  max-width: 40vw;
   margin-bottom: 12px;
   line-height: 24px;
   padding: 10px 20px;
@@ -116,10 +118,12 @@ li {
   color: white;
   background: #0b93f6;
   align-self: flex-end;
+  word-wrap: break-word;
 }
 .Chat .received p {
   background: #e5e5ea;
   color: black;
+  word-wrap: break-word;
 }
 
 .Chat .backButton {
