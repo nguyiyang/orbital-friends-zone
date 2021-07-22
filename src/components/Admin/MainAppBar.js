@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
+import { Link, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
 import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
@@ -55,17 +55,27 @@ function AppAppBar(props) {
   return (
     <div>
       <AppBar position="fixed">
-        <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
+      <Toolbar className={classes.toolbar}>
+          <div className={classes.left} >
+          <Typography
+            variant="subtitle"
+            underline="none"
+            className={classes.welcome}
+          >
+            {"Welcome, Admin"}
+          </Typography>
+          </div>
+          <div className={classes.center} >
           <Link
             variant="h6"
             underline="none"
             color="inherit"
             className={classes.title}
-            href="./admin"
+            href="./"
           >
             {"FriendsZone"}
           </Link>
+          </div>
           <div className={classes.right}>
             <Link
               component="button"
@@ -76,8 +86,7 @@ function AppAppBar(props) {
                 handleLogout();
               }}
             >
-               {<ExitToAppIcon fontSize="large" />}
-              {"Sign Out"}
+              {<ExitToAppIcon fontSize="large" />}
             </Link>
           </div>
         </Toolbar>

@@ -38,6 +38,7 @@ const styles = (theme) => ({
   },
   backButton: {
     margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
   helpButton: {
     backgroundColor: yellow[500],
@@ -73,6 +74,7 @@ function Game(props) {
   return (
     <>
       <AppBar />
+      <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
       <Button
         variant="outlined"
         color="inherit"
@@ -119,6 +121,7 @@ function Game(props) {
           </Grid>
         </Grid>
       </Container>
+      </div>
     </>
   );
 }

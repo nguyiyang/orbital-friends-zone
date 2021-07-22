@@ -9,15 +9,15 @@ import styles from "./Chat.css";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.common.white,
   },
 }));
 
 export default function Chat() {
-
   return (
     <>
-    <AppBar/>
+      <AppBar />
       <section>
         <ChatRoom />
       </section>
@@ -54,7 +54,7 @@ function ChatRoom() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       chatGroupId: groupNumber,
-      userID: userName
+      userID: userName,
     });
 
     setFormValue("");
@@ -84,71 +84,66 @@ function ChatRoom() {
   }
 
   return (
-    <>
-      
-
+    <div style={{backgroundColor: "#cfe8fc"}}>
       <Typography
-      component="div"
-      variant="body1"
-      style={{ width: '100%', position: 'relative' }}
-    >
-      <Box
-        bgcolor="grey.700"
-        color="white"
-        p={2}
-        position="static"
-        top={0}
-        zIndex="tooltip"
+        component="div"
+        variant="body1"
+        style={{ width: "100%", position: "relative" }}
       >
-        Chat Group ({displayName(groupNumber)})
-      </Box>
+        <Box
+          bgcolor="grey.700"
+          color="white"
+          p={2}
+          position="static"
+          top={0}
+          zIndex="tooltip"
+        >
+          Chat Group ({displayName(groupNumber)})
+        </Box>
       </Typography>
 
       <Button
-            variant="outlined"
-            color="inherit"
-            className={classes.backButton}
-            onClick={Home}
-          >
-            Back
-          </Button>
-
-    
+        variant="outlined"
+        color="inherit"
+        className={classes.backButton}
+        onClick={Home}
+      >
+        Back
+      </Button>
 
       <div
-      className="Chat"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        width: "100%",
-        height: "100%"
-      }}>
+        className="Chat"
+        style={{
+          justifyContent: "center",
+          backgroundRepeat: "no-repeat",
+          width: "100%",
+          marginBottom: "6vh",
+        }}
+      >
         <section>
-      <main>
-        {messages &&
-          messages
-            .filter((msg) => msg.chatGroupId === groupNumber)
-            .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          <main>
+            {messages &&
+              messages
+                .filter((msg) => msg.chatGroupId === groupNumber)
+                .map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
-        <span ref={dummy}></span>
-      </main>
+            <span ref={dummy}></span>
+          </main>
 
-      <form onSubmit={sendMessage}>
-        <input
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-          placeholder="Type a message"
-        />
+          <form onSubmit={sendMessage} style={{backgroundColor: "#cfe8fc"}}>
+            <input
+              value={formValue}
+              onChange={(e) => setFormValue(e.target.value)}
+              placeholder="Type a message"
+            />
 
-        <button type="submit" disabled={!formValue}>
-          Send
-        </button>
-      </form>
-      </section>
+            <button type="submit" disabled={!formValue}>
+              Send
+            </button>
+          </form>
+        </section>
       </div>
-    </>
+    </div>
   );
 }
 

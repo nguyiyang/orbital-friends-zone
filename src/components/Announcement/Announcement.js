@@ -10,7 +10,8 @@ import { firebase } from "@firebase/app";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
   announButton: {
     margin: theme.spacing(3)
@@ -32,6 +33,7 @@ export default function Announcement() {
   return (
     <>
       <AppBar />
+      <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
       <Typography
       component="div"
       variant="body1"
@@ -63,6 +65,7 @@ export default function Announcement() {
         <section>
           <ShowForum />
         </section>
+      </div>
       </div>
     </>
   );
