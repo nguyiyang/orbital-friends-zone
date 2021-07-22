@@ -6,6 +6,7 @@
   text-align: left;
   max-width: 1920px;
   margin: auto;
+  background-color: #cfe8fc;
 }
 
 .Chat section {
@@ -16,7 +17,7 @@
   margin-right: auto;
   width: 50%;
   background-color: white;
-  position:relative;
+  position: relative;
 }
 
 .Chat main {
@@ -44,7 +45,7 @@
   height: 7vh;
   position: fixed;
   bottom: 0;
-  
+
   width: 100%;
   display: flex;
   font-size: 1rem;
@@ -53,7 +54,7 @@
 .Chat form button {
   width: 5%;
   background-color: rgb(113, 113, 185);
-  margin-right:auto;
+  margin-right: auto;
 }
 
 .Chat input {

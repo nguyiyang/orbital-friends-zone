@@ -13,7 +13,6 @@ const styles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: theme.spacing(5),
 
     height: "100%",
     align: "center",
@@ -22,11 +21,6 @@ const styles = (theme) => ({
     border: "4px solid currentColor",
     borderRadius: 0,
     height: "auto",
-    padding: theme.spacing(2, 5),
-  },
-  link: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
   },
   buoy: {
     width: "50%",
@@ -44,42 +38,31 @@ function NoChat(props) {
   }
 
   return (
-    /*
-    <div>
-      <div>
-        <Button variant="link" onClick={Home}>
-          Back
-        </Button>
-      </div>
-      <div>
-        You have not been assigned a group. 😞 Group Creation will be done from
-        0000-0600 every Monday. Check again later!
-      </div>
-    </div>
-    */
     <>
       <AppBar />
-      <Container className={classes.root} component="section">
-        <Typography align="center" color="textPrimary" variant="h2">
-          Oops! You have not been assigned a group.
-        </Typography>
-        <br></br>
-        <Typography align="center" color="textPrimary" variant="subtitle2">
-          Group Creation will be done from 0000-0600 every Monday. Check again
-          later!
-        </Typography>
-        <br></br>
-        <img src={GroupNotFound} className={classes.buoy} alt="buoy" />
-        <br></br>
-        <Button
-          size="large"
-          variant="contained"
-          color="primary"
-          onClick={() => ChatGroups()}
-        >
-          Go back
-        </Button>
-      </Container>
+      <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
+        <Container className={classes.root} component="section">
+          <Typography align="center" color="textPrimary" variant="h2">
+            Oops! You have not been assigned a group.
+          </Typography>
+          <br></br>
+          <Typography align="center" color="textPrimary" variant="subtitle2">
+            Group Creation will be done from 0000-0600 every Monday. Check again
+            later!
+          </Typography>
+          <br></br>
+          <img src={GroupNotFound} className={classes.buoy} alt="buoy" />
+          <br></br>
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={() => ChatGroups()}
+          >
+            Go back
+          </Button>
+        </Container>
+      </div>
     </>
   );
 }

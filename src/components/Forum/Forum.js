@@ -9,7 +9,8 @@ import { firebase } from "@firebase/app";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
   postButton: {
     margin: theme.spacing(3)
@@ -33,7 +34,7 @@ export default function Forum() {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc" }}>
       <AppBar />
       <Typography
       component="div"
@@ -78,7 +79,7 @@ export default function Forum() {
           <ShowForum />
         </section>
       </div>
-    </>
+    </div>
   );
 }
 

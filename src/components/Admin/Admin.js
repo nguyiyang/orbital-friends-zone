@@ -394,6 +394,7 @@ function Admin(props) {
   return (
     <>
       <AppBar />
+      <div style={{backgroundColor: "#cfe8fc", height: "100vh"}}>
       <section className={classes.root}>
         <Container className={classes.container}>
           <Grid container spacing={5}>
@@ -453,6 +454,7 @@ function Admin(props) {
       <Typography variant="h5" className={classes.title}>
         {userCount}
       </Typography>
+      </div>
     </>
   );
 }

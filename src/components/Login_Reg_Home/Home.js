@@ -13,7 +13,6 @@ import "@firebase/firestore";
 const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(4)
   },
   images: {
     marginTop: theme.spacing(8),
@@ -126,6 +125,7 @@ function Home(props) {
   }
 
   return (
+    <div style={{backgroundColor: "#cfe8fc"}}>
     <Container className={classes.root} component="section">
       <AppBar />
       <div className={classes.images}>
@@ -161,6 +161,7 @@ function Home(props) {
         <FeedbackButton />
       </div>
     </Container>
+    </div>
   );
 }
 

@@ -12,7 +12,7 @@ import "@firebase/firestore";
 const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(0),
-    marginBottom: theme.spacing(6)
+    paddingBottom: theme.spacing(6)
   },
   images: {
     marginTop: theme.spacing(3),
@@ -86,6 +86,7 @@ const styles = (theme) => ({
     transition: theme.transitions.create("opacity")
   },
   backButton: {
+    backgroundColor: theme.palette.common.white,
     margin: theme.spacing(3)
   }
 });
@@ -190,6 +191,7 @@ function ChatGroups(props) {
   }
 
   return (
+    <div style={{backgroundColor: "#cfe8fc"}}>
     <Container className={classes.root} component="section">
       <AppBar />
       <Button
@@ -242,6 +244,7 @@ function ChatGroups(props) {
         ))}
       </div>
     </Container>
+    </div>
   );
 }
 

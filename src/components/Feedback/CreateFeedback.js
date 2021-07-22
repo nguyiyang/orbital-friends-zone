@@ -37,6 +37,7 @@ const styles = (theme) => ({
   },
   backButton: {
     margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
 });
 
@@ -74,7 +75,7 @@ function MakeFeedback(props) {
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
       <AppBar />
       <Button
         variant="outlined"
@@ -117,7 +118,7 @@ function MakeFeedback(props) {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </div>
   );
 }
 
