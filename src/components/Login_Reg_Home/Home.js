@@ -4,6 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import { Container, ButtonBase, Typography } from "@material-ui/core";
 import AppBar from "./AppBar/MainAppBar";
 import FeedbackButton from "./FeedbackButton";
+import Chat from "./../Images/nus.jpg";
+import Forum from "./../Images/forum.jpg";
+import Announcement from "./../Images/nus2.jpg"
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { firebase } from "@firebase/app";
@@ -51,7 +54,7 @@ const styles = (theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   imageSrc: {
     position: "absolute",
@@ -60,7 +63,7 @@ const styles = (theme) => ({
     top: 0,
     bottom: 0,
     backgroundSize: "cover",
-    backgroundPosition: "center 40%"
+    backgroundPosition: "center 40%",
   },
   imageBackdrop: {
     position: "absolute",
@@ -70,11 +73,12 @@ const styles = (theme) => ({
     bottom: 0,
     background: theme.palette.common.black,
     opacity: 0.5,
-    transition: theme.transitions.create("opacity")
+    transition: theme.transitions.create("opacity"),
   },
   imageTitle: {
     position: "relative",
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 14px`
+    fontSize: '1.5rem',
+    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 14px`,
   },
   imageMarked: {
     height: 3,
@@ -83,7 +87,7 @@ const styles = (theme) => ({
     position: "absolute",
     bottom: -2,
     left: "calc(50% - 9px)",
-    transition: theme.transitions.create("opacity")
+    transition: theme.transitions.create("opacity"),
   }
 });
 
@@ -94,21 +98,17 @@ function Home(props) {
 
   const images = [
     {
-      url:
-        "https://images.unsplash.com/photo-1622495893617-38b112b30790?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1099&q=80"
-        ,
+      image: Chat,
       title: "Chat",
       width: "33%"
     },
     {
-      url:
-        "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1934&q=80",
+      image: Forum,
       title: "Forum",
       width: "33%"
     },
     {
-      url:
-      "https://images.unsplash.com/photo-1610450363377-356b69e6558b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1041&q=80",
+      image: Announcement,
       title: "Announcements",
       width: "33%"
     }
@@ -141,7 +141,7 @@ function Home(props) {
             <div
               className={classes.imageSrc}
               style={{
-                backgroundImage: `url(${image.url})`
+                backgroundImage: `url(${image.image})`
               }}
             />
             <div className={classes.imageBackdrop} />

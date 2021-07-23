@@ -58,8 +58,6 @@ function ThankYou(props) {
         Now, you have to wait for the group completion to be complete. Do visit the forum and the other chat groups to talk to others while waiting!
         </Typography>
         <br></br>
-        <img src={PeepoClap} className={classes.buoy} alt="buoy" />
-        <br></br>
         <Button
           size="large"
           variant="contained"

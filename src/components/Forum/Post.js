@@ -14,7 +14,7 @@ import { blue } from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(5),
     marginBottom: 0,
     display: 'flex',
   },
@@ -24,7 +24,7 @@ const styles = (theme) => ({
   card: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: blue[200],
+    backgroundColor: "#c8a2c8",
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -39,7 +39,8 @@ const styles = (theme) => ({
     width: '100%',
   },
   backButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
 });
 

@@ -39,11 +39,11 @@ function FeedbackButton(props) {
   return (
     <Container className={classes.root} component="section">
       <Button className={classes.button} onClick={handleFeedback}>
-        <Typography variant="h4" component="span">
+        <Typography variant="h6" component="span">
           Feedback
         </Typography>
       </Button>
-      <Typography variant="subtitle1" className={classes.link}>
+      <Typography variant="subtitle2" className={classes.link}>
         We appreciate all feedback to improve our application!
       </Typography>
     </Container>

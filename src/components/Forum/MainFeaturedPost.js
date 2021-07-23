@@ -12,7 +12,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
-    backgroundColor: blue[200],
+    backgroundColor: "#7391C8",
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",
@@ -33,16 +33,16 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
-      padding: theme.spacing(8),
+      padding: theme.spacing(5),
       paddingRight: 0
     }
   },
   likebutton: {
-    backgroundColor: green[500],
+    backgroundColor: "#e6e6fa",
     marginRight: theme.spacing(2)
   },
   commentbutton: {
-    backgroundColor: purple[500],
+    backgroundColor: "#e6e6fa",
     marginRight: theme.spacing(2)
   },
 }));
@@ -96,6 +96,7 @@ export default function MainFeaturedPost(props) {
   return (
     <Paper
       className={classes.mainFeaturedPost}
+      elevation={3}
       style={{ backgroundImage: `url(${post.image})` }}
     >
       {/* Increase the priority of the hero background image */}
@@ -106,11 +107,11 @@ export default function MainFeaturedPost(props) {
             <Typography component="h1" variant="h3" color="inherit">
               {post.title}
             </Typography>
-            <Typography variant="body1" display="block" color="secondary">
+            <Typography variant="body1" display="block" color="inherit" style={{marginLeft: "1vw"}}>
               {"by "}
               {post.userID}
             </Typography>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" style={{marginLeft: "2vw"}}>
               {post.content}
             </Typography>
             <br></br>
@@ -120,7 +121,7 @@ export default function MainFeaturedPost(props) {
             </Typography>
             <Button
               variant="contained"
-              color="primary"
+              color="black"
               className={classes.likebutton}
               startIcon={<ThumbUpAltIcon />}
               onClick={() => giveLike(post.id, post.likes, post.alreadyLiked)}
@@ -130,7 +131,7 @@ export default function MainFeaturedPost(props) {
 
             <Button
               variant="contained"
-              color="primary"
+              color="black"
               className={classes.commentbutton}
               onClick={() => writeComment(post.id)}
             >

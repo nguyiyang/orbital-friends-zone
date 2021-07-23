@@ -9,7 +9,7 @@ import styles from "./Chat.css";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(3),
     backgroundColor: theme.palette.common.white,
   },
 }));

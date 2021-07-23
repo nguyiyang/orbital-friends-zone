@@ -12,6 +12,7 @@ import { firebase } from "@firebase/app";
 const useStyles = makeStyles((theme) => ({
   backButton: {
     margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
   postButton: {
     margin: theme.spacing(3),
@@ -47,7 +48,7 @@ export default function Comment() {
   }
 
   return (
-    <>
+    <div style={{backgroundColor: "#cfe8fc", minHeight:"100vh", maxHeight: "auto"}}>
       <AppBar />
       <Typography
         component="div"
@@ -83,7 +84,7 @@ export default function Comment() {
           <CommentList />
         </section>
       </div>
-    </>
+    </div>
   );
 }
 

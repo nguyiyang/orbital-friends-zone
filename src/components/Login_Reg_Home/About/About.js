@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Container, Grid } from '@material-ui/core';
+import { Button, Container, Grid, Paper } from '@material-ui/core';
 import Typography from './Typo';
-import PepoHappy from "../../Images/PeepoHappy.jpg";
-import PepoG from "../../Images/PepoG.jpg";
-import Pepesnack from "../../Images/Pepesnack.png";
+import GroupIcon from '@material-ui/icons/Group';
+import ChatIcon from '@material-ui/icons/Chat';
+import ForumIcon from '@material-ui/icons/Forum';
 import { Link, useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   container: {
     marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(26),
+    marginBottom: theme.spacing(20),
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -45,6 +45,9 @@ const styles = (theme) => ({
   button: {
     marginTop: theme.spacing(8),
   },
+  icons: {
+    fontSize: 150,
+  },
 });
 
 function ProductHowItWorks(props) {
@@ -60,18 +63,14 @@ function ProductHowItWorks(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
 
-        <Typography variant="h4" className={classes.title} component="h2">
+        <Typography variant="h3" className={classes.title} component="h2">
           Welcome to FriendsZone!
         </Typography>
-        <div>
+        <div style={{marginTop: "5vh"}}>
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
-                <img
-                  src={PepoHappy}
-                  alt="suitcase"
-                  className={classes.image}
-                />
+              <GroupIcon className={classes.icons} />
                 <Typography variant="h5" align="center">
                   Get into your assigned group and make new friends!
                 </Typography>
@@ -79,11 +78,7 @@ function ProductHowItWorks(props) {
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
-                <img
-                  src={Pepesnack}
-                  alt="graph"
-                  className={classes.image}
-                />
+                <ChatIcon className={classes.icons} />
                 <Typography variant="h5" align="center">
                 Use the Chat Groups to talk to more people!
                 </Typography> 
@@ -92,10 +87,7 @@ function ProductHowItWorks(props) {
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 
-                <img
-                  src={PepoG}
-                  className={classes.image}
-                />
+                <ForumIcon className={classes.icons}  />
                 <Typography variant="h5" align="center">
                   The forum is there to provide the answers that you require!
                 </Typography>

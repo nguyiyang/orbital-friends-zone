@@ -11,7 +11,7 @@ import { firebase } from "@firebase/app";
 const useStyles = makeStyles((theme) => ({
   Comments: {
     position: "relative",
-    backgroundColor: purple[100],
+    backgroundColor: "#7391C8",
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",
@@ -32,12 +32,12 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
-      padding: theme.spacing(8),
+      padding: theme.spacing(5),
       paddingRight: 0
     }
   },
   likebutton: {
-    backgroundColor: green[500],
+    backgroundColor: "#e6e6fa",
     marginRight: theme.spacing(2)
   },
   commentbutton: {
@@ -93,6 +93,7 @@ export default function Comments(props) {
 
   return (
     <Paper
+      elevation={3}
       className={classes.Comments}
     >
       {/* Increase the priority of the hero background image */}
@@ -101,10 +102,11 @@ export default function Comments(props) {
         <Grid item md={11}>
           <div className={classes.CommentsContent}>
             
-            <Typography variant="body1" display="block" color="secondary">
+            <Typography variant="body1" display="block" color="black">
+              {"by "}
               {comment.userID}
             </Typography>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h5" color="inherit">
               {comment.content}
             </Typography>
             <br></br>
@@ -114,7 +116,7 @@ export default function Comments(props) {
             </Typography>
             <Button
               variant="contained"
-              color="primary"
+              color="black"
               className={classes.likebutton}
               startIcon={<ThumbUpAltIcon />}
               onClick={() => giveLike(comment.id, comment.likes, comment.alreadyLiked)}
