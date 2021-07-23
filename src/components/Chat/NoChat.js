@@ -55,8 +55,6 @@ function NoChat(props) {
             later!
           </Typography>
           <br></br>
-          <img src={GroupNotFound} className={classes.buoy} alt="buoy" />
-          <br></br>
         </Container>
     </div>
   );

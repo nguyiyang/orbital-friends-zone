@@ -13,8 +13,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
   },
   postButton: {
-    margin: theme.spacing(3)
-  }
+    margin: theme.spacing(3),
+    backgroundColor: "#e6e6fa",
+  },
+  background: {
+    backgroundColor: "#cfe8fc",
+    minHeight: "100vh",
+    maxHeight: "auto",
+  },
 }));
 
 export default function Forum() {
@@ -34,24 +40,24 @@ export default function Forum() {
   }
 
   return (
-    <div style={{ backgroundColor: "#cfe8fc" }}>
+    <div className={classes.background}>
       <AppBar />
       <Typography
-      component="div"
-      variant="body1"
-      style={{ width: '100%', position: 'relative' }}
-    >
-      <Box
-        bgcolor="grey.700"
-        color="white"
-        p={2}
-        position="static"
-        top={0}
-        left="48%"
-        zIndex="tooltip"
+        component="div"
+        variant="body1"
+        style={{ width: "100%", position: "relative" }}
       >
-        Forum
-      </Box>
+        <Box
+          bgcolor="grey.700"
+          color="white"
+          p={2}
+          position="static"
+          top={0}
+          left="48%"
+          zIndex="tooltip"
+        >
+          Forum
+        </Box>
       </Typography>
       <div>
         <header>
@@ -65,7 +71,6 @@ export default function Forum() {
           </Button>
           <Button
             variant="contained"
-            color="secondary"
             size="large"
             onClick={addPost}
             right="0"

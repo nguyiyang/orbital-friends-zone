@@ -4,6 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import { Button, ButtonBase, Container } from "@material-ui/core";
 import Typography from "../Typography";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
+import Acad from "./../Images/academic.jpg";
+import Cca from "./../Images/rockwall.jpg";
+import Group from "./../Images/group.jpg"
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
@@ -97,36 +100,33 @@ function ChatGroups(props) {
 
   const images = [
     {
-      url:
-        "https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=400&q=80",
+      image: Acad,
       title: "Academic Advice",
       width: "40%"
     },
     {
-      url:
-        "https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80",
+      image: Cca,
       title: "CCA and Interests",
       width: "20%"
     },
     {
-      url:
+      image:
         "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=400&q=80",
       title: "Personal Life and Relationship",
       width: "40%"
     },
     {
-      url: "https://ardalis.com/static/4fb4ac75fbd03f00f42e4ac3586c8265/c3638/NotSureIfGoodProgrammer.jpg",
+      image: "https://ardalis.com/static/4fb4ac75fbd03f00f42e4ac3586c8265/c3638/NotSureIfGoodProgrammer.jpg",
       title: "Memes Only!",
       width: "38%"
     },
     {
-      url:
-        "https://images.unsplash.com/photo-1453747063559-36695c8771bd?auto=format&fit=crop&w=400&q=80",
+      image: Group,
       title: "Assigned Group",
       width: "38%"
     },
     {
-      url:
+      image:
         "https://miro.medium.com/max/1000/0*mD7F8b6gIjsq3gsi",
       title: "Game",
       width: "24%"
@@ -225,7 +225,7 @@ function ChatGroups(props) {
             <div
               className={classes.imageSrc}
               style={{
-                backgroundImage: `url(${image.url})`
+                backgroundImage: `url(${image.image})`
               }}
             />
             <div className={classes.imageBackdrop} />

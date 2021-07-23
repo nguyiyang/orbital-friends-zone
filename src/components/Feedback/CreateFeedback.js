@@ -21,7 +21,7 @@ const styles = (theme) => ({
   card: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: "#7391C8",
     padding: theme.spacing(8, 3),
   },
   cardContent: {

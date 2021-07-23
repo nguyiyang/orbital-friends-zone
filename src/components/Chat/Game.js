@@ -22,7 +22,7 @@ const styles = (theme) => ({
   card: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: purple[400],
+    backgroundColor: "#7391C8",
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -66,15 +66,17 @@ function Game(props) {
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
 
+  const [btnDisabled, setBtnDisabled] = useState(true);
+
   const createFeedback = async (e) => {
     e.preventDefault();
     history.push("./Chat", { gNumber: formValue.current.value });
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
       <AppBar />
-      <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
+
       <Button
         variant="outlined"
         color="inherit"
@@ -107,12 +109,14 @@ function Game(props) {
                   className={classes.textField}
                   placeholder="Answer"
                   inputRef={formValue}
+                  onChange={(text) => setBtnDisabled(!text.target.value)}
                 />
                 <BoxButton
                   type="submit"
                   color="primary"
                   variant="contained"
                   className={classes.button}
+                  disabled={btnDisabled}
                 >
                   Submit
                 </BoxButton>
@@ -121,8 +125,7 @@ function Game(props) {
           </Grid>
         </Grid>
       </Container>
-      </div>
-    </>
+    </div>
   );
 }
 

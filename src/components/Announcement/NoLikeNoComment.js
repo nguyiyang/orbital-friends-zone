@@ -7,7 +7,7 @@ import { red } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   Announcement: {
     position: "relative",
-    backgroundColor: red[100],
+    backgroundColor: "#7391C8",
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     padding: theme.spacing(3),
     [theme.breakpoints.up("md")]: {
-      padding: theme.spacing(8),
+      padding: theme.spacing(5),
       paddingRight: 0
     }
   },
@@ -40,6 +40,7 @@ export default function Announcement(props) {
 
   return (
     <Paper
+      elevation={3}
       className={classes.Announcement}
     >
       {/* Increase the priority of the hero background image */}
@@ -50,11 +51,11 @@ export default function Announcement(props) {
             <Typography component="h1" variant="h3" color="inherit">
               {announcements.title}
             </Typography>
-            <Typography variant="body1" display="block" color="secondary">
+            <Typography variant="body1" display="block" color="inherit" style={{marginLeft: "1vw"}}>
               {"by "}
               {announcements.userID}
             </Typography>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" style={{marginLeft: "2vw"}}>
               {announcements.content}
             </Typography>
           </div>
