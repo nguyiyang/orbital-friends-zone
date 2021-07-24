@@ -1,8 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Question from "./Question.js"
 import { Alert } from "react-bootstrap";
@@ -10,6 +12,8 @@ import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import "@firebase/auth";
 import "@firebase/firestore";
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     height: "20vh",
     width: "50vw",
+    padding: theme.spacing(3),
+    textAlign: "center",
+  },
+  paperTwo: {
+    width: "35vw",
     padding: theme.spacing(3),
     textAlign: "center",
   },
@@ -36,9 +45,22 @@ const useStyles = makeStyles((theme) => ({
     width: "10vw",
     marginLeft: "25vw",
   },
+  confirmButton: {
+    marginTop: "3vh",
+    width: "7vw",
+  }
 }));
 
 export default function Regform() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
   const [error, setError] = useState("");
   const usernameRef = useRef();
   const [value1, setValue1] = useState(0);
@@ -141,9 +163,34 @@ export default function Regform() {
     countUsers();
   }, []);
 
+  function SimpleDialog(props) {
+    const classes = useStyles();
+    const { onClose, selectedValue, open } = props;
+  
+    const handleClose = () => {
+      onClose(selectedValue);
+    };
+  
+    return (
+      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+      <Paper className={classes.paperTwo}>
+      <br></br>
+        <Typography align="center" color="textPrimary" variant="h3">
+        Everything is done!
+        </Typography>
+        <br></br>
+        <Typography align="center" color="textPrimary" variant="h7">
+        Now, you have to wait for the group completion to be complete. Do visit the forum and the other chat groups to talk to others while waiting!
+        </Typography>
+        <br></br>
+        <Button variant="contained" color="primary" className={classes.confirmButton} onClick={generateScore}>Continue</Button>
+        </Paper>
+      </Dialog>
+    );
+  }
+
   function generateScore(e) {
     e.preventDefault();
-    setError("");
     const introvertExtrovert =
       parseInt(value1) +
       parseInt(value2) +
@@ -168,6 +215,24 @@ export default function Regform() {
       parseInt(value18) +
       parseInt(value19) +
       parseInt(value20);
+    db.collection("/users").doc(uid).set(
+      {
+        id: users,
+        username: usernameRef.current.value,
+        admin: false,
+        introvertExtrovert: introvertExtrovert,
+        sensingIntuitive: sensingIntuitive,
+        thinkingFeeling: thinkingFeeling,
+        judgingPerceiving: judgingPerceiving,
+        groupId: 0,
+      },
+      { merge: true }
+    )
+    history.push("./");
+  }
+  function confirmSuccess(e) {
+    e.preventDefault();
+    setError("");
     console.log(usernameRef.current.value);
     // save to database here
     const uid = firebase.auth().currentUser?.uid;
@@ -201,20 +266,7 @@ export default function Regform() {
           if (doc.size > 0) {
             setError("Username exists");
           } else {
-            db.collection("/users").doc(uid).set(
-              {
-                id: users,
-                username: usernameRef.current.value,
-                admin: false,
-                introvertExtrovert: introvertExtrovert,
-                sensingIntuitive: sensingIntuitive,
-                thinkingFeeling: thinkingFeeling,
-                judgingPerceiving: judgingPerceiving,
-                groupId: 0,
-              },
-              { merge: true }
-            )
-            history.push("/regform_success");
+            handleClickOpen();
           }
         });
     } else {
@@ -225,7 +277,8 @@ export default function Regform() {
   return (
     <>
       <div style={{ backgroundColor: "#cfe8fc" }}>
-        <Form onSubmit={generateScore}>
+      <SimpleDialog open={open} onClose={handleClose} />
+        <Form>
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
               <Grid
@@ -289,14 +342,7 @@ export default function Regform() {
               <br></br>
               <Grid container className={classes.button}>
                 <Grid item>
-                  <Button
-                    type="submit"
-                    style={{
-                      backgroundColor: "#406dc2",
-                      borderRadius: 5,
-                      
-                    }}
-                  >
+                  <Button variant="contained" color="primary" onClick={confirmSuccess}>
                     Submit
                   </Button>
                 </Grid>

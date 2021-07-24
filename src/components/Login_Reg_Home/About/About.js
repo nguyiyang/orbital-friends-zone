@@ -12,6 +12,8 @@ const styles = (theme) => ({
   root: {
     display: 'flex',
     backgroundColor: "#cfe8fc",
+    minHeight: "100vh",
+    maxHeight: "auto",
     overflow: 'hidden',
   },
   container: {

@@ -119,11 +119,13 @@ li {
   background: #0b93f6;
   align-self: flex-end;
   word-wrap: break-word;
+  text-align: right;
 }
 .Chat .received p {
   background: #e5e5ea;
   color: black;
   word-wrap: break-word;
+  text-align: left;
 }
 
 .Chat .backButton {

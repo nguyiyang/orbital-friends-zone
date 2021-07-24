@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   Announcement: {
     position: "relative",
-    backgroundColor: "#7391C8",
+    backgroundColor: "#6AA4B0",
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",
