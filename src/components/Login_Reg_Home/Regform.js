@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   paperTwo: {
-    width: "35vw",
+    width: "30vw",
     padding: theme.spacing(3),
     textAlign: "center",
   },
