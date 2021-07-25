@@ -117,7 +117,7 @@ function ChatRoom() {
           justifyContent: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
-          minHeight: "70vh",
+          minHeight: "71vh",
           maxHeight: "auto",
           marginBottom: "6vh",
           backgroundColor: "#cfe8fc"

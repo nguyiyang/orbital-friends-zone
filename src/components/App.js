@@ -20,9 +20,7 @@ import Game from "./Chat/Game";
 import Help from "./Chat/Help";
 import ExitGroupCompleted from "./Chat/ExitGroupCompleted";
 import PrivateRoute from "./PrivateRoute";
-import RegformSuccess from "./Login_Reg_Home/RegisterSuccess";
 import MainAppBar from "./Login_Reg_Home/AppBar/MainAppBar";
-import SignupSuccess from "./Login_Reg_Home/SignupSuccess";
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -34,26 +32,24 @@ function App() {
           <PrivateRoute exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/regform" component={Regform} />
-          <Route path="/regform_success" component={RegformSuccess} />
-          <Route path="/admin" component={Admin} />
-          <Route path="/about" component={About} />
-          <Route path="/chat" component={Chat} />
-          <Route path="/NoChat" component={NoChat} />
-          <Route path="/Forum" component={Forum} />
-          <Route path="/addPost" component={Post} />
-          <Route path="/addComment" component={Comment} />
-          <Route path="/MakeAnnouncement" component={MakeAnnouncement} />
-          <Route path="/Announcement" component={Announcement} />
-          <Route path="/Feedback" component={Feedback} />
-          <Route path="/CreateFeedback" component={MakeFeedback} />
-          <Route path="/Thankyou" component={Thankyou} />
-          <Route path="/ChatGroups" component={ChatGroups} />
-          <Route path="/Game" component={Game} />
-          <Route path="/ExitGroupCompleted" component={ExitGroupCompleted} />
-          <Route path="/MainAppBar" component={MainAppBar} />
-          <Route path="/Help" component={Help} />
-          <Route path="/SignupSuccess" component={SignupSuccess} />
+          <PrivateRoute exact path="/regform" component={Regform} />
+          <PrivateRoute exact path="/admin" component={Admin} />
+          <PrivateRoute exact path="/about" component={About} />
+          <PrivateRoute exact path="/chat" component={Chat} />
+          <PrivateRoute exact path="/NoChat" component={NoChat} />
+          <PrivateRoute exact path="/Forum" component={Forum} />
+          <PrivateRoute exact path="/addPost" component={Post} />
+          <PrivateRoute exact path="/addComment" component={Comment} />
+          <PrivateRoute exact path="/MakeAnnouncement" component={MakeAnnouncement} />
+          <PrivateRoute exact path="/Announcement" component={Announcement} />
+          <PrivateRoute exact path="/Feedback" component={Feedback} />
+          <PrivateRoute exact path="/CreateFeedback" component={MakeFeedback} />
+          <PrivateRoute exact path="/Thankyou" component={Thankyou} />
+          <PrivateRoute exact path="/ChatGroups" component={ChatGroups} />
+          <PrivateRoute exact path="/Game" component={Game} />
+          <PrivateRoute exact path="/ExitGroupCompleted" component={ExitGroupCompleted} />
+          <PrivateRoute exact path="/MainAppBar" component={MainAppBar} />
+          <PrivateRoute exact path="/Help" component={Help} />
         </Switch>
       </Router>
     </AuthProvider>
