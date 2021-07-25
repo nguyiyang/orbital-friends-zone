@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   Feedback: {
     position: "relative",
-    backgroundColor: green[50],
+    backgroundColor: "#7391C8",
     color: theme.palette.common.black,
     marginBottom: theme.spacing(3),
     backgroundSize: "85% 85%",
@@ -53,7 +53,7 @@ export default function Feedback(props) {
             <Typography variant="h6" color="inherit">
               {feedbacks.content}
             </Typography>
-            <Typography variant="body1" display="block" color="secondary">
+            <Typography variant="body1" display="block" color="inherit">
               {"by "}
               {feedbacks.userID}
             </Typography>

@@ -13,7 +13,7 @@ import { firebase } from "@firebase/app";
 
 const styles = (theme) => ({
   root: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(5),
     marginBottom: 0,
     display: 'flex',
   },
@@ -23,7 +23,7 @@ const styles = (theme) => ({
   card: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: blue[200],
+    backgroundColor: "#c8a2c8",
     padding: theme.spacing(8, 3),
   },
   cardContent: {
@@ -38,7 +38,8 @@ const styles = (theme) => ({
     width: '100%',
   },
   backButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
   },
 });
 
@@ -75,15 +76,7 @@ function MakeAnnouncement(props) {
   };
 
   return (
-    <div>
-      <header>
-        <Button variant="link" onClick={back}>
-          Back
-        </Button>
-      </header>
-
-      <section>
-      <>
+    <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
     <AppBar />
     <Button
             variant="outlined"
@@ -99,8 +92,8 @@ function MakeAnnouncement(props) {
         <Grid item xs={12} md={6} className={classes.cardWrapper}>
           <div className={classes.card}>
             <form onSubmit={createAnnouncement} className={classes.cardContent}>
-              <Typography variant="h3" component="h2" gutterBottom>
-                Make Announcement
+              <Typography variant="h2" component="h2" gutterBottom>
+                Announcement
               </Typography>
               <TextField noBorder className={classes.textField} placeholder="Title" inputRef={formValue1} onChange={(text) => setBtnDisabled(!text.target.value)}/>
               <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} onChange={(text) => setBtnDisabled1(!text.target.value)} multiline/>
@@ -113,8 +106,6 @@ function MakeAnnouncement(props) {
         
       </Grid>
     </Container>
-    </>
-      </section>
     </div>
   );
 }

@@ -14,6 +14,7 @@ const styles = (theme) => ({
     alignItems: "center",
     justifyContent: "center",
     align: "center",
+    marginTop: "10vh",
   },
   buoy: {
     width: "50%",

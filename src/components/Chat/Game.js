@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Container, Grid } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { Button, Container, Dialog, Grid, Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "../FormTemplate/TextField";
 import Typography from "../FormTemplate/Typography";
 import BoxButton from "../FormTemplate/Button";
@@ -10,7 +10,7 @@ import { purple, yellow } from "@material-ui/core/colors";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(10),
     marginBottom: 0,
@@ -44,12 +44,27 @@ const styles = (theme) => ({
     backgroundColor: yellow[500],
     color: theme.palette.common.black,
   },
-});
+  paperTwo: {
+    width: "30vw",
+    padding: theme.spacing(3),
+    textAlign: "center",
+  },
+}));
 
-function Game(props) {
+export default function Game() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
+
   const formValue = useRef();
   const history = useHistory();
-  const { classes } = props;
+  const classes = useStyles();
 
   async function back() {
     try {
@@ -57,12 +72,35 @@ function Game(props) {
     } catch {}
   }
 
-  async function Help() {
+  async function Help(e) {
     try {
-      history.push("./Help");
+      e.preventDefault();
+      handleClickOpen();
     } catch {}
   }
 
+  function SimpleDialog(props) {
+    const classes = useStyles();
+    const { onClose, selectedValue, open } = props;
+  
+    const handleClose = () => {
+      onClose(selectedValue);
+    };
+  
+    return (
+      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+      <Paper className={classes.paperTwo}>
+      <br></br>
+      <Typography align="center" color="textPrimary" variant="body1">
+        Answer the question with your answer. We will match you with people with the same exact answer.
+        </Typography>
+        <Typography align="center" color="textPrimary" variant="body1">
+        Answer is caps-sensitive! Get Creative!
+        </Typography>
+        </Paper>
+      </Dialog>
+    );
+  }
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
 
@@ -76,7 +114,7 @@ function Game(props) {
   return (
     <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
       <AppBar />
-
+      <SimpleDialog open={open} onClose={handleClose} />
       <Button
         variant="outlined"
         color="inherit"
@@ -137,8 +175,3 @@ async function getUserName() {
   } catch {}
 }
 
-Game.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Game);
