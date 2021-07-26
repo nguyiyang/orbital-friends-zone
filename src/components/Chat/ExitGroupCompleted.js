@@ -44,7 +44,7 @@ function NoChat(props) {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc", minHeight: "100vh", maxHeight: "auto" }}>
       <AppBar />
       <Container className={classes.root} component="section">
         <Typography align="center" color="textPrimary" variant="h2">
@@ -66,7 +66,7 @@ function NoChat(props) {
           Go back
         </Button>
       </Container>
-    </>
+    </div>
   );
 }
 
