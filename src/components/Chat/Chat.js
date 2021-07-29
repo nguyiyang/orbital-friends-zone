@@ -84,7 +84,7 @@ function ChatRoom() {
   }
 
   return (
-    <div style={{backgroundColor: "#cfe8fc"}}>
+    <div style={{backgroundColor: "#cfe8fc", }}>
       <Typography
         component="div"
         variant="body1"
@@ -120,7 +120,8 @@ function ChatRoom() {
           minHeight: "71vh",
           maxHeight: "auto",
           marginBottom: "6vh",
-          backgroundColor: "#cfe8fc"
+          backgroundColor: "#cfe8fc",
+          overflow: 'auto'
         }}
       >
         <section>
