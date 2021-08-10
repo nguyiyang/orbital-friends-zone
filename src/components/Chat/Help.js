@@ -3,7 +3,6 @@ import { Container, Typography, Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import HaveFunImage from "./../Images/HaveFun.jpg";
 import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
@@ -55,7 +54,6 @@ function ThankYou(props) {
         Answer the question with your answer. We will match you with people with the same exact answer. Get Creative!
         </Typography>
         <br></br>
-        <img src={HaveFunImage} className={classes.buoy} alt="buoy" />
         <br></br>
         <Button
           size="large"

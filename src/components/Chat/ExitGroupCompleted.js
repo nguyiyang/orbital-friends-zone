@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Container, Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import LeaveGroup from "./../Images/LeaveGroup.jpg";
 import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
@@ -44,7 +43,7 @@ function NoChat(props) {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc", minHeight: "100vh" }}>
       <AppBar />
       <Container className={classes.root} component="section">
         <Typography align="center" color="textPrimary" variant="h2">
@@ -55,7 +54,6 @@ function NoChat(props) {
           You will be reassigned a group on the next cycle. Keep a lookout!
         </Typography>
         <br></br>
-        <img src={LeaveGroup} className={classes.buoy} alt="buoy" />
         <br></br>
         <Button
           size="large"
@@ -66,7 +64,7 @@ function NoChat(props) {
           Go back
         </Button>
       </Container>
-    </>
+    </div>
   );
 }
 

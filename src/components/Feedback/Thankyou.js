@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Container, Typography } from "@material-ui/core";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import ThankYouImage from "./../Images/ThankYouImage.jpg";
 import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
@@ -44,7 +43,7 @@ function ThankYou(props) {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: "#cfe8fc", minHeight: "100vh" }}>
     <AppBar />
       <Container className={classes.root} component="section">
         <Typography align="center" color="textPrimary" variant="h2">
@@ -55,8 +54,6 @@ function ThankYou(props) {
         We have received your feedback and we will work towards improving our application.
         </Typography>
         <br></br>
-        <img src={ThankYouImage} className={classes.buoy} alt="buoy" />
-        <br></br>
         <Button
           size="large"
           variant="contained"
@@ -66,7 +63,7 @@ function ThankYou(props) {
           Go back
         </Button>
       </Container>
-    </>
+    </div>
   );
 }
 

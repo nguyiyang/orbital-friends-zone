@@ -3,7 +3,6 @@ import { Container, Typography, Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import GroupNotFound from "./../Images/GroupNotFound.jpg";
 import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
