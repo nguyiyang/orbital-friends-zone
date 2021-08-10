@@ -1,5 +1,13 @@
 import React from "react";
-import { FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup } from "@material-ui/core";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Paper,
+  Radio,
+  RadioGroup,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "@firebase/auth";
 import "@firebase/firestore";

@@ -1,46 +1,48 @@
 import React, { useRef, useState } from "react";
-import { Avatar, Box, Button, CssBaseline, Grid, Paper, TextField, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { Alert } from "react-bootstrap";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Image from "./../Images/sample.jpg"
+import Image from "./../Images/sample.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
+import { Link } from "react-router-dom";
 import "@firebase/auth";
 import "@firebase/firestore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh"
+    height: "100vh",
   },
   image: {
     backgroundImage: `url(${Image})`,
     backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    width: "100%",
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 export default function Login() {
@@ -51,7 +53,6 @@ export default function Login() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -75,11 +76,17 @@ export default function Login() {
 
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          FriendsZone
+          <Typography
+            variant="h2"
+            marked="center"
+            align="center"
+            component="h2"
+          >
+            FriendsZone
+          </Typography>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -137,12 +144,11 @@ export default function Login() {
             <Grid container>
               <Grid item xs></Grid>
               <Grid item>
-                <div className="w-100 text-center mt-2">
+                <div>
                   Already have an account? <Link to="/login">Log in</Link>
                 </div>
               </Grid>
             </Grid>
-            <Box mt={5}></Box>
           </form>
         </div>
       </Grid>

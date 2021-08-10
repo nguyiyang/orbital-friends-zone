@@ -6,10 +6,8 @@ import AppBar from "./AppBar/MainAppBar";
 import FeedbackButton from "./FeedbackButton";
 import Chat from "./../Images/nus.jpg";
 import Forum from "./../Images/forum.jpg";
-import Announcement from "./../Images/nus2.jpg"
-import { Link, useHistory } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import { firebase } from "@firebase/app";
+import Announcement from "./../Images/nus2.jpg";
+import { useHistory } from "react-router-dom";
 import "@firebase/auth";
 import "@firebase/firestore";
 
@@ -20,30 +18,24 @@ const styles = (theme) => ({
   images: {
     marginTop: theme.spacing(8),
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   imageWrapper: {
     position: "relative",
     display: "block",
-    padding: 0,
-    borderRadius: 0,
-    height: "55vh",
-    [theme.breakpoints.down("sm")]: {
-      width: "100% !important",
-      height: 100
-    },
+    height: "50vh",
     "&:hover": {
-      zIndex: 1
+      zIndex: 1,
     },
     "&:hover $imageBackdrop": {
-      opacity: 0.15
+      opacity: 0.15,
     },
     "&:hover $imageMarked": {
-      opacity: 0
+      opacity: 0,
     },
     "&:hover $imageTitle": {
-      border: "4px solid currentColor"
-    }
+      border: "4px solid currentColor",
+    },
   },
   imageButton: {
     position: "absolute",
@@ -77,8 +69,8 @@ const styles = (theme) => ({
   },
   imageTitle: {
     position: "relative",
-    fontSize: '1.5rem',
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 14px`,
+    fontSize: "1.5rem",
+    padding: theme.spacing(2),
   },
   imageMarked: {
     height: 3,
@@ -88,30 +80,29 @@ const styles = (theme) => ({
     bottom: -2,
     left: "calc(50% - 9px)",
     transition: theme.transitions.create("opacity"),
-  }
+  },
 });
 
 function Home(props) {
   const { classes } = props;
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
 
   const images = [
     {
       image: Chat,
       title: "Chat",
-      width: "33%"
+      width: "33%",
     },
     {
       image: Forum,
       title: "Forum",
-      width: "33%"
+      width: "33%",
     },
     {
       image: Announcement,
       title: "Announcements",
-      width: "33%"
-    }
+      width: "33%",
+    },
   ];
 
   function NextEvent(x) {
@@ -125,48 +116,48 @@ function Home(props) {
   }
 
   return (
-    <div style={{backgroundColor: "#cfe8fc"}}>
-    <Container className={classes.root} component="section">
-      <AppBar />
-      <div className={classes.images}>
-        {images.map((image, index) => (
-          <ButtonBase
-            key={image.title}
-            className={classes.imageWrapper}
-            onClick={() => NextEvent(index)}
-            style={{
-              width: image.width
-            }}
-          >
-            <div
-              className={classes.imageSrc}
+    <div style={{ backgroundColor: "#cfe8fc" }}>
+      <Container className={classes.root}>
+        <AppBar />
+        <div className={classes.images}>
+          {images.map((image, index) => (
+            <ButtonBase
+              key={image.title}
+              className={classes.imageWrapper}
+              onClick={() => NextEvent(index)}
               style={{
-                backgroundImage: `url(${image.image})`
+                width: image.width,
               }}
-            />
-            <div className={classes.imageBackdrop} />
-            <div className={classes.imageButton}>
-              <Typography
-                component="h3"
-                variant="h6"
-                color="inherit"
-                className={classes.imageTitle}
-              >
-                {image.title}
-                <div className={classes.imageMarked} />
-              </Typography>
-            </div>
-          </ButtonBase>
-        ))}
-        <FeedbackButton />
-      </div>
-    </Container>
+            >
+              <div
+                className={classes.imageSrc}
+                style={{
+                  backgroundImage: `url(${image.image})`,
+                }}
+              />
+              <div className={classes.imageBackdrop} />
+              <div className={classes.imageButton}>
+                <Typography
+                  component="h3"
+                  variant="h6"
+                  color="inherit"
+                  className={classes.imageTitle}
+                >
+                  {image.title}
+                  <div className={classes.imageMarked} />
+                </Typography>
+              </div>
+            </ButtonBase>
+          ))}
+          <FeedbackButton />
+        </div>
+      </Container>
     </div>
   );
 }
 
 Home.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Home);

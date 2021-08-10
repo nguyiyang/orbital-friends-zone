@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Container } from "@material-ui/core";
+import { Button, Container, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "../Typography";
 import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
@@ -23,9 +22,6 @@ const styles = (theme) => ({
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3)
   },
-  buoy: {
-    width: 60
-  }
 });
 
 function FeedbackButton(props) {
