@@ -1,49 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
-import { Link, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import AppBar from "./AppBar";
-import Toolbar, { styles as toolbarStyles } from "./AppBar_1";
+import Toolbar from "@material-ui/core/Toolbar";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Link, Typography } from "@material-ui/core";
 import { useAuth } from "../../contexts/AuthContext";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { firebase } from "@firebase/app";
 
 const styles = (theme) => ({
   title: {
-    fontSize: 30
+    fontSize: 40,
   },
-  placeholder: toolbarStyles(theme).root,
+  placeholder: {
+    height: 64,
+    [theme.breakpoints.up("sm")]: {
+      height: 70,
+    },
+  },
   toolbar: {
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    minHeight: "10vh",
   },
   left: {
-    flex: 1
+    flex: 1,
+    float: "left",
   },
-  leftLinkActive: {
-    color: theme.palette.common.white
+  center: {
+    float: "left",
   },
   right: {
     flex: 1,
     display: "flex",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   rightLink: {
     fontSize: 16,
     color: theme.palette.common.white,
-    marginLeft: theme.spacing(3)
+    marginLeft: theme.spacing(3),
   },
-  linkSecondary: {
-    color: theme.palette.common.white
-  }
+  welcome: {
+    color: theme.palette.common.white,
+  },
 });
 
-function AppAppBar(props) {
+function MainAppBar(props) {
   const { classes } = props;
 
   const history = useHistory();
 
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
 
   async function handleLogout() {
     try {
@@ -52,36 +59,38 @@ function AppAppBar(props) {
     } catch {}
   }
 
+  const [userName, setUserName] = useState("");
+  getUserName().then((x) => setUserName(x));
+
   return (
     <div>
       <AppBar position="fixed">
-      <Toolbar className={classes.toolbar}>
-          <div className={classes.left} >
-          <Typography
-            variant="subtitle"
-            underline="none"
-            className={classes.welcome}
-          >
-            {"Welcome, Admin"}
-          </Typography>
+        <Toolbar className={classes.toolbar}>
+          <div className={classes.left}>
+            <Typography
+              variant="subtitle"
+              underline="none"
+              className={classes.welcome}
+            >
+              {"Welcome, "}
+              {userName}
+            </Typography>
           </div>
-          <div className={classes.center} >
-          <Link
-            variant="h6"
-            underline="none"
-            color="inherit"
-            className={classes.title}
-            href="./"
-          >
-            {"FriendsZone"}
-          </Link>
+          <div className={classes.center}>
+            <Link
+              variant="h6"
+              underline="none"
+              color="inherit"
+              className={classes.title}
+              href="./admin"
+            >
+              {"FriendsZone"}
+            </Link>
           </div>
           <div className={classes.right}>
             <Link
               component="button"
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
+              className={classes.rightLink}
               onClick={() => {
                 handleLogout();
               }}
@@ -96,8 +105,16 @@ function AppAppBar(props) {
   );
 }
 
-AppAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
+async function getUserName() {
+  const uid = firebase.auth().currentUser?.uid;
+  const printed = await firebase.firestore().collection("users").doc(uid).get();
+  try {
+    return printed.data().username;
+  } catch {}
+}
+
+MainAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AppAppBar);
+export default withStyles(styles)(MainAppBar);

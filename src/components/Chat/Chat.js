@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3),
     backgroundColor: theme.palette.common.white,
   },
+  label: {
+    backgroundColor: "grey",
+    color: "white",
+    padding: "1rem",
+    position: "static",
+  },
 }));
 
 export default function Chat() {
@@ -91,12 +97,7 @@ function ChatRoom() {
         style={{ width: "100%", position: "relative" }}
       >
         <Box
-          bgcolor="grey.700"
-          color="white"
-          p={2}
-          position="static"
-          top={0}
-          zIndex="tooltip"
+          className={classes.label}
         >
           Chat Group ({displayName(groupNumber)})
         </Box>

@@ -42,7 +42,6 @@ export default function Announcement(props) {
       elevation={3}
       className={classes.Announcement}
     >
-      {/* Increase the priority of the hero background image */}
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={11}>

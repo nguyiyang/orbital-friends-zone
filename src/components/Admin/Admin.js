@@ -45,14 +45,7 @@ const styles = (theme) => ({
 
 function Admin(props) {
   const { classes } = props;
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
-  async function handleLogout() {
-    try {
-      await logout();
-      history.push("/login");
-    } catch {}
-  }
   const db = firebase.firestore();
 
   // count total number of assigned users

@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react";
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '../FormTemplate/TextField';
-import Typography from '../FormTemplate/Typography';
-import BoxButton from '../FormTemplate/Button';
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "../FormTemplate/TextField";
+import Typography from "../FormTemplate/Typography";
+import BoxButton from "../FormTemplate/Button";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { blue } from '@material-ui/core/colors';
 import { Button, Container, Grid } from "@material-ui/core";
-import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
@@ -15,14 +13,11 @@ const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(5),
     marginBottom: 0,
-    display: 'flex',
-  },
-  cardWrapper: {
-    zIndex: 1,
+    display: "flex",
   },
   card: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
     backgroundColor: "#c8a2c8",
     padding: theme.spacing(8, 3),
   },
@@ -30,12 +25,12 @@ const styles = (theme) => ({
     maxWidth: 400,
   },
   textField: {
-    width: '100%',
+    width: "100%",
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
   },
   button: {
-    width: '100%',
+    width: "100%",
   },
   backButton: {
     margin: theme.spacing(3),
@@ -46,7 +41,6 @@ const styles = (theme) => ({
 function MakeAnnouncement(props) {
   const formValue1 = useRef();
   const formValue2 = useRef();
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
   const { classes } = props;
 
@@ -70,51 +64,74 @@ function MakeAnnouncement(props) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       content: formValue2.current.value,
-      userID: userName
+      userID: userName,
     });
     history.push("./Admin");
   };
 
   return (
     <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
-    <AppBar />
-    <Button
-            variant="outlined"
-            color="inherit"
-            className={classes.backButton}
-            onClick={back}
-          >
-            Back
-          </Button>
-    <Container className={classes.root} component="section">
-      <Grid container alignItems="center"
-  justify="center" m={20}>
-        <Grid item xs={12} md={6} className={classes.cardWrapper}>
-          <div className={classes.card}>
-            <form onSubmit={createAnnouncement} className={classes.cardContent}>
-              <Typography variant="h2" component="h2" gutterBottom>
-                Announcement
-              </Typography>
-              <TextField noBorder className={classes.textField} placeholder="Title" inputRef={formValue1} onChange={(text) => setBtnDisabled(!text.target.value)}/>
-              <TextField noBorder className={classes.textField} placeholder="Content" inputRef={formValue2} onChange={(text) => setBtnDisabled1(!text.target.value)} multiline/>
-              <BoxButton type="submit" color="primary" variant="contained" className={classes.button} disabled={btnDisabled || btnDisabled1}>
-                Submit
-              </BoxButton>
-            </form>
-          </div>
+      <AppBar />
+      <Button
+        variant="outlined"
+        color="inherit"
+        className={classes.backButton}
+        onClick={back}
+      >
+        Back
+      </Button>
+      <Container className={classes.root} component="section">
+        <Grid container alignItems="center" justify="center" m={20}>
+          <Grid item xs={12} md={6}>
+            <div className={classes.card}>
+              <form
+                onSubmit={createAnnouncement}
+                className={classes.cardContent}
+              >
+                <Typography variant="h2" component="h2">
+                  Announcement
+                </Typography>
+                <TextField
+                  noBorder
+                  className={classes.textField}
+                  placeholder="Title"
+                  inputRef={formValue1}
+                  onChange={(text) => setBtnDisabled(!text.target.value)}
+                />
+                <TextField
+                  noBorder
+                  className={classes.textField}
+                  placeholder="Content"
+                  inputRef={formValue2}
+                  onChange={(text) => setBtnDisabled1(!text.target.value)}
+                  multiline
+                />
+                <BoxButton
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  className={classes.button}
+                  disabled={btnDisabled || btnDisabled1}
+                >
+                  Submit
+                </BoxButton>
+              </form>
+            </div>
+          </Grid>
         </Grid>
-        
-      </Grid>
-    </Container>
+      </Container>
     </div>
   );
 }
 
-
 async function getUserName() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();
-  return printed.data().username;
+  try {
+    return printed.data().username;
+  } catch(e) {
+
+  }
 }
 
 MakeAnnouncement.propTypes = {

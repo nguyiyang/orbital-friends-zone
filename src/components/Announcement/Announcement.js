@@ -1,10 +1,9 @@
 import React from "react";
-import AnnounFormat from "./NoLikeNoComment";
+import AnnounFormat from "./AnnounFormat";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, Typography } from "@material-ui/core";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 
@@ -14,13 +13,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
   },
   announButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
   },
-
+  label: {
+    backgroundColor: "grey",
+    color: "white",
+    padding: "1rem",
+    position: "static",
+  },
 }));
 
 export default function Announcement() {
-  const { currentUser, logout } = useAuth();
   const history = useHistory();
   const classes = useStyles();
 
@@ -34,38 +37,29 @@ export default function Announcement() {
     <>
       <AppBar />
       <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
-      <Typography
-      component="div"
-      variant="body1"
-      style={{ width: '100%', position: 'relative' }}
-    >
-      <Box
-        bgcolor="grey.700"
-        color="white"
-        p={2}
-        position="static"
-        top={0}
-        zIndex="tooltip"
-      >
-        Announcement
-      </Box>
-      </Typography>
-      <div>
-        <header>
-          <Button
-            variant="outlined"
-            color="inherit"
-            className={classes.backButton}
-            onClick={Home}
-          >
-            Back
-          </Button>
-        </header>
+        <Typography
+          component="div"
+          variant="body1"
+          style={{ width: "100%", position: "relative" }}
+        >
+          <Box className={classes.label}>Announcement</Box>
+        </Typography>
+        <div>
+          <header>
+            <Button
+              variant="outlined"
+              color="inherit"
+              className={classes.backButton}
+              onClick={Home}
+            >
+              Back
+            </Button>
+          </header>
 
-        <section>
-          <ShowForum />
-        </section>
-      </div>
+          <section>
+            <ShowForum />
+          </section>
+        </div>
       </div>
     </>
   );
