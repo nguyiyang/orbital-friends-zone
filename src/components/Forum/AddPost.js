@@ -4,13 +4,12 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "../FormTemplate/TextField";
 import Typography from "../FormTemplate/Typography";
 import BoxButton from "../FormTemplate/Button";
-import { Box, Container, Button } from "@material-ui/core";
+import { Container, Button } from "@material-ui/core";
 import React, { useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { blue } from "@material-ui/core/colors";
+
 
 const styles = (theme) => ({
   root: {
@@ -49,19 +48,12 @@ function Post(props) {
   const formValue2 = useRef();
   const history = useHistory();
   const { classes } = props;
-  const [open, setOpen] = React.useState(false);
-
-  const { currentUser, logout } = useAuth();
 
   async function back() {
     try {
       history.push("./Forum");
     } catch {}
   }
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));
@@ -87,7 +79,9 @@ function Post(props) {
 
   return (
     <div style={{ backgroundColor: "#cfe8fc", height: "100vh" }}>
+
       <AppBar />
+
       <Button
         variant="outlined"
         color="inherit"
@@ -96,6 +90,7 @@ function Post(props) {
       >
         Back
       </Button>
+
       <Container className={classes.root} component="section">
         <Grid container alignItems="center" justify="center" m={20}>
           <Grid item xs={12} md={6} className={classes.cardWrapper}>

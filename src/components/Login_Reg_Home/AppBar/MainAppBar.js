@@ -21,7 +21,7 @@ const styles = (theme) => ({
   },
   toolbar: {
     justifyContent: "space-between",
-    minHeight: "10vh",
+    minHeight: "8vh",
   },
   left: {
     flex: 1,

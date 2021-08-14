@@ -8,7 +8,7 @@ import Regform from "./Login_Reg_Home/Regform";
 import Chat from "./Chat/Chat";
 import NoChat from "./Chat/NoChat";
 import Forum from "./Forum/Forum";
-import Post from "./Forum/Post";
+import AddPost from "./Forum/AddPost";
 import Comment from "./Forum/Comment";
 import Announcement from "./Announcement/Announcement";
 import MakeAnnouncement from "./Announcement/MakeAnnouncement";
@@ -38,7 +38,7 @@ function App() {
           <PrivateRoute exact path="/chat" component={Chat} />
           <PrivateRoute exact path="/NoChat" component={NoChat} />
           <PrivateRoute exact path="/Forum" component={Forum} />
-          <PrivateRoute exact path="/addPost" component={Post} />
+          <PrivateRoute exact path="/addPost" component={AddPost} />
           <PrivateRoute exact path="/addComment" component={Comment} />
           <PrivateRoute exact path="/MakeAnnouncement" component={MakeAnnouncement} />
           <PrivateRoute exact path="/Announcement" component={Announcement} />
