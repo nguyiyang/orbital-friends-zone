@@ -52,7 +52,7 @@ export default function Forum() {
           color="white"
           p={2}
           position="static"
-          top={0}
+          top={2}
           left="48%"
           zIndex="tooltip"
         >
