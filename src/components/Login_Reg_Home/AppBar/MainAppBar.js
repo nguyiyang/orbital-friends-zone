@@ -14,9 +14,9 @@ const styles = (theme) => ({
     fontSize: 40,
   },
   placeholder: {
-    height: 64,
+    height: "8vh",
     [theme.breakpoints.up("sm")]: {
-      height: 64,
+      height: "8vh",
     },
   },
   toolbar: {

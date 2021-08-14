@@ -51,10 +51,6 @@ export default function Forum() {
           bgcolor="grey.700"
           color="white"
           p={2}
-          position="static"
-          top={2}
-          left="48%"
-          zIndex="tooltip"
         >
           Forum
         </Box>
