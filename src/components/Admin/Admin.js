@@ -214,9 +214,6 @@ function Admin(props) {
 
     function recalculate() {
       let newCentroids = [];
-      function sameId(x,i,j) {
-        return x.id === centroids[i].items[j]
-      }
       // initialise new centroids with new mean values of data
       for (let i = 0; i < centroids.length; i++) {
         let accum1 = 0;
@@ -224,11 +221,13 @@ function Admin(props) {
         let accum3 = 0;
         let accum4 = 0;
         for (let j = 0; j < centroids[i].items.length; j++) {
-          
-          accum1 += data.find(sameId(i,j)).score1;
-          accum2 += data.find(sameId(i,j)).score2;
-          accum3 += data.find(sameId(i,j)).score3;
-          accum4 += data.find(sameId(i,j)).score4;
+          function sameId(x) {
+            return x.id === centroids[i].items[j];
+          }
+          accum1 += data.find(sameId).score1;
+          accum2 += data.find(sameId).score2;
+          accum3 += data.find(sameId).score3;
+          accum4 += data.find(sameId).score4;
         }
         newCentroids.push({
           score1: accum1 / centroids[i].items.length,
