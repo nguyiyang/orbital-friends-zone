@@ -144,14 +144,14 @@ export default function Regform() {
   const db = firebase.firestore();
 
   const [users, setUsers] = useState(0);
-  const countUsers = () =>
-    db
+  useEffect(() => {
+    const countUsers = () =>
+    firebase.firestore()
       .collection("users")
       .get()
       .then((snap) => {
         setUsers(snap.size); // will return the collection size
       });
-  useEffect(() => {
     countUsers();
   }, []);
 

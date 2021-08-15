@@ -47,10 +47,8 @@ function Admin(props) {
   const history = useHistory();
   const db = firebase.firestore();
 
-  // count total number of assigned users
-  const [totalAssigned, setTotalAssigned] = useState(0);
   const assigned = () =>
-    db
+  firebase.firestore()
       .collection("users")
       .where("groupId", ">", 0)
       .get();
@@ -59,67 +57,75 @@ function Admin(props) {
   });
 
   const [totalGroups, setTotalGroups] = useState(0);
-  const countGroups = () => {
-    db.collection("groups")
-      .get();
-  };
+  
   useEffect(() => {
+    const countGroups = () => {
+      firebase.firestore().collection("groups")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setTotalGroups(querySnapshot.size);
+          });
+        });
+    };
     countGroups();
   }, []);
 
   // number of available users for grouping
   const [userCount, setUserCount] = useState(0);
 
-  const countUnassigned = () => {
-    db.collection("users")
-      .where("groupId", "==", 0)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setUserCount(querySnapshot.size);
-        });
-      });
-  };
+  
   useEffect(() => {
+    const countUnassigned = () => {
+      firebase.firestore().collection("users")
+        .where("groupId", "==", 0)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setUserCount(querySnapshot.size);
+          });
+        });
+    };
     countUnassigned();
   }, []);
 
   // data consist of score1, score2, username of all unassigned users
   const [data, setData] = useState([]);
-  const getData = () => {
-    let score1 = 0;
-    let score2 = 0;
-    let score3 = 0;
-    let score4 = 0;
-    let username = "";
-    let id;
-    let newData;
-    db.collection("users")
-      .where("groupId", "==", 0)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          //console.log(doc.data());
-          score1 = doc.data().introvertExtrovert;
-          score2 = doc.data().sensingIntuitive;
-          score3 = doc.data().thinkingFeeling;
-          score4 = doc.data().judgingPerceiving;
-          username = doc.data().username;
-          id = doc.data().id;
-          newData = {
-            score1: score1,
-            score2: score2,
-            score3: score3,
-            score4: score4,
-            username: username,
-            id: id,
-          };
-          id++;
-          setData((data) => [...data, newData]);
-        });
-      });
-  };
+  
   useEffect(() => {
+    const getData = () => {
+      let score1 = 0;
+      let score2 = 0;
+      let score3 = 0;
+      let score4 = 0;
+      let username = "";
+      let id;
+      let newData;
+      firebase.firestore().collection("users")
+        .where("groupId", "==", 0)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            //console.log(doc.data());
+            score1 = doc.data().introvertExtrovert;
+            score2 = doc.data().sensingIntuitive;
+            score3 = doc.data().thinkingFeeling;
+            score4 = doc.data().judgingPerceiving;
+            username = doc.data().username;
+            id = doc.data().id;
+            newData = {
+              score1: score1,
+              score2: score2,
+              score3: score3,
+              score4: score4,
+              username: username,
+              id: id,
+            };
+            id++;
+            setData((data) => [...data, newData]);
+          });
+        });
+    };
     getData();
   }, []);
 
@@ -208,6 +214,9 @@ function Admin(props) {
 
     function recalculate() {
       let newCentroids = [];
+      function sameId(x,i,j) {
+        return x.id === centroids[i].items[j]
+      }
       // initialise new centroids with new mean values of data
       for (let i = 0; i < centroids.length; i++) {
         let accum1 = 0;
@@ -215,10 +224,11 @@ function Admin(props) {
         let accum3 = 0;
         let accum4 = 0;
         for (let j = 0; j < centroids[i].items.length; j++) {
-          accum1 += data.find((x) => x.id === centroids[i].items[j]).score1;
-          accum2 += data.find((x) => x.id === centroids[i].items[j]).score2;
-          accum3 += data.find((x) => x.id === centroids[i].items[j]).score3;
-          accum4 += data.find((x) => x.id === centroids[i].items[j]).score4;
+          
+          accum1 += data.find(sameId(i,j)).score1;
+          accum2 += data.find(sameId(i,j)).score2;
+          accum3 += data.find(sameId(i,j)).score3;
+          accum4 += data.find(sameId(i,j)).score4;
         }
         newCentroids.push({
           score1: accum1 / centroids[i].items.length,
@@ -298,7 +308,6 @@ function Admin(props) {
       return different;
     }
 
-    console.log(totalGroups);
 
     for (
       let i = totalGroups + 1;
