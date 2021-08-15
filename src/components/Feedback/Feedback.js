@@ -68,7 +68,6 @@ export default function Feedback() {
   );
 }
 
-const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function ShowFB() {

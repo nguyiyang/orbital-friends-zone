@@ -177,14 +177,6 @@ function ChatMessage(props) {
   }
 }
 
-async function getGroupId() {
-  const uid = firebase.auth().currentUser?.uid;
-  const printed = await firebase.firestore().collection("users").doc(uid).get();
-  try {
-    return printed.data().groupId;
-  } catch {}
-}
-
 async function getUserName() {
   const uid = firebase.auth().currentUser?.uid;
   const printed = await firebase.firestore().collection("users").doc(uid).get();

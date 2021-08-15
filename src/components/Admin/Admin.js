@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AppBar from "./MainAppBar";
 import Typography from "../FormTemplate/Typography";
 import { Button, Container, Grid } from "@material-ui/core";
-import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import NotesIcon from "@material-ui/icons/Notes";
@@ -54,10 +53,7 @@ function Admin(props) {
     db
       .collection("users")
       .where("groupId", ">", 0)
-      .get()
-      .then((querySnapshot) => {
-        setTotalAssigned(querySnapshot.size);
-      });
+      .get();
   useEffect(() => {
     assigned();
   });
@@ -65,12 +61,7 @@ function Admin(props) {
   const [totalGroups, setTotalGroups] = useState(0);
   const countGroups = () => {
     db.collection("groups")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setTotalGroups(querySnapshot.size);
-        });
-      });
+      .get();
   };
   useEffect(() => {
     countGroups();

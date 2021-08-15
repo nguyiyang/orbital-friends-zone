@@ -3,14 +3,12 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid, Paper, Typography} from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import { purple, green, blue } from "@material-ui/core/colors";
 import { useHistory } from "react-router-dom";
 import { firebase } from "@firebase/app";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 
 const useStyles = makeStyles((theme) => ({
-  mainFeaturedPost: {
+  IndividualPost: {
     position: "relative",
     backgroundColor: "#7391C8",
     color: theme.palette.common.black,
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     left: 0
   },
-  mainFeaturedPostContent: {
+  IndividualPostContent: {
     justifyContent: "center",
     align: "center",
     position: "relative",
@@ -50,15 +48,11 @@ const useStyles = makeStyles((theme) => ({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-export default function MainFeaturedPost(props) {
+export default function IndividualPost(props) {
   const classes = useStyles();
   const { post } = props;
 
   const postRef = firestore.collection("Forum");
-
-  const query = postRef.orderBy("createdAt", "desc");
-
-  const [posts] = useCollectionData(query, { idField: "id" });
 
   const history = useHistory();
 
@@ -95,7 +89,7 @@ export default function MainFeaturedPost(props) {
 
   return (
     <Paper
-      className={classes.mainFeaturedPost}
+      className={classes.IndividualPost}
       elevation={3}
       style={{ backgroundImage: `url(${post.image})` }}
     >
@@ -103,7 +97,7 @@ export default function MainFeaturedPost(props) {
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={11}>
-          <div className={classes.mainFeaturedPostContent}>
+          <div className={classes.IndividualPostContent}>
             <Typography component="h1" variant="h3" color="inherit">
               {post.title}
             </Typography>
@@ -144,6 +138,6 @@ export default function MainFeaturedPost(props) {
   );
 }
 
-MainFeaturedPost.propTypes = {
+IndividualPost.propTypes = {
   post: PropTypes.object
 };

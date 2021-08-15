@@ -1,14 +1,12 @@
 import React, { useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { Button, Container, Dialog, Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "../FormTemplate/TextField";
 import Typography from "../FormTemplate/Typography";
 import BoxButton from "../FormTemplate/Button";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
-import { purple, yellow } from "@material-ui/core/colors";
+import { yellow } from "@material-ui/core/colors";
 import { useHistory } from "react-router-dom";
-import { firebase } from "@firebase/app";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,8 +99,6 @@ export default function Game() {
       </Dialog>
     );
   }
-  const [userName, setUserName] = useState("");
-  getUserName().then((x) => setUserName(x));
 
   const [btnDisabled, setBtnDisabled] = useState(true);
 
@@ -167,11 +163,4 @@ export default function Game() {
   );
 }
 
-async function getUserName() {
-  const uid = firebase.auth().currentUser?.uid;
-  const printed = await firebase.firestore().collection("users").doc(uid).get();
-  try {
-    return printed.data().username;
-  } catch {}
-}
 

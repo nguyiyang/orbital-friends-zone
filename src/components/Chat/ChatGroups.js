@@ -154,13 +154,6 @@ function ChatGroups(props) {
 
   const firestore = firebase.firestore();
 
-  async function ExitGroup() {
-    firestore.collection("users").doc(firebase.auth().currentUser?.uid).update({
-      groupId: 0
-    });
-    history.push("./ExitGroupCompleted");
-  }
-
   function NextEvent(x) {
     if (x === 0) {
       history.push("./Chat", { gNumber: "Academic Advice" });

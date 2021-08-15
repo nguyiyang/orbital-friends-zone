@@ -52,7 +52,6 @@ export default function Login() {
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -63,14 +62,12 @@ export default function Login() {
 
     try {
       setError("");
-      setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
       setSuccess("Signup successful");
     } catch {
       setError("Failed to create an account");
     }
 
-    setLoading(false);
   }
   const classes = useStyles();
 

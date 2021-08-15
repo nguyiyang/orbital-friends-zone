@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, Typography } from "@material-ui/core";
-import MainFeaturedPost from "./MainFeaturedPost";
+import IndividualPost from "./IndividualPost";
 import AppBar from "../Login_Reg_Home/AppBar/MainAppBar";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useHistory } from "react-router-dom";
@@ -84,7 +84,6 @@ export default function Forum() {
   );
 }
 
-const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function ShowForum() {
@@ -98,7 +97,7 @@ function ShowForum() {
         {posts &&
           posts.map((text) => (
             <div>
-              <MainFeaturedPost post={text} />
+              <IndividualPost post={text} />
             </div>
           ))}
       </main>

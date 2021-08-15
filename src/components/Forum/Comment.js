@@ -88,7 +88,6 @@ export default function Comment() {
   );
 }
 
-const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function CommentList() {
@@ -97,22 +96,6 @@ function CommentList() {
   const [comments] = useCollectionData(query, { idField: "id" });
 
   const postIdentifier = useLocation().state.postId;
-
-  async function giveLike(identity, numOfLikes, likedArray) {
-    const currUid = await auth.currentUser.uid;
-    console.log(likedArray);
-    if (likedArray.includes(currUid)) {
-      commentsRef.doc(identity).update({
-        likes: numOfLikes - 1,
-        alreadyLiked: firebase.firestore.FieldValue.arrayRemove(currUid),
-      });
-    } else {
-      commentsRef.doc(identity).update({
-        likes: numOfLikes + 1,
-        alreadyLiked: firebase.firestore.FieldValue.arrayUnion(currUid),
-      });
-    }
-  }
 
   return (
     <>
@@ -132,15 +115,8 @@ function CommentList() {
 
 function AddComment() {
   const formValue = useRef();
-  const history = useHistory();
   const classes = useStyles();
   const postIdentifier = useLocation().state.postId;
-
-  async function back() {
-    try {
-      history.push("./Forum");
-    } catch {}
-  }
 
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));

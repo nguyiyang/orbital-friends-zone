@@ -65,7 +65,6 @@ export default function Announcement() {
   );
 }
 
-const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function ShowForum() {

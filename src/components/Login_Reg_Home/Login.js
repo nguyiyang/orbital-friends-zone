@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import {
   Avatar,
-  Box,
   Button,
   Grid,
   Paper,
@@ -52,7 +51,6 @@ export default function Login() {
   const passwordRef = useRef();
   const { login } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   async function handleSubmit(e) {
@@ -60,7 +58,6 @@ export default function Login() {
 
     try {
       setError("");
-      setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       const uid = firebase.auth().currentUser?.uid;
       const db = firebase.firestore();
@@ -81,7 +78,6 @@ export default function Login() {
       setError("Failed to log in");
     }
 
-    setLoading(false);
   }
   const classes = useStyles();
 

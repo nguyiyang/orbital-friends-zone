@@ -238,7 +238,6 @@ export default function Regform() {
     e.preventDefault();
     setError("");
     // save to database here
-    const uid = firebase.auth().currentUser?.uid;
     const db = firebase.firestore();
     if (
       value1 &&

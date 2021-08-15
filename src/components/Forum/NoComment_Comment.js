@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid, Paper, Typography} from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import { purple, green } from "@material-ui/core/colors";
-import { useHistory } from "react-router-dom";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { purple } from "@material-ui/core/colors";
 import { firebase } from "@firebase/app";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,12 +53,6 @@ export default function Comments(props) {
 
   const commentsRef = firestore.collection("Comment");
 
-  const query = commentsRef.orderBy("createdAt", "desc");
-
-  const [comments] = useCollectionData(query, { idField: "id" });
-
-  const history = useHistory();
-
   async function giveLike(identity, numOfLikes, likedArray) {
     const currUid = await auth.currentUser.uid;
     console.log(likedArray);
@@ -75,12 +67,6 @@ export default function Comments(props) {
         alreadyLiked: firebase.firestore.FieldValue.arrayUnion(currUid)
       });
     }
-  }
-
-  async function writeComment(x) {
-    try {
-      history.push("./addComment", { commentId: x });
-    } catch {}
   }
 
   function LikeorLikes(x) {

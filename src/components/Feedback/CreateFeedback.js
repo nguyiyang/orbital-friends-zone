@@ -45,17 +45,12 @@ function MakeFeedback(props) {
   const formValue = useRef();
   const history = useHistory();
   const { classes } = props;
-  const [open, setOpen] = React.useState(false);
 
   async function back() {
     try {
       history.push("./");
     } catch {}
   }
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const [userName, setUserName] = useState("");
   getUserName().then((x) => setUserName(x));

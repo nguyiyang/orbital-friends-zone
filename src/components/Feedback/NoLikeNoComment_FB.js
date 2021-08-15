@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import green from "@material-ui/core/colors/green";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   Feedback: {
@@ -39,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Feedback(props) {
   const classes = useStyles();
   const { feedbacks } = props;
-  const history = useHistory();
 
   return (
     <Paper
